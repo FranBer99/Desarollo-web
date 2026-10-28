@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Documento completo — Clase 2</title>
+  <meta name="description" content="Ejemplo de documento HTML con regiones semánticas.">
+  <style>
+    :root {
+      color-scheme: light;
+      --indigo: #4f46e5;
+      --indigo-oscuro: #3730a3;
+      --indigo-suave: #eef2ff;
+      --borde: #e7e5e4;
+      --texto: #292524;
+      --tenue: #78716c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #fafaf9;
+      color: var(--texto);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+    }
+
+    .pagina {
+      max-width: 44rem;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    .region {
+      position: relative;
+      margin-bottom: 1rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--borde);
+      border-radius: 0.6rem;
+      background-color: #ffffff;
+    }
+
+    .region::before {
+      content: attr(data-region);
+      position: absolute;
+      top: -0.7rem;
+      left: 0.9rem;
+      padding: 0 0.4rem;
+      background-color: #ffffff;
+      color: var(--indigo-oscuro);
+      font-family: ui-monospace, monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    header.region {
+      margin-top: 1.5rem;
+      border-color: #c7d2fe;
+      background-color: var(--indigo-suave);
+    }
+
+    h1 {
+      margin: 0 0 0.25rem;
+      font-size: 1.5rem;
+      line-height: 1.25;
+    }
+
+    p {
+      margin: 0.5rem 0 0;
+    }
+
+    .bajada {
+      color: var(--tenue);
+      font-size: 0.95rem;
+    }
+
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin: 0.75rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--indigo-oscuro);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.18em;
+    }
+
+    main h2 {
+      margin: 0 0 0.35rem;
+      font-size: 1.1rem;
+    }
+
+    main ul {
+      margin: 0.5rem 0 0;
+      padding-left: 1.2rem;
+    }
+
+    main li + li {
+      margin-top: 0.25rem;
+    }
+
+    footer.region {
+      color: var(--tenue);
+      font-size: 0.85rem;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    code {
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+      background-color: #e0e7ff;
+      color: #312e81;
+      font-family: ui-monospace, monospace;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="pagina">
+    <header class="region" data-region="header">
+      <h1>Horarios del cuatrimestre</h1>
+      <p class="bajada">Ejemplo de documento con regiones semánticas visibles.</p>
+      <nav aria-label="Secciones del ejemplo">
+        <ul>
+          <li><a href="#cursada">Cursada</a></li>
+          <li><a href="#aulas">Aulas</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="region" data-region="main">
+      <section id="cursada">
+        <h2>Cursada</h2>
+        <p>
+          Las clases de la materia se dictan dos veces por semana. Cada
+          encuentro combina una parte teórica y una parte práctica.
+        </p>
+      </section>
+
+      <section id="aulas">
+        <h2>Aulas</h2>
+        <ul>
+          <li>Teóricas: aula 12, segundo piso.</li>
+          <li>Prácticas: laboratorio 3, planta baja.</li>
+          <li>Consultas: jueves de 18 a 19 h.</li>
+        </ul>
+      </section>
+
+      <section id="contacto">
+        <h2>Contacto</h2>
+        <p>
+          Las novedades se publican en el campus. Para consultas, escribir a
+          <code>desarrollo3@ejemplo.edu.ar</code>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="region" data-region="footer">
+      <p>Desarrollo de Software III · Ejemplo didáctico · 2026</p>
+    </footer>
+  </div>
+</body>
+</html>

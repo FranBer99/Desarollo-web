@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="El DOM, los componentes de un documento HTML y la organización del encabezado y el cuerpo.">
+  <title>Clase 02 · Estructura de un documento HTML — Desarrollo de Software III</title>
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/curso.css">
+</head>
+<body>
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <header class="sitio-header">
+    <div class="contenedor">
+      <div class="sitio-header__barra">
+        <a class="marca" href="../../index.html">desarrollo-de-software-iii{}</a>
+        <p class="sitio-header__contexto">&rsaquo; Clase 02 · Estructura de un documento HTML</p>
+      </div>
+      <nav class="rail" aria-label="Clases del curso">
+        <a href="../../index.html" aria-label="Clase 0: Presentación del curso">00</a>
+        <a href="../../clases/01-origenes-y-evolucion-de-html/index.html" aria-label="Clase 1: Orígenes y evolución de HTML">01</a>
+        <a href="../../clases/02-estructura-de-un-documento-html/index.html" aria-label="Clase 2: Estructura de un documento HTML" aria-current="page">02</a>
+        <a href="../../clases/03-etiquetas/index.html" aria-label="Clase 3: Etiquetas principales y secundarias">03</a>
+        <a href="../../clases/04-control-de-texto/index.html" aria-label="Clase 4: Control de texto">04</a>
+        <a href="../../clases/05-enlaces/index.html" aria-label="Clase 5: Enlaces e hipervínculos">05</a>
+        <a href="../../clases/06-tablas/index.html" aria-label="Clase 6: Tablas">06</a>
+        <a href="../../clases/07-formularios/index.html" aria-label="Clase 7: Formularios">07</a>
+        <a href="../../clases/08-marcos/index.html" aria-label="Clase 8: Marcos">08</a>
+        <a href="../../clases/09-css-y-responsive/index.html" aria-label="Clase 9: Hojas de estilo y desarrollo responsivo">09</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="contenedor layout">
+    <nav class="toc" aria-labelledby="toc-titulo">
+      <p class="toc__titulo" id="toc-titulo">En esta clase</p>
+      <ol>
+        <li><a href="#dom">El DOM</a></li>
+        <li><a href="#componentes">Componentes</a></li>
+        <li><a href="#head">El encabezado</a></li>
+        <li><a href="#body">El cuerpo</a></li>
+        <li><a href="#errores-comunes">Errores comunes</a></li>
+        <li><a href="#actividad">Actividad práctica</a></li>
+        <li><a href="#resumen">Resumen</a></li>
+      </ol>
+    </nav>
+
+    <main class="contenido" id="contenido" tabindex="-1">
+<header class="encabezado-clase">
+  <p class="etiqueta">Clase 02</p>
+  <h1>Estructura de un documento HTML</h1>
+  <p class="lead">
+    Un documento HTML no es una lista suelta de etiquetas: es un árbol con una
+    raíz, un encabezado con metadatos y un cuerpo con el contenido visible. En
+    esta clase vemos cómo se organiza y cómo lo interpreta el navegador.
+  </p>
+</header>
+
+<aside class="aviso aviso--nota" aria-label="Objetivos de la clase">
+  <span class="aviso__titulo">Objetivos</span>
+  <ul>
+    <li>Entender qué es el DOM y cómo se relaciona con el código HTML.</li>
+    <li>Identificar los componentes obligatorios de un documento.</li>
+    <li>Organizar correctamente el <code>head</code> y el <code>body</code>.</li>
+    <li>Reconocer errores de estructura en documentos propios y ajenos.</li>
+  </ul>
+</aside>
+
+<section aria-labelledby="dom">
+  <h2 id="dom">El modelo de objetos del documento (DOM)</h2>
+  <p>
+    El <strong>DOM</strong> (<em>Document Object Model</em>) es la representación
+    en memoria que el navegador construye a partir del HTML. Es un árbol de
+    nodos: cada elemento, cada texto y cada comentario es un nodo, y todos
+    descienden de un nodo raíz llamado <code>document</code>.
+  </p>
+  <p>
+    Cuando el navegador recibe un archivo HTML, lo <strong>parsea</strong>
+    (analiza), corrige lo que puede, construye el árbol y recién entonces lo
+    pinta en pantalla. Por eso el HTML que escribimos y el DOM que existe en
+    memoria pueden no ser idénticos: el navegador normaliza el marcado y
+    completa estructuras faltantes.
+  </p>
+
+  <figure class="diagrama">
+    <svg viewBox="0 0 780 350" role="img" aria-labelledby="titulo-dom desc-dom">
+      <title id="titulo-dom">Árbol del DOM de un documento HTML</title>
+      <desc id="desc-dom">
+        El nodo document contiene html; html contiene head y body. Head contiene
+        meta, title y link. Body contiene header, main y footer. Main contiene h1
+        y p.
+      </desc>
+      <g fill="#eef2ff" stroke="#a5b4fc" stroke-width="1.5">
+        <rect x="330" y="8" width="120" height="34" rx="6"/>
+        <rect x="350" y="70" width="80" height="34" rx="6"/>
+        <rect x="170" y="140" width="90" height="34" rx="6"/>
+        <rect x="520" y="140" width="90" height="34" rx="6"/>
+        <rect x="40" y="215" width="90" height="34" rx="6"/>
+        <rect x="150" y="215" width="90" height="34" rx="6"/>
+        <rect x="260" y="215" width="90" height="34" rx="6"/>
+        <rect x="400" y="215" width="100" height="34" rx="6"/>
+        <rect x="515" y="215" width="90" height="34" rx="6"/>
+        <rect x="620" y="215" width="100" height="34" rx="6"/>
+        <rect x="470" y="290" width="80" height="34" rx="6"/>
+        <rect x="570" y="290" width="80" height="34" rx="6"/>
+      </g>
+      <g stroke="#a5b4fc" stroke-width="1.5">
+        <line x1="390" y1="42" x2="390" y2="70"/>
+        <line x1="390" y1="104" x2="215" y2="140"/>
+        <line x1="390" y1="104" x2="565" y2="140"/>
+        <line x1="215" y1="174" x2="85" y2="215"/>
+        <line x1="215" y1="174" x2="195" y2="215"/>
+        <line x1="215" y1="174" x2="305" y2="215"/>
+        <line x1="565" y1="174" x2="450" y2="215"/>
+        <line x1="565" y1="174" x2="560" y2="215"/>
+        <line x1="565" y1="174" x2="670" y2="215"/>
+        <line x1="560" y1="249" x2="510" y2="290"/>
+        <line x1="560" y1="249" x2="610" y2="290"/>
+      </g>
+      <g fill="#3730a3" font-family="'Source Code Pro', monospace" font-size="13"
+         text-anchor="middle" dominant-baseline="middle">
+        <text x="390" y="25">document</text>
+        <text x="390" y="87">html</text>
+        <text x="215" y="157">head</text>
+        <text x="565" y="157">body</text>
+        <text x="85" y="232">meta</text>
+        <text x="195" y="232">title</text>
+        <text x="305" y="232">link</text>
+        <text x="450" y="232">header</text>
+        <text x="560" y="232">main</text>
+        <text x="670" y="232">footer</text>
+        <text x="510" y="307">h1</text>
+        <text x="610" y="307">p</text>
+      </g>
+    </svg>
+    <figcaption>
+      El documento como árbol de nodos: cada caja es un nodo y cada línea una
+      relación padre-hijo.
+    </figcaption>
+  </figure>
+
+  <h3>Tipos de nodos</h3>
+  <dl>
+    <dt>Nodo documento</dt>
+    <dd>La raíz, <code>document</code>. Desde ahí se accede a todo el árbol.</dd>
+    <dt>Nodos de elemento</dt>
+    <dd>Cada etiqueta: <code>html</code>, <code>body</code>, <code>h1</code>, <code>p</code>, etc.</dd>
+    <dt>Nodos de texto</dt>
+    <dd>El contenido escrito entre etiquetas, incluidos los espacios.</dd>
+    <dt>Nodos de comentario</dt>
+    <dd>Los comentarios <code>&lt;!-- ... --&gt;</code>, que existen en el árbol pero no se muestran.</dd>
+  </dl>
+
+  <aside class="aviso aviso--dato" aria-label="Dato">
+    <span class="aviso__titulo">HTML no es el DOM</span>
+    <p>
+      El archivo HTML es el texto que escribimos; el DOM es el objeto vivo que
+      el navegador crea a partir de ese texto. JavaScript puede agregar,
+      quitar o modificar nodos, y el DOM cambia sin que el archivo original se
+      modifique. Por eso “ver código fuente” y “ver en el inspector” no siempre
+      muestran lo mismo.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="componentes">
+  <h2 id="componentes">Componentes de un documento web</h2>
+  <p>
+    Todo documento HTML5 tiene tres componentes básicos: la declaración de tipo,
+    el elemento raíz y la división entre encabezado y cuerpo.
+  </p>
+
+  <div class="tabla">
+    <table>
+      <caption>Componentes principales de un documento HTML5</caption>
+      <thead>
+        <tr>
+          <th scope="col">Componente</th>
+          <th scope="col">Función</th>
+          <th scope="col">¿Obligatorio?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><code>&lt;!DOCTYPE html&gt;</code></th>
+          <td>Indica que el documento es HTML5 y activa el modo estándar del navegador.</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>&lt;html lang="es"&gt;</code></th>
+          <td>Elemento raíz. El atributo <code>lang</code> declara el idioma del contenido.</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>&lt;head&gt;</code></th>
+          <td>Metadatos: título, codificación, estilos, scripts, descripción.</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>&lt;body&gt;</code></th>
+          <td>Contenido visible del documento.</td>
+          <td>Sí</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    El <code>DOCTYPE</code> no es una etiqueta HTML: es una instrucción especial
+    que debe ir en la primera línea. En HTML5 es simplemente
+    <code>&lt;!DOCTYPE html&gt;</code>; en versiones anteriores incluía una
+    referencia larga al DTD.
+  </p>
+</section>
+
+<section aria-labelledby="head">
+  <h2 id="head">La estructura del encabezado (<code>&lt;head&gt;</code>)</h2>
+  <p>
+    El <code>head</code> no se ve, pero define cómo se comporta y se presenta el
+    documento. Estos son los elementos que conviene incluir siempre, en este
+    orden:
+  </p>
+
+  <div class="tabla">
+    <table>
+      <caption>Elementos habituales del encabezado</caption>
+      <thead>
+        <tr>
+          <th scope="col">Elemento</th>
+          <th scope="col">Para qué sirve</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><code>&lt;meta charset="utf-8"&gt;</code></th>
+          <td>Declara la codificación. Debe aparecer en los primeros 1024 bytes del archivo.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>&lt;meta name="viewport" …&gt;</code></th>
+          <td>Le indica al navegador móvil que use el ancho del dispositivo.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>&lt;title&gt;</code></th>
+          <td>Nombre de la pestaña y título en resultados de búsqueda. Es obligatorio y debe ser único por página.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>&lt;meta name="description"&gt;</code></th>
+          <td>Resumen para buscadores y vistas previas. No mejora el posicionamiento por sí solo, pero ayuda a mostrar un buen fragmento.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>&lt;link rel="stylesheet"&gt;</code></th>
+          <td>Vincula la hoja de estilos externa.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>&lt;link rel="icon"&gt;</code></th>
+          <td>Define el favicon.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>&lt;style&gt;</code></th>
+          <td>Estilos embebidos. Útil para ejemplos o páginas de un solo archivo.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>&lt;script defer src="…"&gt;</code></th>
+          <td>Carga JavaScript sin bloquear el análisis del documento.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure class="bloque-codigo">
+    <figcaption>head completo</figcaption>
+    <pre><code>&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;title&gt;Horarios de la carrera&lt;/title&gt;
+&lt;meta name="description" content="Horarios y aulas del cuatrimestre."&gt;
+&lt;link rel="icon" href="favicon.svg" type="image/svg+xml"&gt;
+&lt;link rel="stylesheet" href="estilos.css"&gt;
+&lt;script src="app.js" defer&gt;&lt;/script&gt;</code></pre>
+  </figure>
+
+  <aside class="aviso aviso--atencion" aria-label="Atención">
+    <span class="aviso__titulo">El título no es el <code>h1</code></span>
+    <p>
+      El <code>title</code> aparece en la pestaña y en los resultados de
+      búsqueda; el <code>h1</code> es el título visible dentro de la página.
+      Suelen coincidir en significado, pero no son lo mismo y no deben faltar.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="body">
+  <h2 id="body">La estructura del cuerpo (<code>&lt;body&gt;</code>)</h2>
+  <p>
+    El <code>body</code> contiene todo lo visible. Para que la página sea
+    comprensible por personas y por tecnologías de asistencia, conviene
+    organizarlo con regiones semánticas:
+  </p>
+  <ul>
+    <li><code>&lt;header&gt;</code>: encabezado de la página o de una sección.</li>
+    <li><code>&lt;nav&gt;</code>: conjunto de enlaces de navegación.</li>
+    <li><code>&lt;main&gt;</code>: contenido principal, uno solo por página.</li>
+    <li><code>&lt;aside&gt;</code>: contenido complementario.</li>
+    <li><code>&lt;footer&gt;</code>: pie de página o de sección.</li>
+    <li><code>&lt;section&gt;</code> y <code>&lt;article&gt;</code>: bloques temáticos y piezas autónomas de contenido.</li>
+  </ul>
+  <p>
+    Estas etiquetas no cambian la apariencia por sí solas, pero sí la forma en
+    que el navegador, los lectores de pantalla y los buscadores entienden la
+    página. Son la base de la accesibilidad.
+  </p>
+
+  <figure class="demo">
+    <iframe src="ejemplos/documento-completo.html"
+            title="Documento HTML completo con regiones semánticas"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>Documento completo con <code>header</code>, <code>nav</code>, <code>main</code> y <code>footer</code>.</span>
+      <a href="ejemplos/documento-completo.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="errores-comunes">
+  <h2 id="errores-comunes">Errores comunes</h2>
+  <aside class="aviso aviso--atencion" aria-label="Atención">
+    <span class="aviso__titulo">Revisá estos puntos</span>
+    <ul>
+      <li>Escribir contenido visible dentro del <code>head</code>: el navegador lo mueve al <code>body</code> y la estructura queda impredecible.</li>
+      <li>Usar más de un <code>main</code> por página.</li>
+      <li>Omitir el <code>lang</code> del elemento <code>html</code>: los lectores de pantalla no saben en qué idioma leer.</li>
+      <li>Repetir el mismo <code>title</code> en todas las páginas del sitio.</li>
+      <li>Colocar la hoja de estilos al final del <code>body</code>: la página se muestra sin estilos hasta que termina de cargar.</li>
+      <li>Anidar un <code>header</code> o un <code>footer</code> dentro de otro sin que representen regiones distintas.</li>
+    </ul>
+  </aside>
+</section>
+
+<div class="ejercicio">
+  <h2 id="actividad">Actividad práctica</h2>
+  <p>
+    Comparar el código fuente de un sitio real con el árbol que construye el
+    navegador.
+  </p>
+  <ol>
+    <li>Elegir un sitio de noticias o el sitio de la universidad y abrirlo en el navegador.</li>
+    <li>Ver el código fuente con <kbd>Ctrl</kbd> + <kbd>U</kbd> e identificar <code>DOCTYPE</code>, <code>html</code>, <code>head</code> y <code>body</code>.</li>
+    <li>Anotar cinco elementos que estén dentro del <code>head</code> y explicar para qué sirve cada uno.</li>
+    <li>Abrir las herramientas de desarrollo con <kbd>F12</kbd>, ir a <em>Elements</em> y desplegar el árbol hasta encontrar el contenido principal.</li>
+    <li>Modificar un texto desde el inspector, sin guardar, y recargar la página para comprobar que el cambio se pierde.</li>
+    <li>Crear un documento propio con la estructura completa, al menos tres regiones semánticas y un título coherente.</li>
+  </ol>
+  <p>
+    <strong>Para entregar</strong>: el documento propio y una breve comparación
+    entre el código fuente y el DOM observado en el inspector.
+  </p>
+</div>
+
+<div class="resumen">
+  <h2 id="resumen">Resumen</h2>
+  <ul>
+    <li>El DOM es el árbol de nodos que el navegador construye a partir del HTML.</li>
+    <li>Todo documento HTML5 lleva <code>DOCTYPE</code>, <code>html</code> con <code>lang</code>, <code>head</code> y <code>body</code>.</li>
+    <li>El <code>head</code> contiene metadatos: codificación, viewport, título, descripción, estilos y scripts.</li>
+    <li>El <code>body</code> contiene el contenido visible y se organiza con regiones semánticas.</li>
+    <li>Un solo <code>main</code> por página y un <code>title</code> único son reglas básicas de calidad.</li>
+  </ul>
+</div>
+
+<div class="bibliografia">
+  <h2>Bibliografía del tema</h2>
+  <ul>
+    <li>
+      Celaya Luna, A. (2014). <cite>Creación de páginas web: HTML 5</cite>.
+      Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/56045">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Pérez Rodríguez, M. D. (Coord.) (2012).
+      <cite>Introducción al lenguaje HTML 5</cite>. Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/225270">Acceso en eLibro</a>.
+    </li>
+    <li>
+      MDN Web Docs.
+      <a href="https://developer.mozilla.org/es/docs/Web/API/Document_Object_Model">Modelo de objetos del documento (DOM)</a>.
+    </li>
+    <li>
+      W3C.
+      <a href="https://www.w3.org/TR/html52/dom.html">HTML: el DOM</a>.
+    </li>
+  </ul>
+</div>
+
+    <nav class="pager" aria-label="Navegación entre clases">
+      <a class="pager__anterior" rel="prev" href="../../clases/01-origenes-y-evolucion-de-html/index.html">
+        <span class="pager__direccion">← Anterior</span>
+        <span class="pager__titulo">Clase 01 · Orígenes y evolución de HTML</span>
+      </a>
+      <a class="pager__siguiente" rel="next" href="../../clases/03-etiquetas/index.html">
+        <span class="pager__direccion">Siguiente →</span>
+        <span class="pager__titulo">Clase 03 · Etiquetas principales y secundarias</span>
+      </a>
+    </nav>
+    </main>
+  </div>
+
+  <footer class="sitio-footer">
+    <div class="contenedor sitio-footer__contenido">
+      <p><strong>Desarrollo de Software III</strong> · Licenciatura en Sistemas ·
+        Universidad John F. Kennedy</p>
+      <p><a href="../../index.html">Índice del curso</a> ·
+        <a href="../../index.html#bibliografia">Bibliografía</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -91,6 +91,10 @@ El archivo `.nojekyll` evita que GitHub procese el sitio con Jekyll.
 - Recorrer la página solo con teclado y comprobar el foco visible.
 - Ejecutar Lighthouse o axe DevTools sobre la portada y una clase.
 
+> El analizador de CSS del validador puede no reconocer funciones recientes
+> como `@container`; eso no significa que el HTML sea inválido. Verificá esas
+> funciones en un navegador actualizado.
+
 ## Documentación
 
 - [Guía de mantenimiento](docs/README.md)

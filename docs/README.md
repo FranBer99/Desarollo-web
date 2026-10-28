@@ -101,6 +101,11 @@ java -jar vnu.jar index.html
 # https://validator.w3.org/nu/
 ```
 
+> El validador del W3C revisa el HTML y el CSS embebido. Su analizador de CSS
+> puede no reconocer propiedades recientes como `container-type` o la regla
+> `@container`; antes de dar una función por inválida, comprobá el soporte en
+> un navegador actual y en [Can I use](https://caniuse.com/).
+
 ## Bibliografía
 
 La bibliografía obligatoria y suplementaria está citada en la portada y en

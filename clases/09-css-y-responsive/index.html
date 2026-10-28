@@ -80,11 +80,11 @@
   <h2 id="css">¿Qué es CSS?</h2>
   <p>
     <strong>CSS</strong> (<em>Cascading Style Sheets</em>) es el lenguaje que
-    describe la presentación de un documento. Nació en 1996, cuando el HTML
-    estaba lleno de etiquetas y atributos visuales, para separar el contenido
-    de su apariencia. Hoy el estándar está dividido en módulos que evolucionan
-    por separado (selectores, color, layout, animaciones), aunque coloquialmente
-    se los siga llamando “CSS3”.
+    describe la presentación de un documento. Su primera recomendación es de
+    1996, cuando el HTML estaba lleno de etiquetas y atributos visuales, y
+    surgió para separar el contenido de su apariencia. Hoy el estándar está
+    dividido en módulos que evolucionan por separado (selectores, color,
+    layout, animaciones), aunque coloquialmente se los siga llamando “CSS3”.
   </p>
 
   <h3>Formas de incluir CSS</h3>
@@ -407,7 +407,7 @@ p::selection {
   <ul>
     <li><code>block</code>, <code>inline</code>, <code>inline-block</code>, <code>flex</code>, <code>grid</code>, <code>none</code>.</li>
     <li><code>position: static</code> (predeterminado), <code>relative</code>, <code>absolute</code>, <code>fixed</code>, <code>sticky</code>.</li>
-    <li><code>z-index</code> solo funciona en elementos posicionados o en contextos de apilamiento.</li>
+    <li><code>z-index</code> actúa sobre elementos posicionados y sobre ítems de flex o grid, siempre dentro de un contexto de apilamiento.</li>
     <li><code>display: none</code> quita el elemento del flujo y del árbol de accesibilidad; <code>visibility: hidden</code> lo oculta pero reserva el espacio.</li>
   </ul>
 

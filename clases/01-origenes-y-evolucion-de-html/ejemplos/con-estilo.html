@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi primer documento con estilos</title>
+  <style>
+    /* Una hoja de estilos embebida: el mismo contenido, otra presentación. */
+    :root {
+      color-scheme: light;
+    }
+
+    body {
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 1.5rem;
+      background-color: #fafaf9;
+      color: #292524;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+    }
+
+    h1 {
+      margin-bottom: 0.25rem;
+      color: #3730a3;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin-top: 2rem;
+      border-bottom: 2px solid #c7d2fe;
+      padding-bottom: 0.25rem;
+      color: #4338ca;
+      font-size: 1.25rem;
+    }
+
+    a {
+      color: #4f46e5;
+      text-underline-offset: 0.15em;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    li::marker {
+      color: #4f46e5;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bienvenidos a la web</h1>
+
+  <p>
+    Este documento reproduce el espíritu de las primeras páginas publicadas en
+    el CERN: texto, listas y enlaces. La diferencia es que ahora una hoja de
+    estilos define la tipografía, el color y el ancho de lectura.
+  </p>
+
+  <h2>Qué se puede publicar</h2>
+  <ul>
+    <li>Documentos de texto con títulos y párrafos.</li>
+    <li>Listas de elementos.</li>
+    <li>Enlaces a otras páginas.</li>
+    <li>Imágenes, cuando el navegador las soporta.</li>
+  </ul>
+
+  <p>
+    Más información en
+    <a href="https://info.cern.ch/">el primer sitio web de la historia</a>.
+  </p>
+</body>
+</html>

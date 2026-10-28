@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Qué es HTML, cómo nació, cómo evolucionó el estándar y cuáles son los fundamentos de HTML y CSS.">
+  <title>Clase 01 · Orígenes y evolución de HTML — Desarrollo de Software III</title>
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/curso.css">
+</head>
+<body>
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <header class="sitio-header">
+    <div class="contenedor">
+      <div class="sitio-header__barra">
+        <a class="marca" href="../../index.html">desarrollo-de-software-iii{}</a>
+        <p class="sitio-header__contexto">&rsaquo; Clase 01 · Orígenes y evolución de HTML</p>
+      </div>
+      <nav class="rail" aria-label="Clases del curso">
+        <a href="../../index.html" aria-label="Clase 0: Presentación del curso">00</a>
+        <a href="../../clases/01-origenes-y-evolucion-de-html/index.html" aria-label="Clase 1: Orígenes y evolución de HTML" aria-current="page">01</a>
+        <a href="../../clases/02-estructura-de-un-documento-html/index.html" aria-label="Clase 2: Estructura de un documento HTML">02</a>
+        <a href="../../clases/03-etiquetas/index.html" aria-label="Clase 3: Etiquetas principales y secundarias">03</a>
+        <a href="../../clases/04-control-de-texto/index.html" aria-label="Clase 4: Control de texto">04</a>
+        <a href="../../clases/05-enlaces/index.html" aria-label="Clase 5: Enlaces e hipervínculos">05</a>
+        <a href="../../clases/06-tablas/index.html" aria-label="Clase 6: Tablas">06</a>
+        <a href="../../clases/07-formularios/index.html" aria-label="Clase 7: Formularios">07</a>
+        <a href="../../clases/08-marcos/index.html" aria-label="Clase 8: Marcos">08</a>
+        <a href="../../clases/09-css-y-responsive/index.html" aria-label="Clase 9: Hojas de estilo y desarrollo responsivo">09</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="contenedor layout">
+    <nav class="toc" aria-labelledby="toc-titulo">
+      <p class="toc__titulo" id="toc-titulo">En esta clase</p>
+      <ol>
+        <li><a href="#que-es-html">¿Qué es HTML?</a></li>
+        <li><a href="#historia">Historia y evolución</a></li>
+        <li><a href="#fundamentos-html">Fundamentos de HTML</a></li>
+        <li><a href="#fundamentos-css">Fundamentos de CSS</a></li>
+        <li><a href="#primer-documento">Primer documento</a></li>
+        <li><a href="#actividad">Actividad práctica</a></li>
+        <li><a href="#resumen">Resumen</a></li>
+      </ol>
+    </nav>
+
+    <main class="contenido" id="contenido" tabindex="-1">
+<header class="encabezado-clase">
+  <p class="etiqueta">Clase 01</p>
+  <h1>Orígenes y evolución de HTML</h1>
+  <p class="lead">
+    Antes de escribir la primera etiqueta conviene entender qué problema
+    resuelve HTML, de dónde viene y por qué el estándar que usamos hoy ya no
+    tiene número de versión.
+  </p>
+</header>
+
+<aside class="aviso aviso--nota" aria-label="Objetivos de la clase">
+  <span class="aviso__titulo">Objetivos</span>
+  <ul>
+    <li>Definir qué es HTML y diferenciarlo de un lenguaje de programación.</li>
+    <li>Ubicar los hitos principales de la historia del estándar.</li>
+    <li>Reconocer la anatomía de un elemento y de una regla CSS.</li>
+    <li>Escribir y abrir un primer documento HTML válido.</li>
+  </ul>
+</aside>
+
+<section aria-labelledby="que-es-html">
+  <h2 id="que-es-html">¿Qué es HTML?</h2>
+  <p>
+    <strong>HTML</strong> son las siglas de <em>HyperText Markup Language</em>,
+    es decir, <strong>lenguaje de marcado de hipertexto</strong>. No es un
+    lenguaje de programación: no tiene variables, condiciones ni bucles. Es un
+    lenguaje <strong>declarativo</strong> que describe la estructura y el
+    significado del contenido mediante marcas o etiquetas.
+  </p>
+  <p>
+    Un documento HTML le dice al navegador qué es cada cosa: esto es un
+    encabezado, esto es un párrafo, esto es una lista, esto es un enlace. A
+    partir de esa información el navegador construye una representación en
+    memoria —el DOM, que veremos en la próxima clase— y la dibuja en pantalla.
+  </p>
+
+  <div class="tabla">
+    <table>
+      <caption>Las tres capas de una página web</caption>
+      <thead>
+        <tr>
+          <th scope="col">Capa</th>
+          <th scope="col">Lenguaje</th>
+          <th scope="col">Se ocupa de…</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Estructura y contenido</th>
+          <td>HTML</td>
+          <td>Qué información hay y qué significado tiene.</td>
+        </tr>
+        <tr>
+          <th scope="row">Presentación</th>
+          <td>CSS</td>
+          <td>Cómo se ve: tipografía, color, espacio, disposición.</td>
+        </tr>
+        <tr>
+          <th scope="row">Comportamiento</th>
+          <td>JavaScript</td>
+          <td>Cómo reacciona a las acciones del usuario.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    Mantener las tres capas separadas es una de las ideas más importantes del
+    desarrollo web: el mismo HTML puede verse de maneras muy distintas según
+    el CSS, y puede funcionar sin JavaScript. Esa separación mejora el
+    mantenimiento, la accesibilidad y el rendimiento.
+  </p>
+</section>
+
+<section aria-labelledby="historia">
+  <h2 id="historia">Historia y evolución del estándar</h2>
+  <p>
+    HTML nació en el CERN a comienzos de los noventa para compartir documentos
+    científicos entre computadoras distintas. Su historia está marcada por la
+    “guerra de los navegadores”, la llegada de los estándares y, finalmente,
+    un acuerdo para abandonar las versiones numeradas.
+  </p>
+
+  <div class="tabla">
+    <table>
+      <caption>Hitos de HTML y CSS</caption>
+      <thead>
+        <tr>
+          <th scope="col">Año</th>
+          <th scope="col">Hito</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1989–1991</th>
+          <td>
+            Tim Berners-Lee propone el proyecto en el CERN y crea el primer
+            navegador (<em>WorldWideWeb</em>), el primer servidor y las primeras
+            páginas. HTML se inspira en SGML, un estándar para describir
+            lenguajes de marcado.
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">1993</th>
+          <td>
+            El navegador Mosaic populariza la web fuera del ámbito académico.
+            Las etiquetas que entendían los navegadores se documentan sin un
+            estándar formal.
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">1995</th>
+          <td>
+            Se publica HTML 2.0 (RFC 1866), el primer estándar reconocido, con
+            formularios, tablas y mapas de imagen.
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">1996</th>
+          <td>
+            El W3C publica la primera recomendación de CSS, pensada para separar
+            la presentación del contenido.
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">1997–1999</th>
+          <td>
+            HTML 3.2, HTML 4.0 y HTML 4.01 incorporan hojas de estilo, scripts,
+            marcos y mejoras de accesibilidad. Es la época en que las tablas se
+            usaban para maquetar.
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">2000</th>
+          <td>
+            XHTML 1.0 reformula HTML como una aplicación de XML, con reglas más
+            estrictas. Su adopción masiva fracasa por la rigidez y los problemas
+            de compatibilidad.
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">2004</th>
+          <td>
+            Apple, Mozilla y Opera crean el WHATWG para continuar el desarrollo
+            de HTML de forma abierta, en respuesta al abandono de XHTML 2.0.
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">2008–2014</th>
+          <td>
+            Se publica el primer borrador de HTML5 y, en 2014, la recomendación
+            del W3C. Incorpora etiquetas semánticas, audio, video, canvas,
+            formularios mejorados y APIs.
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">2019–hoy</th>
+          <td>
+            El W3C y el WHATWG acuerdan continuar con un único
+            <em>HTML Living Standard</em>: el estándar se actualiza de forma
+            continua y los navegadores lo implementan sin esperar “versiones”.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <aside class="aviso aviso--atencion" aria-label="Atención">
+    <span class="aviso__titulo">“HTML5” no es una versión cerrada</span>
+    <p>
+      Cuando decimos HTML5 solemos referirnos a un conjunto de tecnologías
+      (HTML, CSS3 y APIs del navegador). Desde 2019 el estándar es un documento
+      vivo: no existe un HTML6, sino cambios permanentes en el
+      <em>Living Standard</em>.
+    </p>
+  </aside>
+
+  <h3>La guerra de los navegadores</h3>
+  <p>
+    Durante los noventa, Netscape e Internet Explorer agregaban etiquetas
+    propias para diferenciarse. El resultado fueron páginas que solo funcionaban
+    en un navegador y un enorme costo de mantenimiento. La creación del W3C y,
+    más tarde, del WHATWG, buscó que todos implementaran el mismo estándar.
+    Esa es la razón por la que hoy escribimos HTML estándar y verificamos la
+    compatibilidad antes de usar una función nueva.
+  </p>
+</section>
+
+<section aria-labelledby="fundamentos-html">
+  <h2 id="fundamentos-html">Fundamentos de HTML</h2>
+  <p>
+    Todo documento HTML se construye con <strong>elementos</strong>. Un
+    elemento está formado por una etiqueta de apertura, contenido y una etiqueta
+    de cierre. Las etiquetas se escriben entre signos de menor y mayor.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>anatomia.html</figcaption>
+    <pre><code>&lt;p class="destacado"&gt;Hola, &lt;strong&gt;mundo&lt;/strong&gt;.&lt;/p&gt;</code></pre>
+  </figure>
+
+  <dl>
+    <dt>Etiqueta de apertura</dt>
+    <dd><code>&lt;p class="destacado"&gt;</code>: indica qué elemento empieza.</dd>
+    <dt>Atributo</dt>
+    <dd><code>class="destacado"</code>: información extra, siempre como <code>nombre="valor"</code>.</dd>
+    <dt>Contenido</dt>
+    <dd><code>Hola, mundo.</code> y el elemento anidado <code>&lt;strong&gt;</code>.</dd>
+    <dt>Etiqueta de cierre</dt>
+    <dd><code>&lt;/p&gt;</code>: indica dónde termina el elemento.</dd>
+  </dl>
+
+  <h3>Reglas de escritura</h3>
+  <ul>
+    <li>
+      Las etiquetas se anidan correctamente: el último elemento abierto es el
+      primero en cerrarse.
+    </li>
+    <li>
+      Algunos elementos no tienen contenido ni cierre, como <code>&lt;img&gt;</code>,
+      <code>&lt;br&gt;</code>, <code>&lt;hr&gt;</code>, <code>&lt;input&gt;</code>,
+      <code>&lt;meta&gt;</code> o <code>&lt;link&gt;</code>. Se los llama
+      <strong>elementos vacíos</strong>.
+    </li>
+    <li>
+      Los nombres de etiquetas y atributos no distinguen mayúsculas de
+      minúsculas, pero la convención —y el estilo del estándar— es escribirlos
+      en minúsculas.
+    </li>
+    <li>
+      Los valores de los atributos van entre comillas dobles. Las comillas
+      simples son válidas, pero conviene ser consistente.
+    </li>
+    <li>
+      El contenido se escribe una sola vez: los espacios y saltos de línea
+      repetidos se colapsan al mostrarse.
+    </li>
+  </ul>
+
+  <aside class="aviso aviso--dato" aria-label="Dato">
+    <span class="aviso__titulo">HTML no es XHTML</span>
+    <p>
+      En HTML5 no hace falta cerrar los elementos vacíos con una barra:
+      <code>&lt;br&gt;</code> es correcto y <code>&lt;br /&gt;</code> también se
+      acepta, pero la barra no tiene efecto. Tampoco se usan espacios antes del
+      <code>&gt;</code>.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="fundamentos-css">
+  <h2 id="fundamentos-css">Fundamentos de CSS</h2>
+  <p>
+    <strong>CSS</strong> (<em>Cascading Style Sheets</em>, hojas de estilo en
+    cascada) es el lenguaje que describe la presentación de un documento. Se
+    creó en 1996 para resolver un problema concreto: el HTML estaba lleno de
+    etiquetas y atributos de estilo (<code>&lt;font&gt;</code>,
+    <code>bgcolor</code>, <code>align</code>) que mezclaban contenido y
+    apariencia.
+  </p>
+  <p>Una regla CSS tiene tres partes:</p>
+
+  <figure class="bloque-codigo">
+    <figcaption>estilos.css</figcaption>
+    <pre><code>p {
+  color: #292524;
+  line-height: 1.6;
+}</code></pre>
+  </figure>
+
+  <ul>
+    <li><strong>Selector</strong>: <code>p</code>, indica a qué elementos se aplica.</li>
+    <li><strong>Declaración</strong>: <code>color: #292524;</code>, formada por propiedad y valor.</li>
+    <li><strong>Bloque</strong>: las declaraciones van entre llaves y separadas por punto y coma.</li>
+  </ul>
+
+  <p>
+    La palabra <em>cascada</em> hace referencia al conjunto de reglas que
+    decide qué estilo gana cuando dos reglas afectan al mismo elemento. Lo
+    veremos en detalle en la clase 9.
+  </p>
+</section>
+
+<section aria-labelledby="primer-documento">
+  <h2 id="primer-documento">Primer documento</h2>
+  <p>
+    Un documento HTML mínimo tiene un <code>DOCTYPE</code>, un elemento
+    <code>html</code> con el idioma, un <code>head</code> con metadatos y un
+    <code>body</code> con el contenido visible.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>index.html</figcaption>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Mi primer documento&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Bienvenidos a la web&lt;/h1&gt;
+    &lt;p&gt;Este es mi primer documento HTML.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </figure>
+
+  <p>
+    El ejemplo siguiente reproduce el espíritu de las primeras páginas:
+    contenido, enlaces y listas, sin ninguna hoja de estilos. El navegador
+    aplica sus estilos por defecto.
+  </p>
+
+  <figure class="demo">
+    <iframe src="ejemplos/primer-documento.html"
+            title="Primer documento HTML sin estilos"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>Documento mínimo sin CSS: solo estructura y contenido.</span>
+      <a href="ejemplos/primer-documento.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+
+  <p>
+    El mismo contenido, con unas pocas reglas CSS, cambia por completo. Ese es
+    el poder de separar estructura y presentación.
+  </p>
+
+  <figure class="demo">
+    <iframe src="ejemplos/con-estilo.html"
+            title="El mismo documento con estilos CSS"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>El mismo HTML con una hoja de estilos embebida.</span>
+      <a href="ejemplos/con-estilo.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="errores-comunes">
+  <h2 id="errores-comunes">Errores comunes</h2>
+  <aside class="aviso aviso--atencion" aria-label="Atención">
+    <span class="aviso__titulo">Revisá estos puntos</span>
+    <ul>
+      <li>Olvidar el <code>&lt;!DOCTYPE html&gt;</code>: el navegador entra en un modo de compatibilidad con páginas antiguas.</li>
+      <li>No declarar <code>&lt;meta charset="utf-8"&gt;</code>: las tildes y la ñ se ven mal.</li>
+      <li>Omitir el <code>&lt;title&gt;</code>: la pestaña y los resultados de búsqueda quedan sin nombre.</li>
+      <li>Cerrar mal las etiquetas: <code>&lt;p&gt;&lt;strong&gt;texto&lt;/p&gt;&lt;/strong&gt;</code>.</li>
+      <li>Usar etiquetas de presentación obsoletas como <code>&lt;font&gt;</code>, <code>&lt;center&gt;</code> o el atributo <code>bgcolor</code>.</li>
+      <li>Pensar que HTML “da estilos”: para eso está CSS.</li>
+    </ul>
+  </aside>
+</section>
+
+<div class="ejercicio">
+  <h2 id="actividad">Actividad práctica</h2>
+  <p>
+    Crear la primera página del portafolio del curso y comprobar que el
+    navegador la interpreta como HTML5.
+  </p>
+  <ol>
+    <li>Crear una carpeta llamada <code>clase-01</code> y dentro un archivo <code>index.html</code>.</li>
+    <li>Escribir la estructura mínima: <code>DOCTYPE</code>, <code>html</code> con <code>lang="es"</code>, <code>head</code> y <code>body</code>.</li>
+    <li>En el <code>head</code>, agregar <code>charset</code>, <code>viewport</code> y un <code>title</code> descriptivo.</li>
+    <li>En el <code>body</code>, incluir un <code>h1</code> con el nombre, un párrafo de presentación y una lista con tres intereses.</li>
+    <li>Agregar un enlace a una página externa que visites seguido.</li>
+    <li>Agregar una hoja de estilos embebida con <code>&lt;style&gt;</code> que cambie la tipografía y el color del texto.</li>
+    <li>Abrir el archivo en el navegador y luego inspeccionarlo con <kbd>F12</kbd>: identificar <code>html</code>, <code>head</code> y <code>body</code> en el panel <em>Elements</em>.</li>
+  </ol>
+  <p>
+    <strong>Para entregar</strong>: el archivo <code>index.html</code> y una
+    captura del panel de elementos mostrando la estructura del documento.
+  </p>
+</div>
+
+<div class="resumen">
+  <h2 id="resumen">Resumen</h2>
+  <ul>
+    <li>HTML es un lenguaje de marcado declarativo: describe estructura y significado, no comportamiento.</li>
+    <li>Nació en el CERN a comienzos de los noventa y se estandarizó en el W3C y luego en el WHATWG.</li>
+    <li>Desde 2019 es un estándar vivo, sin versiones numeradas.</li>
+    <li>Un elemento combina etiquetas, atributos y contenido; algunos elementos son vacíos.</li>
+    <li>CSS se ocupa de la presentación y se conecta con HTML mediante selectores.</li>
+    <li>Separar estructura, presentación y comportamiento es la base de un sitio mantenible.</li>
+  </ul>
+</div>
+
+<div class="bibliografia">
+  <h2>Bibliografía del tema</h2>
+  <ul>
+    <li>
+      Celaya Luna, A. (2014). <cite>Creación de páginas web: HTML 5</cite>.
+      Editorial ICB. Los primeros capítulos recorren la historia y los
+      fundamentos del lenguaje.
+      <a href="https://elibro.net/es/ereader/kennedy/56045">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Pérez Rodríguez, M. D. (Coord.) (2012).
+      <cite>Introducción al lenguaje HTML 5</cite>. Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/225270">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Toharia Rabasco, J. P. y Raya González, L. (2015).
+      <cite>Lenguajes de marcas y sistemas de gestión de la información</cite>.
+      RA-MA Editorial.
+      <a href="https://elibro.net/es/ereader/kennedy/62483">Acceso en eLibro</a>.
+    </li>
+    <li>
+      W3C. <a href="https://www.w3.org/standards/webdesign/htmlcss">HTML y CSS:
+      estándares de diseño web</a>.
+    </li>
+  </ul>
+</div>
+
+    <nav class="pager" aria-label="Navegación entre clases">
+      <a class="pager__anterior" rel="prev" href="../../index.html">
+        <span class="pager__direccion">← Anterior</span>
+        <span class="pager__titulo">Clase 00 · Presentación del curso</span>
+      </a>
+      <a class="pager__siguiente" rel="next" href="../../clases/02-estructura-de-un-documento-html/index.html">
+        <span class="pager__direccion">Siguiente →</span>
+        <span class="pager__titulo">Clase 02 · Estructura de un documento HTML</span>
+      </a>
+    </nav>
+    </main>
+  </div>
+
+  <footer class="sitio-footer">
+    <div class="contenedor sitio-footer__contenido">
+      <p><strong>Desarrollo de Software III</strong> · Licenciatura en Sistemas ·
+        Universidad John F. Kennedy</p>
+      <p><a href="../../index.html">Índice del curso</a> ·
+        <a href="../../index.html#bibliografia">Bibliografía</a></p>
+    </div>
+  </footer>
+</body>
+</html>

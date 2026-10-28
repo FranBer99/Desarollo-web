@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Propósito y funcionamiento de los formularios, estructura, campos de entrada, listas desplegables, botones y estilos.">
+  <title>Clase 07 · Formularios — Desarrollo de Software III</title>
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/curso.css">
+</head>
+<body>
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <header class="sitio-header">
+    <div class="contenedor">
+      <div class="sitio-header__barra">
+        <a class="marca" href="../../index.html">desarrollo-de-software-iii{}</a>
+        <p class="sitio-header__contexto">&rsaquo; Clase 07 · Formularios</p>
+      </div>
+      <nav class="rail" aria-label="Clases del curso">
+        <a href="../../index.html" aria-label="Clase 0: Presentación del curso">00</a>
+        <a href="../../clases/01-origenes-y-evolucion-de-html/index.html" aria-label="Clase 1: Orígenes y evolución de HTML">01</a>
+        <a href="../../clases/02-estructura-de-un-documento-html/index.html" aria-label="Clase 2: Estructura de un documento HTML">02</a>
+        <a href="../../clases/03-etiquetas/index.html" aria-label="Clase 3: Etiquetas principales y secundarias">03</a>
+        <a href="../../clases/04-control-de-texto/index.html" aria-label="Clase 4: Control de texto">04</a>
+        <a href="../../clases/05-enlaces/index.html" aria-label="Clase 5: Enlaces e hipervínculos">05</a>
+        <a href="../../clases/06-tablas/index.html" aria-label="Clase 6: Tablas">06</a>
+        <a href="../../clases/07-formularios/index.html" aria-label="Clase 7: Formularios" aria-current="page">07</a>
+        <a href="../../clases/08-marcos/index.html" aria-label="Clase 8: Marcos">08</a>
+        <a href="../../clases/09-css-y-responsive/index.html" aria-label="Clase 9: Hojas de estilo y desarrollo responsivo">09</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="contenedor layout">
+    <nav class="toc" aria-labelledby="toc-titulo">
+      <p class="toc__titulo" id="toc-titulo">En esta clase</p>
+      <ol>
+        <li><a href="#que-es">¿Qué es un formulario?</a></li>
+        <li><a href="#estructura">Estructura</a></li>
+        <li><a href="#campos">Campos de entrada</a></li>
+        <li><a href="#seleccion">Listas y áreas de texto</a></li>
+        <li><a href="#botones">Botones</a></li>
+        <li><a href="#estilos">Estilizado</a></li>
+        <li><a href="#accesibilidad">Accesibilidad</a></li>
+        <li><a href="#actividad">Actividad práctica</a></li>
+        <li><a href="#resumen">Resumen</a></li>
+      </ol>
+    </nav>
+
+    <main class="contenido" id="contenido" tabindex="-1">
+<header class="encabezado-clase">
+  <p class="etiqueta">Clase 07</p>
+  <h1>Formularios</h1>
+  <p class="lead">
+    Los formularios son la puerta de entrada de los datos: permiten buscar,
+    registrarse, inscribirse, opinar y pagar. Un formulario bien construido se
+    puede completar con teclado, con lector de pantalla y desde un celular.
+  </p>
+</header>
+
+<aside class="aviso aviso--nota" aria-label="Objetivos de la clase">
+  <span class="aviso__titulo">Objetivos</span>
+  <ul>
+    <li>Comprender el circuito entre el formulario y el servidor.</li>
+    <li>Estructurar formularios con <code>form</code>, <code>fieldset</code> y <code>label</code>.</li>
+    <li>Elegir el campo adecuado para cada tipo de dato.</li>
+    <li>Aplicar validación nativa y estilos accesibles.</li>
+  </ul>
+</aside>
+
+<section aria-labelledby="que-es">
+  <h2 id="que-es">¿Qué es un formulario?</h2>
+  <p>
+    Un formulario es un conjunto de controles que permite al usuario ingresar
+    datos y enviarlos a un servidor. El navegador recolecta los valores de los
+    campos con atributo <code>name</code>, los codifica y los envía según el
+    método indicado en <code>method</code>.
+  </p>
+  <p>
+    El servidor recibe esos datos, los valida y responde con una página nueva,
+    una redirección o un error. HTML se ocupa de la interfaz y de la validación
+    del lado del cliente; la validación definitiva y la seguridad siempre
+    corresponden al servidor.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>formulario.html</figcaption>
+    <pre><code>&lt;form action="/inscripcion" method="post"&gt;
+  &lt;label for="nombre"&gt;Nombre&lt;/label&gt;
+  &lt;input id="nombre" name="nombre" type="text"
+         autocomplete="name" required&gt;
+  &lt;button type="submit"&gt;Enviar inscripción&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+  </figure>
+
+  <h3>GET y POST</h3>
+  <div class="tabla">
+    <table>
+      <caption>Métodos de envío</caption>
+      <thead>
+        <tr>
+          <th scope="col">Método</th>
+          <th scope="col">Dónde van los datos</th>
+          <th scope="col">Cuándo usarlo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><code>GET</code></th>
+          <td>En la URL, después de <code>?</code>.</td>
+          <td>Búsquedas y filtros. Los datos quedan visibles en el historial.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>POST</code></th>
+          <td>En el cuerpo de la solicitud.</td>
+          <td>Altas, modificaciones, datos personales o archivos.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>dialog</code></th>
+          <td>No se envía: cierra un <code>dialog</code>.</td>
+          <td>Formularios dentro de un diálogo modal.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Nunca uses <code>GET</code> para contraseñas, datos personales o acciones
+    que modifican información: la URL queda en el historial, en los registros
+    del servidor y en el encabezado <code>Referer</code>.
+  </p>
+
+  <aside class="aviso aviso--dato" aria-label="Dato">
+    <span class="aviso__titulo">El atributo <code>name</code> es el que viaja</span>
+    <p>
+      El servidor recibe pares <code>name=valor</code>. Un campo sin
+      <code>name</code> no se envía; un campo con <code>disabled</code> tampoco.
+      El <code>id</code> sirve para asociarlo con el <code>label</code>; el
+      <code>name</code>, para identificarlo en el envío.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="estructura">
+  <h2 id="estructura">Estructura del formulario</h2>
+  <p>
+    Un formulario se organiza en bloques lógicos. Cada bloque se envuelve en un
+    <code>fieldset</code> con un <code>legend</code> que lo describe. Los
+    controles se asocian a su etiqueta con <code>label</code>.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>estructura.html</figcaption>
+    <pre><code>&lt;form action="/inscripcion" method="post"&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Datos personales&lt;/legend&gt;
+
+    &lt;p&gt;
+      &lt;label for="nombre"&gt;Nombre completo&lt;/label&gt;
+      &lt;input id="nombre" name="nombre" type="text"
+             autocomplete="name" required&gt;
+    &lt;/p&gt;
+
+    &lt;p&gt;
+      &lt;label for="email"&gt;Correo electrónico&lt;/label&gt;
+      &lt;input id="email" name="email" type="email"
+             autocomplete="email" required&gt;
+    &lt;/p&gt;
+  &lt;/fieldset&gt;
+
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+  </figure>
+
+  <ul>
+    <li><strong>No anides formularios</strong>: un <code>form</code> dentro de otro es inválido.</li>
+    <li><strong>Una etiqueta por control</strong>: <code>label for</code> debe coincidir con el <code>id</code> del campo.</li>
+    <li><strong>Agrupá</strong> los campos relacionados con <code>fieldset</code> y <code>legend</code>.</li>
+    <li><strong>Ordená</strong> los campos en el mismo orden en que se completan y en el que se leen.</li>
+    <li><strong>Ubicá</strong> el botón de envío al final, salvo que el formulario sea muy largo.</li>
+  </ul>
+
+  <aside class="aviso aviso--atencion" aria-label="Atención">
+    <span class="aviso__titulo">El placeholder no es una etiqueta</span>
+    <p>
+      El texto de <code>placeholder</code> desaparece al escribir, no se lee
+      siempre con lectores de pantalla y suele tener poco contraste. Usalo solo
+      como ejemplo de formato (“DD/MM/AAAA”), nunca para indicar qué dato va en
+      el campo.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="campos">
+  <h2 id="campos">Campos de entrada</h2>
+  <p>
+    <code>input</code> es un elemento vacío cuyo comportamiento cambia según el
+    atributo <code>type</code>. Elegir el tipo correcto mejora el teclado del
+    celular, la validación y la accesibilidad.
+  </p>
+
+  <div class="tabla">
+    <table>
+      <caption>Tipos de <code>input</code> más usados</caption>
+      <thead>
+        <tr>
+          <th scope="col">Tipo</th>
+          <th scope="col">Para qué</th>
+          <th scope="col">Detalle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>text</code></th><td>Texto corto de una línea.</td><td>Con <code>maxlength</code> y <code>pattern</code> si hace falta.</td></tr>
+        <tr><th scope="row"><code>email</code></th><td>Correo electrónico.</td><td>Valida el formato y abre el teclado adecuado.</td></tr>
+        <tr><th scope="row"><code>password</code></th><td>Contraseñas.</td><td>Oculta lo que se escribe; no reemplaza el cifrado en tránsito.</td></tr>
+        <tr><th scope="row"><code>search</code></th><td>Búsquedas.</td><td>Puede mostrar un botón para limpiar.</td></tr>
+        <tr><th scope="row"><code>tel</code></th><td>Teléfonos.</td><td>No valida el formato: usá <code>pattern</code> si lo necesitás.</td></tr>
+        <tr><th scope="row"><code>url</code></th><td>Direcciones web.</td><td>Exige un esquema válido.</td></tr>
+        <tr><th scope="row"><code>number</code></th><td>Cantidades numéricas.</td><td>Con <code>min</code>, <code>max</code> y <code>step</code>. No sirve para teléfonos ni tarjetas.</td></tr>
+        <tr><th scope="row"><code>range</code></th><td>Valor dentro de un intervalo.</td><td>Se usa con <code>min</code>, <code>max</code> y <code>step</code>.</td></tr>
+        <tr><th scope="row"><code>date</code>, <code>time</code></th><td>Fechas y horas.</td><td>El navegador muestra un selector nativo.</td></tr>
+        <tr><th scope="row"><code>color</code></th><td>Color.</td><td>Devuelve un valor hexadecimal.</td></tr>
+        <tr><th scope="row"><code>file</code></th><td>Archivos.</td><td>Requiere <code>enctype="multipart/form-data"</code> en el formulario.</td></tr>
+        <tr><th scope="row"><code>checkbox</code></th><td>Opciones múltiples independientes.</td><td>Cada opción lleva su propio <code>name</code> o el mismo con <code>[]</code> según el backend.</td></tr>
+        <tr><th scope="row"><code>radio</code></th><td>Una opción entre varias.</td><td>Todas comparten el mismo <code>name</code> y van en un <code>fieldset</code>.</td></tr>
+        <tr><th scope="row"><code>hidden</code></th><td>Datos internos.</td><td>No es seguro: el usuario puede verlo y modificarlo.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Atributos de validación</h3>
+  <ul>
+    <li><code>required</code>: el campo es obligatorio.</li>
+    <li><code>minlength</code> y <code>maxlength</code>: longitud del texto.</li>
+    <li><code>min</code>, <code>max</code> y <code>step</code>: rangos numéricos y de fecha.</li>
+    <li><code>pattern</code>: expresión regular para el formato (por ejemplo, <code>[0-9]{8}</code>).</li>
+    <li><code>readonly</code>: se puede leer, no modificar y sí se envía.</li>
+    <li><code>disabled</code>: no se puede usar ni enviar.</li>
+    <li><code>autocomplete</code>: ayuda al navegador a completar (por ejemplo, <code>name</code>, <code>email</code>, <code>postal-code</code>).</li>
+    <li><code>inputmode</code>: sugiere el teclado adecuado sin cambiar el tipo.</li>
+  </ul>
+
+  <aside class="aviso aviso--nota" aria-label="Nota">
+    <span class="aviso__titulo">La validación del navegador es una ayuda</span>
+    <p>
+      Los atributos <code>required</code>, <code>pattern</code> y
+      <code>min</code> mejoran la experiencia, pero se pueden saltar. El
+      servidor debe validar todo de nuevo, con las mismas reglas y con
+      mensajes claros.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="seleccion">
+  <h2 id="seleccion">Listas desplegables y áreas de texto</h2>
+
+  <h3><code>select</code></h3>
+  <p>
+    Una lista desplegable se construye con <code>select</code>,
+    <code>option</code> y, opcionalmente, <code>optgroup</code> para agrupar.
+    La primera opción suele ser una invitación a elegir, con
+    <code>value=""</code> y <code>disabled</code>.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>select.html</figcaption>
+    <pre><code>&lt;label for="carrera"&gt;Carrera&lt;/label&gt;
+&lt;select id="carrera" name="carrera" required&gt;
+  &lt;option value=""&gt;Elegí una carrera&lt;/option&gt;
+  &lt;optgroup label="Sistemas"&gt;
+    &lt;option&gt;Licenciatura en Sistemas&lt;/option&gt;
+    &lt;option&gt;Analista de Sistemas&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label="Otras"&gt;
+    &lt;option&gt;Contador Público&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;</code></pre>
+  </figure>
+
+  <p>
+    Con <code>multiple</code> se pueden elegir varias opciones, pero el
+    control se vuelve más difícil de usar y no conviene para listas largas. En
+    ese caso, un grupo de <code>checkbox</code> suele ser más claro.
+  </p>
+
+  <h3><code>datalist</code></h3>
+  <p>
+    <code>datalist</code> ofrece sugerencias mientras se escribe, sin obligar a
+    elegir una. Se vincula con el atributo <code>list</code> del
+    <code>input</code>. Es útil para ciudades, carreras o etiquetas.
+  </p>
+
+  <h3><code>textarea</code></h3>
+  <p>
+    Para textos largos se usa <code>textarea</code>, con
+    <code>rows</code> y <code>cols</code> como tamaño inicial. El contenido va
+    entre las etiquetas de apertura y cierre, no en un atributo
+    <code>value</code>.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>textarea.html</figcaption>
+    <pre><code>&lt;label for="consulta"&gt;Consulta&lt;/label&gt;
+&lt;textarea id="consulta" name="consulta" rows="5"
+          maxlength="500"&gt;&lt;/textarea&gt;</code></pre>
+  </figure>
+</section>
+
+<section aria-labelledby="botones">
+  <h2 id="botones">Botones</h2>
+  <p>
+    El elemento <code>button</code> es la forma correcta de crear un botón. Su
+    atributo <code>type</code> define qué hace:
+  </p>
+
+  <div class="tabla">
+    <table>
+      <caption>Tipos de botón</caption>
+      <thead>
+        <tr>
+          <th scope="col">Tipo</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>submit</code></th><td>Envía el formulario. Es el valor predeterminado si se omite <code>type</code>.</td></tr>
+        <tr><th scope="row"><code>reset</code></th><td>Restaura los valores iniciales. Casi nunca es una buena idea: se pierde lo escrito.</td></tr>
+        <tr><th scope="row"><code>button</code></th><td>No hace nada por sí solo; requiere JavaScript.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <aside class="aviso aviso--atencion" aria-label="Atención">
+    <span class="aviso__titulo">Declará siempre el <code>type</code></span>
+    <p>
+      Un <code>&lt;button&gt;</code> sin <code>type</code> dentro de un
+      formulario se comporta como <code>submit</code>. Si querés un botón
+      secundario que no envíe nada, escribí <code>type="button"</code>.
+    </p>
+  </aside>
+
+  <p>
+    Para enviar a distintas direcciones desde un mismo formulario se usan
+    <code>formaction</code> y <code>formmethod</code> en el botón. Para
+    deshabilitar el envío mientras se procesa, se usa <code>disabled</code>,
+    pero hay que explicar por qué con un mensaje visible.
+  </p>
+</section>
+
+<section aria-labelledby="estilos">
+  <h2 id="estilos">Estilizado de formularios</h2>
+  <p>
+    Los controles nativos tienen apariencias distintas en cada navegador y
+    sistema operativo. CSS permite unificar la presentación sin perder la
+    funcionalidad ni la accesibilidad.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>formulario.css</figcaption>
+    <pre><code>.campo {
+  display: grid;
+  gap: 0.35rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #d6d3d1;
+  border-radius: 0.4rem;
+  background-color: #ffffff;
+  font: inherit;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #4f46e5;
+  outline-offset: 2px;
+}
+
+input:user-invalid,
+select:user-invalid,
+textarea:user-invalid {
+  border-color: #b91c1c;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #4f46e5;
+  width: 1.1rem;
+  height: 1.1rem;
+}</code></pre>
+  </figure>
+
+  <ul>
+    <li>Usá <code>font: inherit</code> para que los controles no cambien de tipografía.</li>
+    <li>El foco debe verse siempre; no lo elimines sin reemplazo.</li>
+    <li><code>:user-invalid</code> marca el error recién después de que la persona interactuó; <code>:invalid</code> se activa al cargar y confunde.</li>
+    <li><code>accent-color</code> cambia el color de checkboxes y radios sin reimplementarlos.</li>
+    <li>No ocultes las etiquetas: si el diseño exige etiquetas visibles solo para lectores, usá la clase <code>.visualmente-oculto</code> con cuidado y un placeholder que no reemplace la información.</li>
+    <li>Los mensajes de error deben ser texto visible, no solo un borde rojo.</li>
+  </ul>
+
+  <figure class="demo">
+    <iframe src="ejemplos/formulario.html"
+            title="Formulario de inscripción accesible"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>Formulario completo con grupos, etiquetas, validación nativa y estilos.</span>
+      <a href="ejemplos/formulario.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="accesibilidad">
+  <h2 id="accesibilidad">Accesibilidad</h2>
+  <ul>
+    <li>Cada control tiene una <code>label</code> visible asociada por <code>for</code> e <code>id</code>.</li>
+    <li>Los grupos de radios y checkboxes van dentro de un <code>fieldset</code> con <code>legend</code>.</li>
+    <li>Los campos obligatorios se indican en el texto (“Requerido”), no solo con color o un asterisco sin explicación.</li>
+    <li>Las ayudas y los errores se asocian con <code>aria-describedby</code>; si el error es de formato, se marca el campo con <code>aria-invalid="true"</code>.</li>
+    <li>El orden de tabulación sigue el orden visual y lógico.</li>
+    <li>Los controles tienen un tamaño táctil suficiente (mínimo 24 × 24 px).</li>
+    <li>El botón de envío dice qué hace (“Inscribirme”, no “Enviar”).</li>
+    <li>No uses CAPTCHA inaccesibles ni bloquees el pegado de contraseñas.</li>
+    <li>Probá el formulario con teclado, con zoom al 200 % y con un lector de pantalla.</li>
+  </ul>
+</section>
+
+<div class="ejercicio">
+  <h2 id="actividad">Actividad práctica</h2>
+  <p>
+    Crear el formulario de inscripción a un taller de la facultad.
+  </p>
+  <ol>
+    <li>Armar dos <code>fieldset</code>: “Datos personales” y “Preferencias de cursada”.</li>
+    <li>Incluir nombre, correo, teléfono, fecha de nacimiento y un selector de carrera.</li>
+    <li>Agregar un grupo de radios para el turno y otro de checkboxes para los temas de interés.</li>
+    <li>Agregar una <code>textarea</code> para consultas y un checkbox obligatorio de aceptación.</li>
+    <li>Usar <code>required</code>, <code>type</code> y <code>autocomplete</code> donde corresponda; no usar <code>placeholder</code> como etiqueta.</li>
+    <li>Estilizar con CSS manteniendo el foco visible y el contraste.</li>
+    <li>Probar el envío con campos vacíos, con un correo inválido y con todo completo.</li>
+    <li>Recorrer el formulario solo con <kbd>Tab</kbd> y comprobar que se entiende cada campo.</li>
+  </ol>
+  <p>
+    <strong>Para entregar</strong>: el HTML, el CSS y una lista de las
+    validaciones aplicadas con el mensaje que ve el usuario en cada caso.
+  </p>
+</div>
+
+<div class="resumen">
+  <h2 id="resumen">Resumen</h2>
+  <ul>
+    <li>El formulario envía pares <code>name=valor</code> al servidor según <code>action</code> y <code>method</code>.</li>
+    <li><code>GET</code> va en la URL; <code>POST</code>, en el cuerpo y es el adecuado para datos sensibles o cambios.</li>
+    <li><code>fieldset</code> y <code>legend</code> agrupan; <code>label</code> asocia cada control con su nombre.</li>
+    <li>El tipo de <code>input</code> correcto mejora la validación, el teclado y la accesibilidad.</li>
+    <li>La validación del navegador es una ayuda; el servidor debe validar de nuevo.</li>
+    <li><code>button type="submit"</code> envía; <code>type="button"</code> no hace nada sin JavaScript.</li>
+    <li>Los errores se comunican con texto y se asocian al campo, no solo con color.</li>
+  </ul>
+</div>
+
+<div class="bibliografia">
+  <h2>Bibliografía del tema</h2>
+  <ul>
+    <li>
+      Celaya Luna, A. (2014). <cite>Creación de páginas web: HTML 5</cite>.
+      Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/56045">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Pérez Rodríguez, M. D. (Coord.) (2012).
+      <cite>Introducción al lenguaje HTML 5</cite>. Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/225270">Acceso en eLibro</a>.
+    </li>
+    <li>
+      MDN Web Docs.
+      <a href="https://developer.mozilla.org/es/docs/Learn/Forms">Aprender formularios HTML</a>.
+    </li>
+    <li>
+      W3C.
+      <a href="https://www.w3.org/WAI/tutorials/forms/">Tutorial de formularios accesibles</a>.
+    </li>
+  </ul>
+</div>
+
+    <nav class="pager" aria-label="Navegación entre clases">
+      <a class="pager__anterior" rel="prev" href="../../clases/06-tablas/index.html">
+        <span class="pager__direccion">← Anterior</span>
+        <span class="pager__titulo">Clase 06 · Tablas</span>
+      </a>
+      <a class="pager__siguiente" rel="next" href="../../clases/08-marcos/index.html">
+        <span class="pager__direccion">Siguiente →</span>
+        <span class="pager__titulo">Clase 08 · Marcos</span>
+      </a>
+    </nav>
+    </main>
+  </div>
+
+  <footer class="sitio-footer">
+    <div class="contenedor sitio-footer__contenido">
+      <p><strong>Desarrollo de Software III</strong> · Licenciatura en Sistemas ·
+        Universidad John F. Kennedy</p>
+      <p><a href="../../index.html">Índice del curso</a> ·
+        <a href="../../index.html#bibliografia">Bibliografía</a></p>
+    </div>
+  </footer>
+</body>
+</html>

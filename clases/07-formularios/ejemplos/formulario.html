@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscripción al taller — Clase 7</title>
+  <meta name="description" content="Formulario accesible de inscripción con validación nativa.">
+  <style>
+    :root {
+      color-scheme: light;
+      --texto: #292524;
+      --tenue: #78716c;
+      --borde: #d6d3d1;
+      --fondo: #fafaf9;
+      --indigo: #4f46e5;
+      --indigo-oscuro: #3730a3;
+      --indigo-suave: #eef2ff;
+      --error: #b91c1c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--fondo);
+      color: var(--texto);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+    }
+
+    .contenedor {
+      max-width: 44rem;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 2.5rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .bajada {
+      margin: 0.5rem 0 0;
+      color: var(--tenue);
+    }
+
+    .nota {
+      margin: 1rem 0 0;
+      padding: 0.65rem 0.85rem;
+      border-left: 4px solid var(--indigo);
+      border-radius: 0 0.35rem 0.35rem 0;
+      background-color: var(--indigo-suave);
+      color: var(--indigo-oscuro);
+      font-size: 0.85rem;
+    }
+
+    form {
+      margin-top: 1.25rem;
+    }
+
+    fieldset {
+      margin: 0 0 1.25rem;
+      padding: 1rem 1.1rem 1.15rem;
+      border: 1px solid var(--borde);
+      border-radius: 0.6rem;
+      background-color: #ffffff;
+    }
+
+    legend {
+      padding: 0 0.35rem;
+      color: var(--indigo-oscuro);
+      font-weight: 700;
+    }
+
+    .rejilla {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.9rem;
+    }
+
+    @media (min-width: 34rem) {
+      .rejilla {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .ancho-completo {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .campo {
+      display: grid;
+      gap: 0.3rem;
+      align-content: start;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .req {
+      color: var(--error);
+      font-weight: 700;
+    }
+
+    .ayuda {
+      margin: 0;
+      color: var(--tenue);
+      font-size: 0.78rem;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border: 1px solid var(--borde);
+      border-radius: 0.4rem;
+      background-color: #ffffff;
+      color: var(--texto);
+      font: inherit;
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 6rem;
+    }
+
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid var(--indigo);
+      outline-offset: 2px;
+      border-color: var(--indigo);
+    }
+
+    input:user-invalid,
+    select:user-invalid,
+    textarea:user-invalid {
+      border-color: var(--error);
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: 1.1rem;
+      height: 1.1rem;
+      margin: 0;
+      accent-color: var(--indigo);
+    }
+
+    .opciones {
+      display: grid;
+      gap: 0.45rem;
+      margin-top: 0.15rem;
+    }
+
+    .opcion {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+
+    .opcion label {
+      font-weight: 400;
+    }
+
+    .grupo-interno {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .grupo-interno legend {
+      padding: 0;
+      color: var(--texto);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .acciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1rem;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
+    button {
+      padding: 0.65rem 1.1rem;
+      border: 0;
+      border-radius: 0.45rem;
+      background-color: var(--indigo);
+      color: #ffffff;
+      font: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: var(--indigo-oscuro);
+    }
+
+    button:focus-visible {
+      outline: 3px solid var(--indigo);
+      outline-offset: 3px;
+    }
+
+    .pie-formulario {
+      margin: 0.75rem 0 0;
+      color: var(--tenue);
+      font-size: 0.8rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Inscripción al taller de desarrollo web</h1>
+    <p class="bajada">
+      Completá tus datos para reservar un lugar. Los campos con
+      <span class="req">*</span> son obligatorios.
+    </p>
+
+    <p class="nota">
+      Esta demostración no envía datos a ningún servidor. Para que se pueda
+      probar sin backend se usa <code>method="get"</code>; en un formulario real
+      con datos personales se usa <code>method="post"</code>.
+    </p>
+
+    <form action="#" method="get">
+      <fieldset>
+        <legend>Datos personales</legend>
+        <div class="rejilla">
+          <p class="campo ancho-completo">
+            <label for="nombre">Nombre completo <span class="req" aria-hidden="true">*</span></label>
+            <input id="nombre" name="nombre" type="text"
+                   autocomplete="name" minlength="3" required>
+          </p>
+
+          <p class="campo">
+            <label for="email">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email"
+                   autocomplete="email" required
+                   aria-describedby="ayuda-email">
+            <span class="ayuda" id="ayuda-email">
+              Usaremos este correo para confirmar la inscripción.
+            </span>
+          </p>
+
+          <p class="campo">
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" name="telefono" type="tel"
+                   autocomplete="tel" inputmode="tel"
+                   placeholder="Ej. 11 1234-5678"
+                   aria-describedby="ayuda-telefono">
+            <span class="ayuda" id="ayuda-telefono">
+              Opcional. Solo para consultas urgentes.
+            </span>
+          </p>
+
+          <p class="campo">
+            <label for="nacimiento">Fecha de nacimiento <span class="req" aria-hidden="true">*</span></label>
+            <input id="nacimiento" name="nacimiento" type="date"
+                   autocomplete="bday" required>
+          </p>
+
+          <p class="campo">
+            <label for="carrera">Carrera <span class="req" aria-hidden="true">*</span></label>
+            <select id="carrera" name="carrera" required>
+              <option value="">Elegí una opción</option>
+              <optgroup label="Sistemas">
+                <option>Licenciatura en Sistemas</option>
+                <option>Analista de Sistemas</option>
+              </optgroup>
+              <optgroup label="Otras carreras">
+                <option>Contador Público</option>
+                <option>Abogacía</option>
+              </optgroup>
+            </select>
+          </p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Preferencias de cursada</legend>
+        <div class="rejilla">
+          <fieldset class="grupo-interno ancho-completo">
+            <legend>Turno <span class="req" aria-hidden="true">*</span></legend>
+            <div class="opciones">
+              <span class="opcion">
+                <input id="turno-manana" name="turno" type="radio"
+                       value="manana" required>
+                <label for="turno-manana">Mañana (9 a 12 h)</label>
+              </span>
+              <span class="opcion">
+                <input id="turno-tarde" name="turno" type="radio"
+                       value="tarde">
+                <label for="turno-tarde">Tarde (14 a 17 h)</label>
+              </span>
+              <span class="opcion">
+                <input id="turno-noche" name="turno" type="radio"
+                       value="noche">
+                <label for="turno-noche">Noche (18 a 21 h)</label>
+              </span>
+            </div>
+          </fieldset>
+
+          <fieldset class="grupo-interno ancho-completo">
+            <legend>Temas de interés</legend>
+            <div class="opciones">
+              <span class="opcion">
+                <input id="tema-html" name="temas" type="checkbox" value="html">
+                <label for="tema-html">HTML y accesibilidad</label>
+              </span>
+              <span class="opcion">
+                <input id="tema-css" name="temas" type="checkbox" value="css">
+                <label for="tema-css">CSS y diseño responsivo</label>
+              </span>
+              <span class="opcion">
+                <input id="tema-js" name="temas" type="checkbox" value="javascript">
+                <label for="tema-js">Introducción a JavaScript</label>
+              </span>
+            </div>
+          </fieldset>
+
+          <p class="campo ancho-completo">
+            <label for="consulta">Consulta o comentario</label>
+            <textarea id="consulta" name="consulta" rows="4"
+                      maxlength="500"
+                      aria-describedby="ayuda-consulta"></textarea>
+            <span class="ayuda" id="ayuda-consulta">
+              Máximo 500 caracteres. No incluyas datos sensibles.
+            </span>
+          </p>
+
+          <p class="campo ancho-completo">
+            <span class="opcion">
+              <input id="acepto" name="acepto" type="checkbox" value="si" required>
+              <label for="acepto">
+                Acepto el tratamiento de mis datos para la inscripción
+                <span class="req" aria-hidden="true">*</span>
+              </label>
+            </span>
+          </p>
+        </div>
+      </fieldset>
+
+      <div class="acciones">
+        <button type="submit">Reservar mi lugar</button>
+        <p class="pie-formulario">
+          Al enviar, los datos aparecen en la URL porque esta demo usa GET.
+        </p>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

@@ -643,6 +643,10 @@ samp {
   background-color: #ffffff;
 }
 
+.demo--alto iframe {
+  height: 38rem;
+}
+
 .demo figcaption {
   display: flex;
   flex-wrap: wrap;

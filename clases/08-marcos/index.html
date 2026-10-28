@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Historia y declive de frameset, el iframe actual, seguridad, casos de uso y alternativas.">
+  <title>Clase 08 · Marcos — Desarrollo de Software III</title>
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/curso.css">
+</head>
+<body>
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <header class="sitio-header">
+    <div class="contenedor">
+      <div class="sitio-header__barra">
+        <a class="marca" href="../../index.html">desarrollo-de-software-iii{}</a>
+        <p class="sitio-header__contexto">&rsaquo; Clase 08 · Marcos</p>
+      </div>
+      <nav class="rail" aria-label="Clases del curso">
+        <a href="../../index.html" aria-label="Clase 0: Presentación del curso">00</a>
+        <a href="../../clases/01-origenes-y-evolucion-de-html/index.html" aria-label="Clase 1: Orígenes y evolución de HTML">01</a>
+        <a href="../../clases/02-estructura-de-un-documento-html/index.html" aria-label="Clase 2: Estructura de un documento HTML">02</a>
+        <a href="../../clases/03-etiquetas/index.html" aria-label="Clase 3: Etiquetas principales y secundarias">03</a>
+        <a href="../../clases/04-control-de-texto/index.html" aria-label="Clase 4: Control de texto">04</a>
+        <a href="../../clases/05-enlaces/index.html" aria-label="Clase 5: Enlaces e hipervínculos">05</a>
+        <a href="../../clases/06-tablas/index.html" aria-label="Clase 6: Tablas">06</a>
+        <a href="../../clases/07-formularios/index.html" aria-label="Clase 7: Formularios">07</a>
+        <a href="../../clases/08-marcos/index.html" aria-label="Clase 8: Marcos" aria-current="page">08</a>
+        <a href="../../clases/09-css-y-responsive/index.html" aria-label="Clase 9: Hojas de estilo y desarrollo responsivo">09</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="contenedor layout">
+    <nav class="toc" aria-labelledby="toc-titulo">
+      <p class="toc__titulo" id="toc-titulo">En esta clase</p>
+      <ol>
+        <li><a href="#que-son">¿Qué son los marcos?</a></li>
+        <li><a href="#frameset">frameset: pasado</a></li>
+        <li><a href="#iframe">iframe: presente</a></li>
+        <li><a href="#seguridad">Seguridad</a></li>
+        <li><a href="#alternativas">Alternativas</a></li>
+        <li><a href="#actividad">Actividad práctica</a></li>
+        <li><a href="#resumen">Resumen</a></li>
+      </ol>
+    </nav>
+
+    <main class="contenido" id="contenido" tabindex="-1">
+<header class="encabezado-clase">
+  <p class="etiqueta">Clase 08</p>
+  <h1>Marcos</h1>
+  <p class="lead">
+    Los marcos dividían la ventana en documentos independientes. Fueron muy
+    populares en los noventa, hoy están obsoletos, pero su sucesor —el
+    <code>iframe</code>— sigue siendo útil para incrustar mapas, videos y
+    aplicaciones de terceros.
+  </p>
+</header>
+
+<aside class="aviso aviso--nota" aria-label="Objetivos de la clase">
+  <span class="aviso__titulo">Objetivos</span>
+  <ul>
+    <li>Entender qué eran los marcos y por qué dejaron de usarse.</li>
+    <li>Distinguir <code>frameset</code> de <code>iframe</code>.</li>
+    <li>Incrustar contenido de forma responsiva y accesible.</li>
+    <li>Reconocer los riesgos de seguridad de incrustar sitios ajenos.</li>
+  </ul>
+</aside>
+
+<section aria-labelledby="que-son">
+  <h2 id="que-son">¿Qué son los marcos?</h2>
+  <p>
+    Un marco (<em>frame</em>) es una región de la ventana que muestra un
+    documento HTML completo de forma independiente. La página que contiene los
+    marcos no tiene contenido propio: solo define cómo se divide el espacio y
+    qué documento se carga en cada parte.
+  </p>
+  <p>
+    La idea permitía mantener un menú fijo mientras cambiaba el contenido, algo
+    que antes de CSS y de las aplicaciones de una sola página requería
+    recargar toda la ventana. También permitía combinar contenido de distintos
+    servidores en una misma pantalla. Los problemas superaron rápidamente a las
+    ventajas.
+  </p>
+</section>
+
+<section aria-labelledby="frameset">
+  <h2 id="frameset">frameset: el pasado</h2>
+  <p>
+    En HTML 4, una página con marcos reemplazaba el <code>body</code> por un
+    <code>frameset</code>. El atributo <code>rows</code> o <code>cols</code>
+    definía la división y cada <code>frame</code> apuntaba a un documento.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>frameset.html (HTML 4, obsoleto)</figcaption>
+    <pre><code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+  "http://www.w3.org/TR/html4/frameset.dtd"&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;title&gt;Sitio con marcos&lt;/title&gt;
+&lt;/head&gt;
+&lt;frameset rows="15%, 85%"&gt;
+  &lt;frame src="menu.html" name="menu"&gt;
+  &lt;frameset cols="50%, 50%"&gt;
+    &lt;frame src="contenido.html" name="contenido"&gt;
+    &lt;frame src="ayuda.html" name="ayuda"&gt;
+  &lt;/frameset&gt;
+&lt;/frameset&gt;
+&lt;/html&gt;</code></pre>
+  </figure>
+
+  <p>
+    En HTML5 estos elementos están obsoletos: no forman parte del estándar y
+    los validadores los rechazan. Algunos navegadores todavía los renderizan
+    por compatibilidad, pero no se deben usar en un sitio nuevo.
+  </p>
+
+  <h3>Problemas de los marcos</h3>
+  <ul>
+    <li><strong>Navegación rota:</strong> el botón “atrás” retrocede en un marco y no en la página completa.</li>
+    <li><strong>URL única:</strong> no hay una dirección que represente el estado completo de la ventana; no se puede compartir ni guardar en favoritos.</li>
+    <li><strong>Accesibilidad:</strong> los lectores de pantalla recorren documentos separados y el foco puede perderse entre marcos.</li>
+    <li><strong>Adaptabilidad:</strong> los tamaños en porcentajes no se adaptan a pantallas pequeñas ni al zoom.</li>
+    <li><strong>Impresión:</strong> imprimir varios documentos en una hoja es impredecible.</li>
+    <li><strong>SEO:</strong> los buscadores indexan mal el contenido distribuido en marcos.</li>
+    <li><strong>Mantenimiento:</strong> hay que coordinar varios archivos y nombres de destino.</li>
+  </ul>
+
+  <aside class="aviso aviso--dato" aria-label="Dato">
+    <span class="aviso__titulo">La solución llegó con CSS</span>
+    <p>
+      Un encabezado fijo, un menú lateral y un área de contenido se resuelven
+      hoy con Grid o Flexbox, sin documentos separados y sin perder la URL
+      única. Esa es la alternativa correcta a <code>frameset</code>.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="iframe">
+  <h2 id="iframe">iframe: el presente</h2>
+  <p>
+    <code>iframe</code> (<em>inline frame</em>, marco flotante) incrusta otro
+    documento dentro de la página actual sin reemplazar el <code>body</code>.
+    Es un elemento válido y ampliamente usado para mapas, videos, visores de
+    documentos, widgets de pago y previsualizaciones.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>iframe.html</figcaption>
+    <pre><code>&lt;iframe src="https://example.com/mapa"
+        title="Mapa de la sede centro"
+        width="600" height="400"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        sandbox="allow-scripts"&gt;
+&lt;/iframe&gt;</code></pre>
+  </figure>
+
+  <div class="tabla">
+    <table>
+      <caption>Atributos de <code>iframe</code></caption>
+      <thead>
+        <tr>
+          <th scope="col">Atributo</th>
+          <th scope="col">Para qué</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>src</code></th><td>URL del documento a incrustar.</td></tr>
+        <tr><th scope="row"><code>title</code></th><td>Nombre accesible del marco. Es obligatorio en la práctica: lo anuncia el lector de pantalla.</td></tr>
+        <tr><th scope="row"><code>width</code> y <code>height</code></th><td>Tamaño inicial. Mejor controlarlo con CSS.</td></tr>
+        <tr><th scope="row"><code>loading="lazy"</code></th><td>Retrasa la carga hasta que el marco se acerca al área visible.</td></tr>
+        <tr><th scope="row"><code>sandbox</code></th><td>Restringe lo que el documento incrustado puede hacer.</td></tr>
+        <tr><th scope="row"><code>allow</code></th><td>Habilita permisos concretos: cámara, micrófono, pantalla completa.</td></tr>
+        <tr><th scope="row"><code>allowfullscreen</code></th><td>Permite que el contenido pase a pantalla completa.</td></tr>
+        <tr><th scope="row"><code>referrerpolicy</code></th><td>Controla qué información de origen se envía al sitio incrustado.</td></tr>
+        <tr><th scope="row"><code>name</code></th><td>Nombre del contexto de navegación, usado como destino de enlaces.</td></tr>
+        <tr><th scope="row"><code>srcdoc</code></th><td>HTML embebido directamente en el atributo, sin archivo externo.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Uso responsable</h3>
+  <ul>
+    <li>Incrustá solo contenido en el que confiás: el iframe ejecuta código de otro origen.</li>
+    <li>Escribí siempre un <code>title</code> que describa el contenido, no “iframe”.</li>
+    <li>Aplicá el principio de mínimo privilegio en <code>sandbox</code>: empezar vacío y habilitar solo lo necesario.</li>
+    <li>Usá <code>loading="lazy"</code> para no cargar recursos pesados fuera de pantalla.</li>
+    <li>Definí dimensiones estables para evitar saltos de diseño; para videos, una relación de aspecto.</li>
+    <li>Ofrecé una alternativa: un enlace para abrir el contenido en una pestaña nueva.</li>
+  </ul>
+
+  <figure class="demo demo--alto">
+    <iframe src="../07-formularios/ejemplos/formulario.html"
+            title="Formulario de inscripción embebido desde la clase 7"
+            loading="lazy"
+            sandbox="allow-forms"></iframe>
+    <figcaption>
+      <span>El formulario de la clase 7 embebido con <code>sandbox="allow-forms"</code>.</span>
+      <a href="../07-formularios/ejemplos/formulario.html">Abrir en una pestaña nueva</a>
+    </figcaption>
+  </figure>
+
+  <h3>Responsive con proporción fija</h3>
+  <p>
+    Para un video o un mapa conviene que el marco mantenga una relación de
+    aspecto. Se logra con <code>aspect-ratio</code> en el contenedor:
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>iframe-responsive.css</figcaption>
+    <pre><code>.marco {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.marco iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}</code></pre>
+  </figure>
+</section>
+
+<section aria-labelledby="seguridad">
+  <h2 id="seguridad">Seguridad</h2>
+  <p>
+    Incrustar contenido ajeno es confiar parte de la página a un tercero. Los
+    riesgos principales son:
+  </p>
+  <ul>
+    <li>
+      <strong>Clickjacking.</strong> Un sitio malicioso incrusta tu página y
+      superpone elementos invisibles para que el usuario haga clic en acciones
+      que no quiere. Se mitiga con el encabezado
+      <code>X-Frame-Options: DENY</code> o, mejor, con la directiva
+      <code>frame-ancestors</code> de Content Security Policy.
+    </li>
+    <li>
+      <strong>Contenido no confiable.</strong> Un iframe sin
+      <code>sandbox</code> puede ejecutar scripts, abrir ventanas, enviar
+      formularios o acceder a datos del origen si comparte dominio.
+    </li>
+    <li>
+      <strong>Permisos excesivos.</strong> <code>allow="camera; microphone"</code>
+      sin necesidad amplía la superficie de ataque.
+    </li>
+    <li>
+      <strong>Fuga de información.</strong> La URL de origen puede viajar en el
+      encabezado <code>Referer</code>; <code>referrerpolicy</code> lo controla.
+    </li>
+    <li>
+      <strong>Contenido mixto.</strong> Un iframe <code>http</code> dentro de
+      una página <code>https</code> se bloquea o genera advertencias.
+    </li>
+  </ul>
+
+  <aside class="aviso aviso--atencion" aria-label="Atención">
+    <span class="aviso__titulo"><code>sandbox</code> no es decorativo</span>
+    <p>
+      Sin tokens, el contenido incrustado no puede ejecutar scripts ni enviar
+      formularios. Cada permiso que agregás (<code>allow-scripts</code>,
+      <code>allow-same-origin</code>, <code>allow-forms</code>) amplía lo que
+      puede hacer. Evitá combinar <code>allow-scripts</code> con
+      <code>allow-same-origin</code> en contenido del mismo origen: el
+      documento podría quitarse el sandbox a sí mismo.
+    </p>
+  </aside>
+
+  <p>
+    Si el contenido es propio y de confianza, el iframe puede ser innecesario:
+    conviene integrarlo con HTML normal. Si es de un tercero, verificá su
+    política de privacidad, usá HTTPS y limitá los permisos.
+  </p>
+</section>
+
+<section aria-labelledby="alternativas">
+  <h2 id="alternativas">Alternativas actuales</h2>
+  <div class="tabla">
+    <table>
+      <caption>Qué usar en lugar de marcos</caption>
+      <thead>
+        <tr>
+          <th scope="col">Necesidad</th>
+          <th scope="col">Alternativa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Encabezado o menú fijo</th>
+          <td>HTML semántico + CSS Grid/Flexbox + <code>position: sticky</code>.</td>
+        </tr>
+        <tr>
+          <th scope="row">Reutilizar un fragmento en varias páginas</th>
+          <td>Inclusión en el servidor o un generador estático; en este sitio, el encabezado se repite porque no hay build.</td>
+        </tr>
+        <tr>
+          <th scope="row">Cargar contenido sin recargar</th>
+          <td><code>fetch</code> con JavaScript, o navegación normal si no es necesario.</td>
+        </tr>
+        <tr>
+          <th scope="row">Video</th>
+          <td><code>&lt;video&gt;</code> si el archivo es propio; iframe solo para plataformas externas.</td>
+        </tr>
+        <tr>
+          <th scope="row">Documento PDF</th>
+          <td>Enlace de descarga o visor nativo; el iframe es una opción secundaria.</td>
+        </tr>
+        <tr>
+          <th scope="row">Mapa</th>
+          <td>Iframe del proveedor con <code>title</code>, <code>loading="lazy"</code> y permisos mínimos.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="ejercicio">
+  <h2 id="actividad">Actividad práctica</h2>
+  <p>
+    Incrustar una página propia y comparar el resultado con un
+    <code>frameset</code> obsoleto.
+  </p>
+  <ol>
+    <li>Crear una página con un <code>iframe</code> que muestre el formulario de la clase 7.</li>
+    <li>Agregar <code>title</code>, <code>loading="lazy"</code> y <code>sandbox="allow-forms"</code>.</li>
+    <li>Darle un tamaño estable con CSS y comprobar que se adapta a 320 px y a 1280 px.</li>
+    <li>Agregar un enlace para abrir el formulario en una pestaña nueva, con <code>rel="noopener"</code>.</li>
+    <li>Navegar con <kbd>Tab</kbd>: comprobar que el foco entra al marco, recorre sus campos y sale.</li>
+    <li>Escribir en un archivo aparte un <code>frameset</code> con dos marcos y validarlo: anotar los errores que devuelve el validador.</li>
+    <li>Reemplazar ese <code>frameset</code> por una maqueta con Grid que muestre el mismo contenido en dos columnas.</li>
+  </ol>
+  <p>
+    <strong>Para entregar</strong>: la página con el iframe, el archivo del
+    frameset con los errores del validador y la versión con Grid.
+  </p>
+</div>
+
+<div class="resumen">
+  <h2 id="resumen">Resumen</h2>
+  <ul>
+    <li>Los marcos dividían la ventana en documentos independientes y hoy están obsoletos.</li>
+    <li><code>frameset</code> rompe la URL única, la navegación, la accesibilidad y el responsive; CSS resolvió el problema.</li>
+    <li><code>iframe</code> incrusta un documento dentro de otro y sigue siendo válido para contenido externo.</li>
+    <li>Todo iframe necesita <code>title</code>, dimensiones estables y, si es posible, <code>loading="lazy"</code>.</li>
+    <li><code>sandbox</code> y <code>allow</code> limitan lo que el contenido incrustado puede hacer.</li>
+    <li>Para contenido propio, HTML normal y CSS son casi siempre mejores que un iframe.</li>
+  </ul>
+</div>
+
+<div class="bibliografia">
+  <h2>Bibliografía del tema</h2>
+  <ul>
+    <li>
+      Celaya Luna, A. (2014). <cite>Creación de páginas web: HTML 5</cite>.
+      Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/56045">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Toharia Rabasco, J. P. y Raya González, L. (2015).
+      <cite>Lenguajes de marcas y sistemas de gestión de la información</cite>.
+      RA-MA Editorial.
+      <a href="https://elibro.net/es/ereader/kennedy/62483">Acceso en eLibro</a>.
+    </li>
+    <li>
+      MDN Web Docs.
+      <a href="https://developer.mozilla.org/es/docs/Web/HTML/Element/iframe">El elemento iframe</a>.
+    </li>
+    <li>
+      MDN Web Docs.
+      <a href="https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors">CSP: frame-ancestors</a>.
+    </li>
+  </ul>
+</div>
+
+    <nav class="pager" aria-label="Navegación entre clases">
+      <a class="pager__anterior" rel="prev" href="../../clases/07-formularios/index.html">
+        <span class="pager__direccion">← Anterior</span>
+        <span class="pager__titulo">Clase 07 · Formularios</span>
+      </a>
+      <a class="pager__siguiente" rel="next" href="../../clases/09-css-y-responsive/index.html">
+        <span class="pager__direccion">Siguiente →</span>
+        <span class="pager__titulo">Clase 09 · Hojas de estilo y desarrollo responsivo</span>
+      </a>
+    </nav>
+    </main>
+  </div>
+
+  <footer class="sitio-footer">
+    <div class="contenedor sitio-footer__contenido">
+      <p><strong>Desarrollo de Software III</strong> · Licenciatura en Sistemas ·
+        Universidad John F. Kennedy</p>
+      <p><a href="../../index.html">Índice del curso</a> ·
+        <a href="../../index.html#bibliografia">Bibliografía</a></p>
+    </div>
+  </footer>
+</body>
+</html>

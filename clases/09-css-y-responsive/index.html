@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="CSS: inclusión, selectores, cascada, box model, tipografía, color, medios, animaciones y diseño responsivo.">
+  <title>Clase 09 · Hojas de estilo y desarrollo responsivo — Desarrollo de Software III</title>
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/curso.css">
+</head>
+<body>
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <header class="sitio-header">
+    <div class="contenedor">
+      <div class="sitio-header__barra">
+        <a class="marca" href="../../index.html">desarrollo-de-software-iii{}</a>
+        <p class="sitio-header__contexto">&rsaquo; Clase 09 · Hojas de estilo y desarrollo responsivo</p>
+      </div>
+      <nav class="rail" aria-label="Clases del curso">
+        <a href="../../index.html" aria-label="Clase 0: Presentación del curso">00</a>
+        <a href="../../clases/01-origenes-y-evolucion-de-html/index.html" aria-label="Clase 1: Orígenes y evolución de HTML">01</a>
+        <a href="../../clases/02-estructura-de-un-documento-html/index.html" aria-label="Clase 2: Estructura de un documento HTML">02</a>
+        <a href="../../clases/03-etiquetas/index.html" aria-label="Clase 3: Etiquetas principales y secundarias">03</a>
+        <a href="../../clases/04-control-de-texto/index.html" aria-label="Clase 4: Control de texto">04</a>
+        <a href="../../clases/05-enlaces/index.html" aria-label="Clase 5: Enlaces e hipervínculos">05</a>
+        <a href="../../clases/06-tablas/index.html" aria-label="Clase 6: Tablas">06</a>
+        <a href="../../clases/07-formularios/index.html" aria-label="Clase 7: Formularios">07</a>
+        <a href="../../clases/08-marcos/index.html" aria-label="Clase 8: Marcos">08</a>
+        <a href="../../clases/09-css-y-responsive/index.html" aria-label="Clase 9: Hojas de estilo y desarrollo responsivo" aria-current="page">09</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="contenedor layout">
+    <nav class="toc" aria-labelledby="toc-titulo">
+      <p class="toc__titulo" id="toc-titulo">En esta clase</p>
+      <ol>
+        <li><a href="#css">¿Qué es CSS?</a></li>
+        <li><a href="#selectores">Selectores</a></li>
+        <li><a href="#cascada">Cascada y herencia</a></li>
+        <li><a href="#box-model">Modelo de caja</a></li>
+        <li><a href="#tipografia-color">Tipografía y color</a></li>
+        <li><a href="#medios">Imágenes, audio y video</a></li>
+        <li><a href="#animaciones">Transformaciones y animaciones</a></li>
+        <li><a href="#responsive">Diseño responsivo</a></li>
+        <li><a href="#buenas-practicas">Buenas prácticas</a></li>
+        <li><a href="#actividad">Actividad práctica</a></li>
+        <li><a href="#resumen">Resumen</a></li>
+      </ol>
+    </nav>
+
+    <main class="contenido" id="contenido" tabindex="-1">
+<header class="encabezado-clase">
+  <p class="etiqueta">Clase 09</p>
+  <h1>Hojas de estilo y desarrollo responsivo</h1>
+  <p class="lead">
+    CSS decide cómo se ve el documento: tipografía, color, espacio,
+    disposición y movimiento. Esta clase recorre sus reglas fundamentales y
+    termina en el diseño de interfaces que funcionan en cualquier pantalla.
+  </p>
+</header>
+
+<aside class="aviso aviso--nota" aria-label="Objetivos de la clase">
+  <span class="aviso__titulo">Objetivos</span>
+  <ul>
+    <li>Incluir CSS en un documento y entender la cascada y la herencia.</li>
+    <li>Escribir selectores claros y de baja especificidad.</li>
+    <li>Dominar el modelo de caja, la tipografía, el color y los fondos.</li>
+    <li>Incorporar imágenes, audio, video, transformaciones y animaciones.</li>
+    <li>Construir interfaces responsivas, accesibles y mantenibles.</li>
+  </ul>
+</aside>
+
+<section aria-labelledby="css">
+  <h2 id="css">¿Qué es CSS?</h2>
+  <p>
+    <strong>CSS</strong> (<em>Cascading Style Sheets</em>) es el lenguaje que
+    describe la presentación de un documento. Nació en 1996, cuando el HTML
+    estaba lleno de etiquetas y atributos visuales, para separar el contenido
+    de su apariencia. Hoy el estándar está dividido en módulos que evolucionan
+    por separado (selectores, color, layout, animaciones), aunque coloquialmente
+    se los siga llamando “CSS3”.
+  </p>
+
+  <h3>Formas de incluir CSS</h3>
+  <ol>
+    <li>
+      <strong>Hoja externa</strong> (recomendada): un archivo <code>.css</code>
+      vinculado desde el <code>head</code>. Se cachea, se reutiliza en todas
+      las páginas y mantiene el HTML limpio.
+    </li>
+    <li>
+      <strong>Hoja interna</strong>: un bloque <code>&lt;style&gt;</code> en el
+      <code>head</code>. Útil para ejemplos de un solo archivo o estilos
+      críticos.
+    </li>
+    <li>
+      <strong>Estilo en línea</strong>: el atributo <code>style</code> en un
+      elemento. Tiene la especificidad más alta, no se reutiliza y mezcla
+      contenido con presentación: se reserva para valores dinámicos.
+    </li>
+  </ol>
+
+  <figure class="bloque-codigo">
+    <figcaption>index.html</figcaption>
+    <pre><code>&lt;link rel="stylesheet" href="estilos.css"&gt;
+
+&lt;!-- Interno --&gt;
+&lt;style&gt;
+  body { font-family: system-ui, sans-serif; }
+&lt;/style&gt;
+
+&lt;!-- En línea (evitar) --&gt;
+&lt;p style="color: #4f46e5;"&gt;Texto&lt;/p&gt;</code></pre>
+  </figure>
+
+  <p>
+    <code>@import</code> permite cargar una hoja desde otra, pero bloquea la
+    descarga y complica el rendimiento. Es preferible declarar varias hojas con
+    <code>&lt;link&gt;</code>. El orden importa: las reglas posteriores pueden
+    sobrescribir a las anteriores.
+  </p>
+
+  <h3>Sintaxis</h3>
+  <figure class="bloque-codigo">
+    <figcaption>sintaxis.css</figcaption>
+    <pre><code>/* selector, propiedad y valor */
+p {
+  color: #292524;
+  line-height: 1.6;
+}
+
+/* comentario de una o varias líneas */</code></pre>
+  </figure>
+  <ul>
+    <li><strong>Selector</strong>: a qué elementos se aplica.</li>
+    <li><strong>Declaración</strong>: <code>propiedad: valor;</code>.</li>
+    <li><strong>Bloque</strong>: declaraciones entre llaves.</li>
+    <li>Los comentarios se escriben entre <code>/*</code> y <code>*/</code>.</li>
+    <li>Las propiedades se escriben en <em>kebab-case</em>: <code>background-color</code>.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="selectores">
+  <h2 id="selectores">Selectores</h2>
+  <p>
+    Un selector elige los elementos a los que se aplica una regla. Conocer los
+    básicos evita depender de clases inventadas para todo.
+  </p>
+
+  <div class="tabla">
+    <table>
+      <caption>Selectores y combinadores</caption>
+      <thead>
+        <tr>
+          <th scope="col">Selector</th>
+          <th scope="col">Ejemplo</th>
+          <th scope="col">Selecciona</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Universal</th><td><code>*</code></td><td>Todos los elementos.</td></tr>
+        <tr><th scope="row">Tipo</th><td><code>p</code></td><td>Todos los párrafos.</td></tr>
+        <tr><th scope="row">Clase</th><td><code>.nota</code></td><td>Elementos con <code>class="nota"</code>.</td></tr>
+        <tr><th scope="row">Identificador</th><td><code>#principal</code></td><td>El elemento con <code>id="principal"</code>.</td></tr>
+        <tr><th scope="row">Atributo</th><td><code>[type="email"]</code></td><td>Campos de correo.</td></tr>
+        <tr><th scope="row">Descendiente</th><td><code>article p</code></td><td>Párrafos dentro de un artículo, a cualquier profundidad.</td></tr>
+        <tr><th scope="row">Hijo directo</th><td><code>ul &gt; li</code></td><td>Solo los <code>li</code> hijos inmediatos.</td></tr>
+        <tr><th scope="row">Hermano adyacente</th><td><code>h2 + p</code></td><td>El <code>p</code> que sigue inmediatamente a un <code>h2</code>.</td></tr>
+        <tr><th scope="row">Hermanos generales</th><td><code>h2 ~ p</code></td><td>Todos los <code>p</code> hermanos posteriores al <code>h2</code>.</td></tr>
+        <tr><th scope="row">Pseudoclase</th><td><code>a:hover</code></td><td>Enlaces bajo el puntero.</td></tr>
+        <tr><th scope="row">Pseudoelemento</th><td><code>p::first-line</code></td><td>La primera línea del párrafo.</td></tr>
+        <tr><th scope="row">Negación</th><td><code>li:not(.activo)</code></td><td>Elementos que no cumplen el selector.</td></tr>
+        <tr><th scope="row">Lista</th><td><code>:is(h1, h2, h3)</code></td><td>Cualquiera de los tres.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Pseudoclases útiles</h3>
+  <ul>
+    <li><code>:hover</code>, <code>:focus</code>, <code>:focus-visible</code>, <code>:active</code>.</li>
+    <li><code>:first-child</code>, <code>:last-child</code>, <code>:nth-child(2n)</code>, <code>:nth-of-type(3)</code>.</li>
+    <li><code>:checked</code>, <code>:disabled</code>, <code>:required</code>, <code>:user-invalid</code>.</li>
+    <li><code>:target</code>: el elemento al que apunta el fragmento de la URL.</li>
+    <li><code>:has()</code>: selecciona un padre según su contenido, por ejemplo <code>article:has(img)</code>.</li>
+    <li><code>:where()</code>: agrupa selectores sin sumar especificidad; <code>:is()</code> sí la suma.</li>
+  </ul>
+
+  <h3>Pseudoelementos</h3>
+  <p>
+    <code>::before</code> y <code>::after</code> crean contenido decorativo
+    antes o después de un elemento. Se usan con <code>content</code> y no deben
+    contener información esencial: el texto generado por CSS puede no ser
+    anunciado por los lectores de pantalla y no se puede seleccionar.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>pseudoelementos.css</figcaption>
+    <pre><code>.enlace-externo::after {
+  content: " ↗";
+  font-size: 0.8em;
+}
+
+p::selection {
+  background-color: #c7d2fe;
+  color: #1e1b4b;
+}</code></pre>
+  </figure>
+
+  <aside class="aviso aviso--dato" aria-label="Dato">
+    <span class="aviso__titulo">Clases antes que identificadores</span>
+    <p>
+      Para dar estilo conviene usar clases reutilizables y dejar los
+      <code>id</code> para anclas y asociaciones. Una clase bien nombrada
+      (<code>.tarjeta</code>, <code>.aviso--atencion</code>) describe el
+      componente; un <code>#contenido</code> suele ser único y difícil de
+      reutilizar.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="cascada">
+  <h2 id="cascada">Cascada, especificidad y herencia</h2>
+  <p>
+    Cuando varias reglas afectan al mismo elemento, el navegador decide cuál
+    gana. Esa decisión combina el origen de la regla, su importancia, su
+    especificidad y el orden en que aparece.
+  </p>
+
+  <h3>Especificidad</h3>
+  <p>
+    Se calcula como una terna: identificadores, clases/atributos/pseudoclases y
+    tipos/pseudoelementos. Cuanto más alta, más prioridad.
+  </p>
+
+  <div class="tabla">
+    <table>
+      <caption>Peso de los selectores</caption>
+      <thead>
+        <tr>
+          <th scope="col">Selector</th>
+          <th scope="col">Peso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>*</code></th><td>0, 0, 0</td></tr>
+        <tr><th scope="row"><code>p</code>, <code>li::marker</code></th><td>0, 0, 1</td></tr>
+        <tr><th scope="row"><code>.nota</code>, <code>[type="email"]</code>, <code>a:hover</code></th><td>0, 1, 0</td></tr>
+        <tr><th scope="row"><code>#principal</code></th><td>1, 0, 0</td></tr>
+        <tr><th scope="row"><code>style="..."</code></th><td>Mayor que cualquier selector</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure class="bloque-codigo">
+    <figcaption>cascada.css</figcaption>
+    <pre><code>p { color: #78716c; }
+.destacado { color: #4f46e5; }
+#principal { color: #0f766e; }
+
+/* &lt;p id="principal" class="destacado"&gt; queda verde */</code></pre>
+  </figure>
+
+  <p>
+    Si dos reglas tienen la misma especificidad, gana la que aparece después en
+    el archivo (o en la hoja que se carga después). El atributo
+    <code>!important</code> invierte el orden normal y debe reservarse para
+    excepciones justificadas, como utilidades de accesibilidad.
+  </p>
+
+  <h3>Herencia</h3>
+  <p>
+    Algunas propiedades se heredan de padres a hijos: <code>color</code>,
+    <code>font-family</code>, <code>font-size</code>, <code>line-height</code>,
+    <code>text-align</code>. Otras no: <code>margin</code>, <code>padding</code>,
+    <code>border</code>, <code>width</code>, <code>display</code>. Las variables
+    CSS también se heredan.
+  </p>
+  <p>
+    Los valores <code>inherit</code>, <code>initial</code>, <code>unset</code>
+    y <code>revert</code> permiten forzar o revertir ese comportamiento. Las
+    propiedades personalizadas (<code>--color-acento</code>) son la forma más
+    práctica de compartir valores sin repetirlos.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>variables.css</figcaption>
+    <pre><code>:root {
+  --color-texto: #292524;
+  --color-acento: #4f46e5;
+  --radio: 0.5rem;
+}
+
+.boton {
+  padding: 0.6rem 1rem;
+  border-radius: var(--radio);
+  background-color: var(--color-acento);
+  color: #ffffff;
+}</code></pre>
+  </figure>
+
+  <aside class="aviso aviso--nota" aria-label="Nota">
+    <span class="aviso__titulo">La cascada no es el enemigo</span>
+    <p>
+      Si necesitás usar <code>!important</code> o identificar selectores cada
+      vez más largos, probablemente el problema sea la estructura del CSS, no
+      la cascada. Mantené selectores simples, una sola capa de componentes y
+      nombres claros.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="box-model">
+  <h2 id="box-model">Modelo de caja</h2>
+  <p>
+    Todo elemento visible es una caja rectangular compuesta por cuatro capas:
+    contenido, relleno (<em>padding</em>), borde y margen. Entenderlas es
+    imprescindible para calcular tamaños y espacios.
+  </p>
+
+  <figure class="diagrama">
+    <svg viewBox="0 0 760 320" role="img" aria-labelledby="titulo-caja desc-caja">
+      <title id="titulo-caja">Modelo de caja de CSS</title>
+      <desc id="desc-caja">
+        Desde afuera hacia adentro: margen, borde, relleno y contenido.
+      </desc>
+      <rect x="20" y="20" width="720" height="280" fill="#fafaf9" stroke="#d6d3d1" stroke-width="2"/>
+      <rect x="80" y="65" width="600" height="190" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+      <rect x="125" y="100" width="510" height="120" fill="#eef2ff" stroke="#a5b4fc" stroke-width="2"/>
+      <rect x="190" y="125" width="380" height="70" fill="#ffffff" stroke="#4f46e5" stroke-width="2"/>
+      <g font-family="'Source Code Pro', monospace" font-size="14" fill="#3730a3">
+        <text x="30" y="45">margin</text>
+        <text x="90" y="88">border</text>
+        <text x="135" y="120">padding</text>
+      </g>
+      <text x="380" y="165" fill="#4f46e5" font-family="'Source Code Pro', monospace"
+            font-size="16" font-weight="600" text-anchor="middle">contenido</text>
+    </svg>
+    <figcaption>
+      El tamaño total de una caja depende de <code>box-sizing</code> y de las
+      cuatro capas.
+    </figcaption>
+  </figure>
+
+  <figure class="bloque-codigo">
+    <figcaption>caja.css</figcaption>
+    <pre><code>.caja {
+  width: 300px;
+  padding: 1rem;
+  border: 2px solid #4f46e5;
+  margin: 1.5rem;
+  box-sizing: border-box;
+}</code></pre>
+  </figure>
+
+  <ul>
+    <li>
+      Con <code>content-box</code> (predeterminado), <code>width</code> mide
+      solo el contenido: el total suma relleno y borde.
+    </li>
+    <li>
+      Con <code>border-box</code>, <code>width</code> incluye contenido,
+      relleno y borde. Es lo que casi siempre se espera; se suele aplicar a
+      todos los elementos con <code>* { box-sizing: border-box; }</code>.
+    </li>
+    <li>Los márgenes verticales de cajas adyacentes pueden colapsar: el mayor gana, no se suman.</li>
+    <li><code>min-width</code>, <code>max-width</code>, <code>min-height</code> y <code>max-height</code> limitan el crecimiento.</li>
+    <li><code>overflow</code> decide qué pasa con el contenido que no entra: <code>visible</code>, <code>hidden</code>, <code>auto</code>, <code>scroll</code>.</li>
+    <li><code>outline</code> no ocupa espacio y no afecta el modelo de caja; es ideal para el foco.</li>
+  </ul>
+
+  <h3>Unidades</h3>
+  <div class="tabla">
+    <table>
+      <caption>Unidades de medida en CSS</caption>
+      <thead>
+        <tr>
+          <th scope="col">Unidad</th>
+          <th scope="col">Relativa a</th>
+          <th scope="col">Uso típico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>px</code></th><td>Píxeles CSS.</td><td>Bordes, detalles finos.</td></tr>
+        <tr><th scope="row"><code>rem</code></th><td>Tamaño de letra de la raíz.</td><td>Tipografía y espaciado global.</td></tr>
+        <tr><th scope="row"><code>em</code></th><td>Tamaño de letra del elemento.</td><td>Espaciado proporcional al texto.</td></tr>
+        <tr><th scope="row"><code>ch</code></th><td>Ancho del carácter “0”.</td><td>Ancho de lectura.</td></tr>
+        <tr><th scope="row"><code>%</code></th><td>El contenedor.</td><td>Anchos flexibles.</td></tr>
+        <tr><th scope="row"><code>vw</code>, <code>vh</code></th><td>Viewport.</td><td>Secciones a pantalla completa; en móvil preferí <code>dvh</code>.</td></tr>
+        <tr><th scope="row"><code>fr</code></th><td>Fracción del espacio libre en Grid.</td><td>Columnas de grillas.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    <code>calc()</code>, <code>min()</code>, <code>max()</code> y
+    <code>clamp()</code> combinan unidades y permiten tamaños fluidos:
+    <code>width: min(100% - 2rem, 70ch)</code>.
+  </p>
+
+  <h3>Display y posicionamiento</h3>
+  <ul>
+    <li><code>block</code>, <code>inline</code>, <code>inline-block</code>, <code>flex</code>, <code>grid</code>, <code>none</code>.</li>
+    <li><code>position: static</code> (predeterminado), <code>relative</code>, <code>absolute</code>, <code>fixed</code>, <code>sticky</code>.</li>
+    <li><code>z-index</code> solo funciona en elementos posicionados o en contextos de apilamiento.</li>
+    <li><code>display: none</code> quita el elemento del flujo y del árbol de accesibilidad; <code>visibility: hidden</code> lo oculta pero reserva el espacio.</li>
+  </ul>
+
+  <figure class="demo">
+    <iframe src="ejemplos/caja.html"
+            title="Demostración visual del modelo de caja"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>Margen, borde, relleno y contenido con medidas visibles.</span>
+      <a href="ejemplos/caja.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="tipografia-color">
+  <h2 id="tipografia-color">Tipografía, color y fondos</h2>
+
+  <h3>Tipografía</h3>
+  <p>
+    Se define con <code>font-family</code>, que acepta una lista de fuentes de
+    respaldo, y con <code>font-size</code>. Para textos largos conviene una
+    altura de línea entre 1.5 y 1.8 y un ancho de 45 a 75 caracteres.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>tipografia.css</figcaption>
+    <pre><code>body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  line-height: 1.65;
+  color: #292524;
+}
+
+h1,
+h2 {
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}</code></pre>
+  </figure>
+
+  <ul>
+    <li><strong>Peso</strong>: <code>font-weight</code> (400 normal, 600 seminegrita, 700 negrita).</li>
+    <li><strong>Estilo</strong>: <code>font-style: italic</code>; no lo uses para simular énfasis semántico.</li>
+    <li><strong>Alineación</strong>: <code>text-align: left | center | right | justify</code>.</li>
+    <li><strong>Transformación</strong>: <code>text-transform: uppercase | lowercase | capitalize</code>.</li>
+    <li><strong>Decoración</strong>: <code>text-decoration: underline | line-through | none</code>.</li>
+    <li><strong>Sombra</strong>: <code>text-shadow</code>, con moderación.</li>
+    <li><strong>Cortes</strong>: <code>overflow-wrap: break-word</code> y <code>hyphens: auto</code>.</li>
+  </ul>
+
+  <p>
+    Las fuentes web se cargan con <code>@font-face</code> o con un servicio
+    externo. Cada archivo adicional es una descarga: limitá los pesos y usá
+    <code>font-display: swap</code> para que el texto se vea mientras carga.
+    Las pilas de fuentes del sistema son la opción más rápida y privada.
+  </p>
+
+  <h3>Color</h3>
+  <p>
+    Un color se puede escribir con nombre (<code>rebeccapurple</code>),
+    hexadecimal (<code>#4f46e5</code>), <code>rgb()</code>,
+    <code>hsl()</code> u <code>oklch()</code>. Los formatos modernos aceptan
+    transparencia con una barra: <code>rgb(79 70 229 / 0.5)</code>.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>color.css</figcaption>
+    <pre><code>:root {
+  --indigo-600: #4f46e5;
+  --indigo-100: #e0e7ff;
+  --texto: #292524;
+}
+
+.boton {
+  background-color: var(--indigo-600);
+  color: #ffffff;
+}
+
+.boton:hover {
+  background-color: hsl(243 75% 50%);
+}</code></pre>
+  </figure>
+
+  <p>
+    El contraste entre texto y fondo es un requisito de accesibilidad: 4.5:1
+    para texto normal y 3:1 para texto grande. El color por sí solo nunca debe
+    ser la única forma de transmitir información (por ejemplo, un error).
+  </p>
+
+  <h3>Fondos y gradientes</h3>
+  <p>
+    <code>background-color</code> pinta un color; <code>background-image</code>
+    acepta imágenes y gradientes. Los gradientes son imágenes generadas por
+    CSS: no requieren archivos y se adaptan al tamaño del elemento.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>gradientes.css</figcaption>
+    <pre><code>.hero {
+  background-image: linear-gradient(135deg, #4f46e5, #0f766e);
+  color: #ffffff;
+}
+
+.radial {
+  background-image: radial-gradient(circle at 30% 30%, #eef2ff, #4f46e5);
+}
+
+.conic {
+  background-image: conic-gradient(#4f46e5, #0f766e, #4f46e5);
+}</code></pre>
+  </figure>
+
+  <p>
+    Otras propiedades de fondo son <code>background-repeat</code>,
+    <code>background-position</code>, <code>background-size</code> (con
+    <code>cover</code> y <code>contain</code>), <code>background-attachment</code>
+    y <code>background-clip</code>. Se pueden combinar varias capas separadas
+    por comas.
+  </p>
+
+  <figure class="demo">
+    <iframe src="ejemplos/estilos.html"
+            title="Demostración de tipografía, color y gradientes"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>Escala tipográfica, variables de color y fondos con gradientes.</span>
+      <a href="ejemplos/estilos.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="medios">
+  <h2 id="medios">Imágenes, audio y video</h2>
+
+  <h3>Imágenes</h3>
+  <p>
+    La etiqueta <code>img</code> es un elemento vacío y requiere
+    <code>src</code> y <code>alt</code>. El texto alternativo describe la
+    imagen para quien no puede verla; si es decorativa, se deja vacío
+    (<code>alt=""</code>) para que el lector de pantalla la ignore.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>imagen.html</figcaption>
+    <pre><code>&lt;img src="plano.svg" alt="Plano del aula 3 con las mesas numeradas"
+     width="640" height="360" loading="lazy" decoding="async"&gt;</code></pre>
+  </figure>
+
+  <ul>
+    <li>Declará <code>width</code> y <code>height</code> para reservar el espacio y evitar saltos de diseño.</li>
+    <li><code>max-width: 100%</code> y <code>height: auto</code> hacen que la imagen sea fluida.</li>
+    <li><code>loading="lazy"</code> posterga las imágenes fuera de pantalla.</li>
+    <li><code>object-fit: cover</code> recorta sin deformar; <code>contain</code> muestra completa.</li>
+    <li>Usá <code>srcset</code> y <code>sizes</code> para ofrecer versiones adecuadas al ancho de pantalla.</li>
+    <li><code>picture</code> permite elegir formato (AVIF, WebP) o recorte según el dispositivo.</li>
+  </ul>
+
+  <figure class="bloque-codigo">
+    <figcaption>imagen-responsive.html</figcaption>
+    <pre><code>&lt;picture&gt;
+  &lt;source media="(min-width: 48rem)" srcset="playa-ancha.avif"
+          type="image/avif"&gt;
+  &lt;source media="(min-width: 48rem)" srcset="playa-ancha.webp"
+          type="image/webp"&gt;
+  &lt;img src="playa-cuadrada.jpg" alt="Atardecer sobre el río"
+       width="800" height="600" loading="lazy"&gt;
+&lt;/picture&gt;</code></pre>
+  </figure>
+
+  <h3>Audio y video</h3>
+  <p>
+    HTML5 incorporó <code>audio</code> y <code>video</code> sin necesidad de
+    plugins. El navegador elige la primera fuente compatible y muestra los
+    controles nativos con <code>controls</code>.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>video.html</figcaption>
+    <pre><code>&lt;video controls preload="metadata" poster="portada.jpg"
+       width="640" height="360"&gt;
+  &lt;source src="clase.webm" type="video/webm"&gt;
+  &lt;source src="clase.mp4" type="video/mp4"&gt;
+  &lt;track kind="subtitles" src="clase.vtt" srclang="es"
+         label="Español" default&gt;
+  Tu navegador no puede reproducir este video.
+&lt;/video&gt;</code></pre>
+  </figure>
+
+  <ul>
+    <li>Ofrecé al menos dos formatos: WebM y MP4 son la combinación habitual.</li>
+    <li>Los subtítulos con <code>track</code> son obligatorios para contenido con voz.</li>
+    <li><code>preload="metadata"</code> evita descargar todo el archivo de entrada.</li>
+    <li>El <code>poster</code> muestra una imagen antes de reproducir.</li>
+    <li>No reproduzcas audio automáticamente: los navegadores lo bloquean y resulta invasivo.</li>
+    <li>Un video decorativo de fondo debe ir <code>muted</code>, <code>loop</code> y sin controles, con una alternativa estática.</li>
+  </ul>
+
+  <figure class="demo demo--alto">
+    <iframe src="ejemplos/medios.html"
+            title="Imágenes, audio y video en HTML"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>Imagen responsiva con <code>picture</code>, audio y video con subtítulos.</span>
+      <a href="ejemplos/medios.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="animaciones">
+  <h2 id="animaciones">Transformaciones y animaciones</h2>
+  <p>
+    <code>transform</code> mueve, escala, rota o inclina un elemento sin
+    modificar el flujo del documento. <code>transition</code> interpola un
+    cambio de estado y <code>animation</code> ejecuta una secuencia definida
+    con <code>@keyframes</code>.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>transformaciones.css</figcaption>
+    <pre><code>.tarjeta:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+.girar {
+  transform: rotate(45deg);
+}
+
+.espejar {
+  transform: scaleX(-1);
+  transform-origin: center;
+}</code></pre>
+  </figure>
+
+  <figure class="bloque-codigo">
+    <figcaption>transiciones.css</figcaption>
+    <pre><code>.boton {
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.boton:hover {
+  transform: translateY(-2px);
+  background-color: #3730a3;
+}</code></pre>
+  </figure>
+
+  <figure class="bloque-codigo">
+    <figcaption>keyframes.css</figcaption>
+    <pre><code>@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tarjeta {
+  animation: aparecer 320ms ease-out both;
+}</code></pre>
+  </figure>
+
+  <ul>
+    <li>Animá <code>transform</code> y <code>opacity</code>: se resuelven en la GPU y no fuerzan recálculo de layout.</li>
+    <li>Evitá animar <code>width</code>, <code>height</code>, <code>top</code> o <code>margin</code> en bucles.</li>
+    <li><code>transition: all</code> anima propiedades no deseadas; enumerá las que cambian.</li>
+    <li>No superes tres destellos por segundo: puede provocar convulsiones.</li>
+    <li>Ofrecé una forma de pausar animaciones largas y respetá <code>prefers-reduced-motion</code>.</li>
+    <li>La información nunca debe depender de una animación para entenderse.</li>
+  </ul>
+
+  <figure class="bloque-codigo">
+    <figcaption>movimiento-reducido.css</figcaption>
+    <pre><code>@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}</code></pre>
+  </figure>
+
+  <figure class="demo">
+    <iframe src="ejemplos/animaciones.html"
+            title="Transformaciones, transiciones y animaciones con movimiento reducido"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>Hover con transición, animación de entrada y respeto por el movimiento reducido.</span>
+      <a href="ejemplos/animaciones.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="responsive">
+  <h2 id="responsive">Desarrollo responsivo</h2>
+  <p>
+    Una interfaz responsiva se adapta al tamaño de la pantalla, a la
+    orientación, al zoom y al tipo de entrada. No se trata de hacer “una
+    versión para celular”, sino de que el mismo contenido funcione en todos
+    los contextos.
+  </p>
+
+  <h3>La metaetiqueta viewport</h3>
+  <p>
+    Sin esta etiqueta, los navegadores móviles simulan una pantalla de
+    escritorio y reducen todo. Debe ir en el <code>head</code>:
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>viewport.html</figcaption>
+    <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></pre>
+  </figure>
+  <p>
+    No uses <code>user-scalable=no</code> ni <code>maximum-scale=1</code>:
+    impiden hacer zoom y perjudican a quien necesita ampliar el texto.
+  </p>
+
+  <h3>Mobile first y media queries</h3>
+  <p>
+    Se escribe primero el diseño para pantallas angostas y luego se amplía con
+    <code>min-width</code>. Los puntos de corte se eligen según el contenido,
+    no según marcas de dispositivos.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>media-queries.css</figcaption>
+    <pre><code>/* Base: una columna */
+.grilla {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .grilla {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .grilla {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}</code></pre>
+  </figure>
+
+  <p>
+    Una grilla de tarjetas se puede resolver sin puntos de corte, dejando que
+    el navegador decida cuántas columnas entran:
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>grilla-automatica.css</figcaption>
+    <pre><code>.grilla {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 18rem), 1fr)
+  );
+}</code></pre>
+  </figure>
+
+  <h3>Texto e imágenes fluidos</h3>
+  <ul>
+    <li><code>clamp()</code> ajusta el tamaño de letra entre un mínimo y un máximo.</li>
+    <li><code>max-width: 65ch</code> mantiene una línea de lectura cómoda.</li>
+    <li><code>img { max-width: 100%; height: auto; }</code> evita desbordes.</li>
+    <li><code>aspect-ratio</code> reserva la proporción de videos e imágenes.</li>
+    <li>Evitá anchos fijos en píxeles para bloques principales.</li>
+  </ul>
+
+  <h3>Container queries</h3>
+  <p>
+    Las consultas de contenedor permiten adaptar un componente al ancho de su
+    contenedor, no al de la ventana. Son ideales para tarjetas que se usan en
+    una barra lateral o en una grilla ancha.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>container.css</figcaption>
+    <pre><code>.contenedor-tarjetas {
+  container-type: inline-size;
+}
+
+@container (min-width: 30rem) {
+  .tarjeta {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+  }
+}</code></pre>
+  </figure>
+
+  <h3>Otros aspectos</h3>
+  <ul>
+    <li><strong>Navegación:</strong> un menú horizontal puede envolverse o convertirse en una lista vertical sin JavaScript.</li>
+    <li><strong>Tablas:</strong> se desplazan horizontalmente dentro de una región accesible (clase 6).</li>
+    <li><strong>Áreas táctiles:</strong> al menos 24 × 24 px, y 44 × 44 px como objetivo cómodo.</li>
+    <li><strong>Zoom:</strong> probá al 200 %; el contenido no debe perderse ni superponerse.</li>
+    <li><strong>Orientación:</strong> verificá horizontal y vertical.</li>
+    <li><strong>Impresión:</strong> una hoja <code>@media print</code> puede ocultar la navegación y mostrar las URLs.</li>
+  </ul>
+
+  <figure class="demo">
+    <iframe src="ejemplos/responsive.html"
+            title="Grilla de tarjetas responsiva con container queries"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>Grilla fluida y componente que cambia según el ancho de su contenedor.</span>
+      <a href="ejemplos/responsive.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="buenas-practicas">
+  <h2 id="buenas-practicas">Buenas prácticas</h2>
+  <ul>
+    <li><strong>Organizá el CSS por capas:</strong> tokens, base, layout, componentes y utilidades.</li>
+    <li><strong>Nombres por función:</strong> <code>.tarjeta</code>, <code>.aviso</code>, <code>.pager</code>; evitá <code>.verde-grande</code>.</li>
+    <li><strong>Baja especificidad:</strong> clases simples; evitá <code>#id</code> y selectores larguísimos.</li>
+    <li><strong>Sin estilos en línea</strong> salvo valores dinámicos calculados.</li>
+    <li><strong>Variables</strong> para colores, tipografías, radios y espaciados.</li>
+    <li><strong>Un solo sentido de espaciado:</strong> por ejemplo, márgenes solo hacia abajo o <code>gap</code> en contenedores flexibles.</li>
+    <li><strong>Accesibilidad:</strong> contraste, foco visible, movimiento reducido, texto ampliable.</li>
+    <li><strong>Rendimiento:</strong> menos fuentes y pesos, imágenes optimizadas, CSS crítico en páginas grandes.</li>
+    <li><strong>Compatibilidad:</strong> verificá las funciones nuevas con <code>@supports</code> y ofrecé una alternativa.</li>
+    <li><strong>Herramientas:</strong> stylelint para errores, Prettier para formato y DevTools para depurar.</li>
+    <li><strong>Documentación:</strong> comentarios de sección y un README que explique la estructura.</li>
+  </ul>
+
+  <aside class="aviso aviso--nota" aria-label="Nota">
+    <span class="aviso__titulo">Capas y funciones modernas</span>
+    <p>
+      <code>@layer</code> permite ordenar la cascada por capas,
+      <code>@supports</code> aplica estilos solo si el navegador entiende una
+      propiedad y el anidamiento nativo de CSS evita repetir selectores. Son
+      herramientas útiles, pero conviene incorporarlas cuando el equipo y el
+      público objetivo las puedan aprovechar.
+    </p>
+  </aside>
+</section>
+
+<div class="ejercicio">
+  <h2 id="actividad">Actividad práctica</h2>
+  <p>
+    Diseñar una página personal responsiva que reúna todo lo visto en la
+    materia.
+  </p>
+  <ol>
+    <li>Definir en <code>:root</code> al menos seis variables: colores, tipografía, radio y espaciado.</li>
+    <li>Construir una portada con nombre, presentación y una grilla de tres tarjetas.</li>
+    <li>Aplicar una escala tipográfica fluida con <code>clamp()</code> y un ancho de lectura de 65 caracteres.</li>
+    <li>Usar un gradiente como fondo de la portada y verificar el contraste del texto.</li>
+    <li>Incluir una imagen responsiva con <code>picture</code> o <code>srcset</code>, con texto alternativo.</li>
+    <li>Agregar una transición en los enlaces o botones y una animación de entrada para las tarjetas.</li>
+    <li>Respetar <code>prefers-reduced-motion</code>.</li>
+    <li>Adaptar la grilla a una, dos y tres columnas; probar a 320, 768 y 1280 px.</li>
+    <li>Validar el HTML y el CSS, y revisar el contraste y el foco con teclado.</li>
+  </ol>
+  <p>
+    <strong>Para entregar</strong>: el HTML, el CSS y capturas en los tres
+    anchos, junto con el resultado de la validación.
+  </p>
+</div>
+
+<div class="resumen">
+  <h2 id="resumen">Resumen</h2>
+  <ul>
+    <li>CSS separa la presentación del contenido; la hoja externa es la forma recomendada.</li>
+    <li>La cascada combina origen, importancia, especificidad y orden; conviene mantener la especificidad baja.</li>
+    <li>El modelo de caja suma contenido, relleno, borde y margen; <code>border-box</code> simplifica los cálculos.</li>
+    <li>Tipografía, color y fondos se controlan con propiedades y variables; el contraste es obligatorio.</li>
+    <li>Las imágenes necesitan dimensiones, texto alternativo y versiones adecuadas; el video necesita subtítulos.</li>
+    <li><code>transform</code>, <code>transition</code> y <code>@keyframes</code> agregan movimiento, siempre respetando las preferencias del usuario.</li>
+    <li>El diseño responsivo combina viewport, unidades relativas, Grid/Flexbox, media queries y container queries.</li>
+    <li>Un CSS mantenible usa nombres claros, capas, variables y verificación en navegadores reales.</li>
+  </ul>
+</div>
+
+<div class="bibliografia">
+  <h2>Bibliografía del tema</h2>
+  <ul>
+    <li>
+      Celaya Luna, A. (2014). <cite>Creación de páginas web: HTML 5</cite>.
+      Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/56045">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Pérez Rodríguez, M. D. (Coord.) (2012).
+      <cite>Introducción al lenguaje HTML 5</cite>. Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/225270">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Toharia Rabasco, J. P. y Raya González, L. (2015).
+      <cite>Lenguajes de marcas y sistemas de gestión de la información</cite>.
+      RA-MA Editorial.
+      <a href="https://elibro.net/es/ereader/kennedy/62483">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Orós Cabello, J. C. (2014).
+      <cite>Diseño de páginas Web con XHTML, JavaScript y CSS</cite>.
+      RA-MA Editorial.
+      <a href="https://elibro.net/es/ereader/kennedy/106414">Acceso en eLibro</a>.
+    </li>
+    <li>
+      MDN Web Docs.
+      <a href="https://developer.mozilla.org/es/docs/Web/CSS">Referencia de CSS</a>.
+    </li>
+  </ul>
+</div>
+
+    <nav class="pager" aria-label="Navegación entre clases">
+      <a class="pager__anterior" rel="prev" href="../../clases/08-marcos/index.html">
+        <span class="pager__direccion">← Anterior</span>
+        <span class="pager__titulo">Clase 08 · Marcos</span>
+      </a>
+      <a class="pager__siguiente" rel="next" href="../../index.html">
+        <span class="pager__direccion">Volver al índice →</span>
+        <span class="pager__titulo">Índice del curso</span>
+      </a>
+    </nav>
+    </main>
+  </div>
+
+  <footer class="sitio-footer">
+    <div class="contenedor sitio-footer__contenido">
+      <p><strong>Desarrollo de Software III</strong> · Licenciatura en Sistemas ·
+        Universidad John F. Kennedy</p>
+      <p><a href="../../index.html">Índice del curso</a> ·
+        <a href="../../index.html#bibliografia">Bibliografía</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="0.5" stop-color="#ec4899"/>
+      <stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="agua" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4f46e5"/>
+      <stop offset="1" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="reflejo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fde68a" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#fde68a" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="600" fill="url(#cielo)"/>
+  <circle cx="860" cy="190" r="74" fill="#fef3c7" opacity="0.9"/>
+
+  <path d="M0 405 180 250 320 390 470 215 640 405 780 280 940 405 1080 300 1200 390V600H0Z"
+        fill="#312e81" opacity="0.85"/>
+  <path d="M0 470 160 360 330 470 520 350 720 470 880 390 1040 470 1200 400V600H0Z"
+        fill="#1e1b4b"/>
+
+  <rect y="452" width="1200" height="148" fill="url(#agua)"/>
+  <path d="M790 452 930 452 880 600 840 600Z" fill="url(#reflejo)"/>
+
+  <path d="M120 120q14 10 28 0M156 120q14 10 28 0M1080 150q12 8 24 0"
+        fill="none" stroke="#fef3c7" stroke-width="3" stroke-linecap="round"/>
+
+  <g fill="#fef3c7" opacity="0.8">
+    <circle cx="220" cy="90" r="3"/>
+    <circle cx="1040" cy="90" r="2.5"/>
+    <circle cx="960" cy="330" r="2"/>
+    <circle cx="300" cy="170" r="2"/>
+  </g>
+</svg>

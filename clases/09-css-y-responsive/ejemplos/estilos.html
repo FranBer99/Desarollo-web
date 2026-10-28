@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tipografía, color y gradientes — Clase 9</title>
+  <meta name="description" content="Demostración de variables, escala tipográfica, color y gradientes en CSS.">
+  <style>
+    :root {
+      color-scheme: light;
+      --texto: #292524;
+      --tenue: #57534e;
+      --borde: #e7e5e4;
+      --fondo: #fafaf9;
+      --indigo-700: #4338ca;
+      --indigo-600: #4f46e5;
+      --indigo-100: #e0e7ff;
+      --teal-700: #0f766e;
+      --ambar-500: #f59e0b;
+      --rosa-500: #ec4899;
+      --radio: 0.6rem;
+      --sombra: 0 1px 2px rgb(28 25 23 / 0.06),
+        0 12px 32px -20px rgb(28 25 23 / 0.35);
+      --fuente: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--fondo);
+      color: var(--texto);
+      font-family: var(--fuente);
+      font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+      line-height: 1.65;
+    }
+
+    .contenedor {
+      max-width: 54rem;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.9rem, 1.3rem + 2.5vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
+    }
+
+    .bajada {
+      max-width: 60ch;
+      margin: 0.6rem 0 0;
+      color: var(--tenue);
+      font-size: 1.05rem;
+    }
+
+    h2 {
+      margin-top: 2.5rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--borde);
+      font-size: 1.25rem;
+      line-height: 1.3;
+    }
+
+    h3 {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+    }
+
+    p {
+      margin: 0.6rem 0 0;
+    }
+
+    code {
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+      background-color: var(--indigo-100);
+      color: #312e81;
+      font-family: ui-monospace, monospace;
+      font-size: 0.85em;
+    }
+
+    /* Paleta */
+    .paleta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .color {
+      overflow: hidden;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      background-color: #ffffff;
+    }
+
+    .color__muestra {
+      height: 4.5rem;
+    }
+
+    .muestra-indigo { background-color: #4f46e5; }
+    .muestra-teal { background-color: #0f766e; }
+    .muestra-ambar { background-color: #f59e0b; }
+    .muestra-rosa { background-color: #ec4899; }
+    .muestra-texto { background-color: #292524; }
+
+    .color__datos {
+      display: grid;
+      gap: 0.1rem;
+      padding: 0.55rem 0.7rem;
+      font-size: 0.75rem;
+    }
+
+    .color__nombre {
+      font-weight: 600;
+    }
+
+    .color__valor {
+      color: var(--tenue);
+      font-family: ui-monospace, monospace;
+      font-size: 0.7rem;
+    }
+
+    /* Escala tipográfica */
+    .escala {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      background-color: #ffffff;
+      box-shadow: var(--sombra);
+    }
+
+    .escala__fila {
+      display: grid;
+      gap: 0.1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px dashed var(--borde);
+    }
+
+    .escala__fila:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .escala__rotulo {
+      color: var(--tenue);
+      font-family: ui-monospace, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .muestra-h1 {
+      font-size: clamp(1.9rem, 1.3rem + 2.5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .muestra-h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .muestra-h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .muestra-cuerpo {
+      font-size: 1rem;
+    }
+
+    .muestra-small {
+      color: var(--tenue);
+      font-size: 0.8125rem;
+    }
+
+    /* Gradientes */
+    .gradientes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .gradiente {
+      display: flex;
+      min-height: 10rem;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 0.15rem;
+      padding: 1rem;
+      border-radius: var(--radio);
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
+    }
+
+    .gradiente strong {
+      font-size: 1rem;
+    }
+
+    .gradiente span {
+      font-size: 0.75rem;
+      opacity: 0.9;
+    }
+
+    .gradiente--lineal {
+      background-image: linear-gradient(135deg, var(--indigo-600), var(--teal-700));
+    }
+
+    .gradiente--radial {
+      background-image: radial-gradient(circle at 30% 30%, #818cf8, #312e81 70%);
+    }
+
+    .gradiente--conico {
+      background-image: conic-gradient(
+        from 210deg,
+        var(--indigo-600),
+        var(--rosa-500),
+        var(--ambar-500),
+        var(--indigo-600)
+      );
+    }
+
+    /* Botones */
+    .acciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .boton {
+      display: inline-block;
+      padding: 0.65rem 1.1rem;
+      border: 1px solid transparent;
+      border-radius: 0.5rem;
+      background-color: var(--indigo-600);
+      color: #ffffff;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 160ms ease, transform 160ms ease;
+    }
+
+    .boton:hover {
+      background-color: var(--indigo-700);
+      transform: translateY(-1px);
+    }
+
+    .boton:focus-visible {
+      outline: 3px solid var(--indigo-600);
+      outline-offset: 3px;
+    }
+
+    .boton--secundario {
+      border-color: var(--indigo-600);
+      background-color: transparent;
+      color: var(--indigo-700);
+    }
+
+    .boton--secundario:hover {
+      background-color: var(--indigo-100);
+      color: #312e81;
+    }
+
+    .nota {
+      margin-top: 1.5rem;
+      padding: 0.8rem 0.95rem;
+      border-left: 4px solid var(--indigo-600);
+      border-radius: 0 0.35rem 0.35rem 0;
+      background-color: #eef2ff;
+      color: #3730a3;
+      font-size: 0.85rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .boton {
+        transition: none;
+      }
+
+      .boton:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Un pequeño sistema de diseño</h1>
+    <p class="bajada">
+      Variables, escala tipográfica, color y gradientes combinados en una misma
+      página. Todo el estilo se define una sola vez en <code>:root</code>.
+    </p>
+
+    <h2 id="paleta">Paleta</h2>
+    <ul class="paleta">
+      <li class="color">
+        <div class="color__muestra muestra-indigo"></div>
+        <div class="color__datos">
+          <span class="color__nombre">Índigo 600</span>
+          <span class="color__valor">#4f46e5</span>
+        </div>
+      </li>
+      <li class="color">
+        <div class="color__muestra muestra-teal"></div>
+        <div class="color__datos">
+          <span class="color__nombre">Teal 700</span>
+          <span class="color__valor">#0f766e</span>
+        </div>
+      </li>
+      <li class="color">
+        <div class="color__muestra muestra-ambar"></div>
+        <div class="color__datos">
+          <span class="color__nombre">Ámbar 500</span>
+          <span class="color__valor">#f59e0b</span>
+        </div>
+      </li>
+      <li class="color">
+        <div class="color__muestra muestra-rosa"></div>
+        <div class="color__datos">
+          <span class="color__nombre">Rosa 500</span>
+          <span class="color__valor">#ec4899</span>
+        </div>
+      </li>
+      <li class="color">
+        <div class="color__muestra muestra-texto"></div>
+        <div class="color__datos">
+          <span class="color__nombre">Texto</span>
+          <span class="color__valor">#292524</span>
+        </div>
+      </li>
+    </ul>
+
+    <h2 id="escala-tipografica">Escala tipográfica</h2>
+    <div class="escala">
+      <div class="escala__fila">
+        <span class="escala__rotulo">h1 · clamp(1.9rem, 1.3rem + 2.5vw, 2.8rem)</span>
+        <span class="muestra-h1">Título principal</span>
+      </div>
+      <div class="escala__fila">
+        <span class="escala__rotulo">h2 · 1.5rem</span>
+        <span class="muestra-h2">Título de sección</span>
+      </div>
+      <div class="escala__fila">
+        <span class="escala__rotulo">h3 · 1.15rem</span>
+        <span class="muestra-h3">Título de tercer nivel</span>
+      </div>
+      <div class="escala__fila">
+        <span class="escala__rotulo">cuerpo · 1rem / 1.65</span>
+        <span class="muestra-cuerpo">
+          El texto corrido tiene una altura de línea amplia para que se lea
+          cómodo en pantallas de cualquier tamaño.
+        </span>
+      </div>
+      <div class="escala__fila">
+        <span class="escala__rotulo">small · 0.8125rem</span>
+        <span class="muestra-small">Texto secundario, notas y aclaraciones.</span>
+      </div>
+    </div>
+
+    <h2 id="gradientes">Gradientes</h2>
+    <div class="gradientes">
+      <div class="gradiente gradiente--lineal">
+        <strong>Lineal</strong>
+        <span>linear-gradient(135deg, …)</span>
+      </div>
+      <div class="gradiente gradiente--radial">
+        <strong>Radial</strong>
+        <span>radial-gradient(circle at 30% 30%, …)</span>
+      </div>
+      <div class="gradiente gradiente--conico">
+        <strong>Cónico</strong>
+        <span>conic-gradient(from 210deg, …)</span>
+      </div>
+    </div>
+
+    <h2 id="botones">Botones</h2>
+    <div class="acciones">
+      <a class="boton" href="#paleta">Acción principal</a>
+      <a class="boton boton--secundario" href="#escala-tipografica">Acción secundaria</a>
+    </div>
+
+    <p class="nota">
+      Los gradientes son imágenes generadas por CSS: no requieren archivos y se
+      adaptan al tamaño del elemento. Usalos con moderación y comprobá siempre
+      el contraste del texto que va encima.
+    </p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diseño responsivo — Clase 9</title>
+  <meta name="description" content="Ejemplo de grilla fluida, media queries y container queries.">
+  <style>
+    :root {
+      color-scheme: light;
+      --texto: #292524;
+      --tenue: #78716c;
+      --borde: #e7e5e4;
+      --fondo: #fafaf9;
+      --indigo: #4f46e5;
+      --indigo-oscuro: #3730a3;
+      --indigo-suave: #eef2ff;
+      --teal: #0f766e;
+      --teal-suave: #f0fdfa;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--fondo);
+      color: var(--texto);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+      line-height: 1.65;
+    }
+
+    .contenedor {
+      max-width: 58rem;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 2.5rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 1.1rem + 2vw, 2.2rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .bajada {
+      max-width: 62ch;
+      margin: 0.5rem 0 0;
+      color: var(--tenue);
+    }
+
+    h2 {
+      margin-top: 2.5rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--borde);
+      font-size: 1.2rem;
+    }
+
+    p {
+      margin: 0.6rem 0 0;
+    }
+
+    code {
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+      background-color: #e0e7ff;
+      color: #312e81;
+      font-family: ui-monospace, monospace;
+      font-size: 0.85em;
+    }
+
+    /* Indicador visual del punto de corte */
+    .indicador {
+      margin-top: 1rem;
+      padding: 0.6rem 0.85rem;
+      border: 1px solid var(--borde);
+      border-radius: 0.45rem;
+      background-color: #ffffff;
+      color: var(--tenue);
+      font-family: ui-monospace, monospace;
+      font-size: 0.78rem;
+    }
+
+    .indicador span {
+      display: none;
+    }
+
+    .rango-angosto {
+      display: block !important;
+    }
+
+    @media (min-width: 40rem) {
+      .rango-angosto {
+        display: none !important;
+      }
+
+      .rango-medio {
+        display: block !important;
+      }
+    }
+
+    @media (min-width: 64rem) {
+      .rango-medio {
+        display: none !important;
+      }
+
+      .rango-ancho {
+        display: block !important;
+      }
+    }
+
+    /* Grilla fluida */
+    .grilla {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 15rem), 1fr)
+      );
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .tarjeta {
+      padding: 1rem 1.05rem;
+      border: 1px solid var(--borde);
+      border-radius: 0.6rem;
+      background-color: #ffffff;
+    }
+
+    .tarjeta h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .tarjeta p {
+      margin-top: 0.35rem;
+      color: var(--tenue);
+      font-size: 0.85rem;
+    }
+
+    .etiqueta {
+      display: inline-block;
+      margin-bottom: 0.4rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background-color: var(--indigo-suave);
+      color: var(--indigo-oscuro);
+      font-family: ui-monospace, monospace;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Container queries */
+    .paneles {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 48rem) {
+      .paneles {
+        grid-template-columns: 17rem minmax(0, 1fr);
+        align-items: start;
+      }
+    }
+
+    .panel {
+      container-type: inline-size;
+      padding: 0.9rem;
+      border: 1px dashed #a8a29e;
+      border-radius: 0.6rem;
+      background-color: #f5f5f4;
+    }
+
+    .panel__rotulo {
+      margin: 0 0 0.6rem;
+      color: var(--tenue);
+      font-family: ui-monospace, monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .ficha {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.75rem;
+      padding: 0.9rem;
+      border: 1px solid var(--borde);
+      border-radius: 0.5rem;
+      background-color: #ffffff;
+    }
+
+    .ficha__avatar {
+      display: grid;
+      place-items: center;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      background-color: var(--teal-suave);
+      color: var(--teal);
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .ficha h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .ficha p {
+      margin-top: 0.2rem;
+      color: var(--tenue);
+      font-size: 0.82rem;
+    }
+
+    @container (min-width: 26rem) {
+      .ficha {
+        grid-template-columns: 4rem minmax(0, 1fr);
+        align-items: center;
+      }
+    }
+
+    /* Tipografía fluida */
+    .fluida {
+      margin-top: 1rem;
+      padding: 1.1rem;
+      border: 1px solid var(--borde);
+      border-radius: 0.6rem;
+      background-color: #ffffff;
+    }
+
+    .fluida h3 {
+      margin: 0;
+      font-size: clamp(1.25rem, 1rem + 2.5vw, 2.1rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .fluida p {
+      max-width: 65ch;
+      margin-top: 0.45rem;
+      color: var(--tenue);
+      font-size: 0.9rem;
+    }
+
+    .nota {
+      margin-top: 1.5rem;
+      padding: 0.8rem 0.95rem;
+      border-left: 4px solid var(--indigo);
+      border-radius: 0 0.35rem 0.35rem 0;
+      background-color: var(--indigo-suave);
+      color: var(--indigo-oscuro);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Una misma página, todos los tamaños</h1>
+    <p class="bajada">
+      Redimensioná la ventana o el marco para ver cómo cambian el indicador, la
+      grilla y las fichas.
+    </p>
+
+    <p class="indicador" aria-hidden="true">
+      <span class="rango-angosto">Vista angosta · menos de 40rem</span>
+      <span class="rango-medio">Vista media · entre 40rem y 63.99rem</span>
+      <span class="rango-ancho">Vista ancha · 64rem o más</span>
+    </p>
+
+    <h2>Grilla automática</h2>
+    <p>
+      Sin media queries: <code>auto-fit</code> y <code>minmax()</code> deciden
+      cuántas columnas entran según el espacio disponible.
+    </p>
+    <div class="grilla">
+      <article class="tarjeta">
+        <span class="etiqueta">HTML</span>
+        <h3>Estructura</h3>
+        <p>Contenido semántico y accesible.</p>
+      </article>
+      <article class="tarjeta">
+        <span class="etiqueta">CSS</span>
+        <h3>Presentación</h3>
+        <p>Tipografía, color y disposición.</p>
+      </article>
+      <article class="tarjeta">
+        <span class="etiqueta">Grid</span>
+        <h3>Grillas</h3>
+        <p>Columnas flexibles con <code>fr</code> y <code>minmax()</code>.</p>
+      </article>
+      <article class="tarjeta">
+        <span class="etiqueta">Flex</span>
+        <h3>Alineación</h3>
+        <p>Distribución en una dimensión.</p>
+      </article>
+      <article class="tarjeta">
+        <span class="etiqueta">Media</span>
+        <h3>Puntos de corte</h3>
+        <p>Ajustes según el ancho de la ventana.</p>
+      </article>
+      <article class="tarjeta">
+        <span class="etiqueta">Container</span>
+        <h3>Consultas de contenedor</h3>
+        <p>El componente se adapta a su contexto.</p>
+      </article>
+    </div>
+
+    <h2>Container queries</h2>
+    <p>
+      La misma ficha se muestra en dos contenedores de distinto ancho. No
+      consulta la ventana: consulta el espacio que le da su contenedor.
+    </p>
+    <div class="paneles">
+      <div class="panel">
+        <p class="panel__rotulo">Contenedor angosto</p>
+        <article class="ficha">
+          <span class="ficha__avatar" aria-hidden="true">A</span>
+          <div>
+            <h3>Ana Pérez</h3>
+            <p>La ficha se apila porque el contenedor mide menos de 26rem.</p>
+          </div>
+        </article>
+      </div>
+      <div class="panel">
+        <p class="panel__rotulo">Contenedor ancho</p>
+        <article class="ficha">
+          <span class="ficha__avatar" aria-hidden="true">L</span>
+          <div>
+            <h3>Luis Gómez</h3>
+            <p>La ficha pasa a dos columnas porque el contenedor supera los 26rem.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <h2>Tipografía fluida</h2>
+    <div class="fluida">
+      <h3>Un título que crece con la pantalla</h3>
+      <p>
+        El tamaño usa <code>clamp()</code> para moverse entre un mínimo y un
+        máximo sin saltos bruscos. El ancho de lectura se limita a
+        <code>65ch</code> para que las líneas no se vuelvan incómodas en
+        pantallas grandes.
+      </p>
+    </div>
+
+    <p class="nota">
+      Los puntos de corte se eligen mirando el contenido, no los dispositivos.
+      Si el texto se corta o las tarjetas quedan muy angostas, ese es el
+      momento de agregar una media query.
+    </p>
+  </div>
+</body>
+</html>

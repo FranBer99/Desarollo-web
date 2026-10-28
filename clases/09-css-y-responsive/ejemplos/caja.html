@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modelo de caja — Clase 9</title>
+  <meta name="description" content="Demostración visual del modelo de caja de CSS.">
+  <style>
+    :root {
+      color-scheme: light;
+      --texto: #292524;
+      --tenue: #78716c;
+      --borde: #d6d3d1;
+      --indigo: #4f46e5;
+      --indigo-oscuro: #3730a3;
+      --indigo-suave: #eef2ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #fafaf9;
+      color: var(--texto);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+    }
+
+    .contenedor {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 2.5rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+      line-height: 1.2;
+    }
+
+    .bajada {
+      margin: 0.4rem 0 0;
+      color: var(--tenue);
+    }
+
+    h2 {
+      margin-top: 2rem;
+      font-size: 1.15rem;
+    }
+
+    h3 {
+      margin-top: 1.25rem;
+      font-size: 1rem;
+    }
+
+    p {
+      margin: 0.5rem 0 0;
+    }
+
+    code {
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+      background-color: #e0e7ff;
+      color: #312e81;
+      font-family: ui-monospace, monospace;
+      font-size: 0.85em;
+    }
+
+    /* Representación didáctica: el margen real es transparente. */
+    .zona-margen {
+      margin-top: 1rem;
+      padding: 1.4rem;
+      border: 1px dashed #a8a29e;
+      border-radius: 0.4rem;
+      background-color: #f5f5f4;
+    }
+
+    .zona-margen > .rotulo,
+    .zona-borde > .rotulo,
+    .zona-relleno > .rotulo {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: #57534e;
+      font-family: ui-monospace, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .zona-borde {
+      padding: 1rem;
+      border: 4px solid var(--indigo);
+      border-radius: 0.35rem;
+      background-color: #e0e7ff;
+    }
+
+    .zona-relleno {
+      padding: 1.5rem;
+      background-color: var(--indigo-suave);
+    }
+
+    .zona-contenido {
+      display: grid;
+      place-items: center;
+      min-height: 5rem;
+      border: 1px solid var(--indigo);
+      background-color: #ffffff;
+      color: var(--indigo-oscuro);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .comparacion {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 40rem) {
+      .comparacion {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .caso {
+      padding: 1rem;
+      border: 1px solid var(--borde);
+      border-radius: 0.5rem;
+      background-color: #ffffff;
+    }
+
+    .caso h3 {
+      margin-top: 0;
+      color: var(--indigo-oscuro);
+      font-family: ui-monospace, monospace;
+      font-size: 0.85rem;
+    }
+
+    .caja-medida {
+      width: 13rem;
+      padding: 1.5rem;
+      border: 4px solid var(--indigo);
+      background-color: var(--indigo-suave);
+      color: var(--indigo-oscuro);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    .content-box {
+      box-sizing: content-box;
+    }
+
+    .border-box {
+      box-sizing: border-box;
+    }
+
+    .medida {
+      margin-top: 0.6rem;
+      color: var(--tenue);
+      font-size: 0.8rem;
+    }
+
+    .nota {
+      margin-top: 1.25rem;
+      padding: 0.75rem 0.9rem;
+      border-left: 4px solid var(--indigo);
+      border-radius: 0 0.35rem 0.35rem 0;
+      background-color: var(--indigo-suave);
+      color: var(--indigo-oscuro);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h1>El modelo de caja</h1>
+    <p class="bajada">
+      Cada elemento es una caja con cuatro capas. Esta representación exagera
+      los tamaños para que se puedan ver.
+    </p>
+
+    <h2>Las cuatro capas</h2>
+    <div class="zona-margen">
+      <span class="rotulo">margen · 1.5rem</span>
+      <div class="zona-borde">
+        <span class="rotulo">borde · 4px</span>
+        <div class="zona-relleno">
+          <span class="rotulo">relleno · 1.5rem</span>
+          <div class="zona-contenido">
+            contenido<br>
+            <small>width: 16rem</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="nota">
+      El margen real es transparente y no tiene fondo. Acá se dibuja con un
+      borde punteado solo para explicar dónde queda.
+    </p>
+
+    <h2>content-box y border-box</h2>
+    <p>
+      Las dos cajas tienen el mismo <code>width: 13rem</code>, el mismo relleno
+      y el mismo borde. La diferencia es qué incluye ese ancho.
+    </p>
+
+    <div class="comparacion">
+      <div class="caso">
+        <h3>box-sizing: content-box</h3>
+        <div class="caja-medida content-box">contenido</div>
+        <p class="medida">
+          13rem de contenido + 3rem de relleno + 8px de borde:
+          la caja ocupa más de 16rem.
+        </p>
+      </div>
+      <div class="caso">
+        <h3>box-sizing: border-box</h3>
+        <div class="caja-medida border-box">contenido</div>
+        <p class="medida">
+          El ancho total es 13rem: el relleno y el borde se descuentan del
+          contenido.
+        </p>
+      </div>
+    </div>
+
+    <h2>Por qué se usa border-box</h2>
+    <p>
+      Con <code>border-box</code>, agregar relleno o borde no cambia el ancho
+      total de la caja. Eso hace que los diseños sean predecibles y que una
+      grilla no se rompa al ajustar el espaciado. Por eso la mayoría de los
+      proyectos aplican:
+    </p>
+    <pre><code>*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}</code></pre>
+  </div>
+</body>
+</html>

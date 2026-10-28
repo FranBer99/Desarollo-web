@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transformaciones y animaciones — Clase 9</title>
+  <meta name="description" content="Ejemplo de transiciones, transformaciones y animaciones CSS con movimiento reducido.">
+  <style>
+    :root {
+      color-scheme: light;
+      --texto: #292524;
+      --tenue: #78716c;
+      --borde: #e7e5e4;
+      --indigo: #4f46e5;
+      --indigo-oscuro: #3730a3;
+      --indigo-suave: #eef2ff;
+      --teal: #0f766e;
+      --sombra: 0 1px 2px rgb(28 25 23 / 0.06),
+        0 18px 40px -24px rgb(28 25 23 / 0.35);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #fafaf9;
+      color: var(--texto);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.65;
+    }
+
+    .contenedor {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 2.5rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+      line-height: 1.2;
+    }
+
+    .bajada {
+      margin: 0.4rem 0 0;
+      color: var(--tenue);
+    }
+
+    h2 {
+      margin-top: 2.25rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--borde);
+      font-size: 1.15rem;
+    }
+
+    p {
+      margin: 0.6rem 0 0;
+    }
+
+    code {
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+      background-color: #e0e7ff;
+      color: #312e81;
+      font-family: ui-monospace, monospace;
+      font-size: 0.85em;
+    }
+
+    .grilla {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .tarjeta {
+      padding: 1rem 1.05rem;
+      border: 1px solid var(--borde);
+      border-radius: 0.6rem;
+      background-color: #ffffff;
+      box-shadow: var(--sombra);
+      animation: aparecer 420ms ease-out both;
+    }
+
+    .tarjeta:nth-child(2) {
+      animation-delay: 80ms;
+    }
+
+    .tarjeta:nth-child(3) {
+      animation-delay: 160ms;
+    }
+
+    .tarjeta h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .tarjeta p {
+      margin-top: 0.35rem;
+      color: var(--tenue);
+      font-size: 0.85rem;
+    }
+
+    .destacada {
+      transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+
+    .destacada:hover {
+      transform: translateY(-4px) rotate(-0.5deg);
+      box-shadow: 0 1px 2px rgb(28 25 23 / 0.06),
+        0 26px 50px -26px rgb(28 25 23 / 0.45);
+    }
+
+    .acciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .boton {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.05rem;
+      border: 0;
+      border-radius: 0.5rem;
+      background-color: var(--indigo);
+      color: #ffffff;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 180ms ease, background-color 180ms ease;
+    }
+
+    .boton:hover {
+      background-color: var(--indigo-oscuro);
+      transform: translateY(-2px);
+    }
+
+    .boton:focus-visible {
+      outline: 3px solid var(--indigo);
+      outline-offset: 3px;
+    }
+
+    .icono {
+      display: inline-block;
+      transition: transform 280ms ease;
+    }
+
+    .boton:hover .icono {
+      transform: rotate(90deg);
+    }
+
+    .estado {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--tenue);
+      font-size: 0.85rem;
+    }
+
+    .pulso {
+      display: inline-block;
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      background-color: var(--teal);
+      animation: pulso 2s ease-in-out infinite;
+    }
+
+    .estado::after {
+      content: "No detectado: las animaciones están activas.";
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulso {
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.75;
+      }
+      50% {
+        transform: scale(1.35);
+        opacity: 1;
+      }
+    }
+
+    .nota {
+      margin-top: 1.5rem;
+      padding: 0.8rem 0.95rem;
+      border-left: 4px solid var(--indigo);
+      border-radius: 0 0.35rem 0.35rem 0;
+      background-color: var(--indigo-suave);
+      color: var(--indigo-oscuro);
+      font-size: 0.85rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tarjeta {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+
+      .boton,
+      .icono,
+      .destacada,
+      .pulso {
+        transition: none;
+        animation: none;
+      }
+
+      .boton:hover,
+      .destacada:hover,
+      .boton:hover .icono {
+        transform: none;
+      }
+
+      .estado::after {
+        content: "Activado: las animaciones están deshabilitadas.";
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h1 id="inicio">Transformaciones y animaciones</h1>
+    <p class="bajada">
+      Movimiento al servicio de la interacción, con una salida para quien
+      prefiere reducir las animaciones.
+    </p>
+
+    <h2>Entrada de tarjetas</h2>
+    <div class="grilla">
+      <article class="tarjeta">
+        <h3>Aparecer</h3>
+        <p>Desplazamiento vertical y opacidad con <code>@keyframes</code>.</p>
+      </article>
+      <article class="tarjeta">
+        <h3>En cascada</h3>
+        <p>Un pequeño retraso escalona la entrada de cada tarjeta.</p>
+      </article>
+      <article class="tarjeta">
+        <h3>Sin exagerar</h3>
+        <p>Distancias cortas y duraciones de menos de medio segundo.</p>
+      </article>
+    </div>
+
+    <h2>Hover y transición</h2>
+    <div class="grilla">
+      <article class="tarjeta destacada">
+        <h3>Tarjeta interactiva</h3>
+        <p>Pasá el puntero: se eleva y rota apenas.</p>
+      </article>
+      <article class="tarjeta">
+        <h3>Botón con ícono</h3>
+        <p>El ícono rota y el botón se eleva dos píxeles.</p>
+        <div class="acciones">
+          <a class="boton" href="#inicio">
+            <span class="icono" aria-hidden="true">↻</span>
+            Probar transición
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <h2>Estado del movimiento</h2>
+    <p class="estado">
+      <span class="pulso" aria-hidden="true"></span>
+      Preferencia de movimiento reducido:
+    </p>
+
+    <p class="nota">
+      La animación del punto y las transiciones se desactivan cuando el sistema
+      operativo informa <code>prefers-reduced-motion: reduce</code>. El
+      contenido sigue completo: la animación nunca es la única forma de
+      entender algo.
+    </p>
+  </div>
+</body>
+</html>

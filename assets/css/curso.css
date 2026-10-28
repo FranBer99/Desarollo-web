@@ -259,6 +259,9 @@ textarea {
   .toc {
     position: sticky;
     top: 1.25rem;
+    max-height: calc(100vh - 2.5rem);
+    max-height: calc(100dvh - 2.5rem);
+    overflow-y: auto;
   }
 }
 
@@ -360,16 +363,6 @@ textarea {
   line-height: 1.4;
 }
 
-.contenido h1 code,
-.contenido h2 code,
-.contenido h3 code,
-.contenido h4 code {
-  padding: 0;
-  background: none;
-  color: inherit;
-  font-size: 0.9em;
-  font-weight: inherit;
-}
 
 .contenido h2 + *,
 .contenido h3 + *,
@@ -528,6 +521,17 @@ samp {
   font-size: 0.875em;
   font-weight: 500;
   overflow-wrap: anywhere;
+}
+
+.contenido h1 code,
+.contenido h2 code,
+.contenido h3 code,
+.contenido h4 code {
+  padding: 0;
+  background: none;
+  color: inherit;
+  font-size: 0.9em;
+  font-weight: inherit;
 }
 
 .bloque-codigo {

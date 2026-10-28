@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catálogo de etiquetas — Clase 3</title>
+  <meta name="description" content="Ejemplos de etiquetas semánticas y de bloque en HTML.">
+  <style>
+    :root {
+      color-scheme: light;
+      --texto: #292524;
+      --tenue: #78716c;
+      --borde: #e7e5e4;
+      --indigo: #4f46e5;
+      --indigo-oscuro: #3730a3;
+      --indigo-suave: #eef2ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0 auto;
+      max-width: 46rem;
+      padding: 1.5rem;
+      background-color: #ffffff;
+      color: var(--texto);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--indigo-oscuro);
+      font-size: 1.6rem;
+      line-height: 1.2;
+    }
+
+    .bajada {
+      margin-top: 0.5rem;
+      color: var(--tenue);
+    }
+
+    h2 {
+      margin-top: 2rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--borde);
+      font-size: 1.15rem;
+    }
+
+    dl {
+      margin: 0;
+    }
+
+    dt {
+      margin-top: 0.9rem;
+      color: var(--indigo-oscuro);
+      font-family: ui-monospace, monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    dd {
+      margin: 0.1rem 0 0;
+    }
+
+    code {
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+      background-color: #e0e7ff;
+      color: #312e81;
+      font-family: ui-monospace, monospace;
+      font-size: 0.85em;
+    }
+
+    mark {
+      padding: 0 0.15em;
+      border-radius: 0.2rem;
+      background-color: #fef08a;
+      color: #422006;
+    }
+
+    abbr[title] {
+      text-decoration: underline dotted;
+      cursor: help;
+    }
+
+    blockquote {
+      margin: 0.75rem 0 0;
+      padding: 0.6rem 0.9rem;
+      border-left: 4px solid #c7d2fe;
+      background-color: var(--indigo-suave);
+      color: var(--indigo-oscuro);
+    }
+
+    blockquote cite {
+      display: block;
+      margin-top: 0.2rem;
+      font-size: 0.85rem;
+      font-style: normal;
+      opacity: 0.85;
+    }
+
+    .flujo {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      border: 1px dashed #a8a29e;
+      border-radius: 0.4rem;
+      background-color: #fafaf9;
+    }
+
+    .flujo p {
+      margin: 0;
+    }
+
+    .resaltado {
+      background-color: #fef08a;
+      box-shadow: 0 0 0 2px #fef08a;
+    }
+
+    .bloque {
+      margin-top: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #c7d2fe;
+      border-radius: 0.35rem;
+      background-color: var(--indigo-suave);
+      color: var(--indigo-oscuro);
+    }
+
+    .linea {
+      padding: 0.1em 0.4em;
+      border-radius: 0.25rem;
+      background-color: #dcfce7;
+      color: #14532d;
+    }
+
+    details {
+      margin-top: 0.75rem;
+      padding: 0.6rem 0.9rem;
+      border: 1px solid var(--borde);
+      border-radius: 0.4rem;
+      background-color: #fafaf9;
+    }
+
+    summary {
+      color: var(--indigo-oscuro);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    details p {
+      margin: 0.5rem 0 0;
+    }
+
+    kbd {
+      padding: 0.1em 0.4em;
+      border: 1px solid #d6d3d1;
+      border-bottom-width: 2px;
+      border-radius: 0.3rem;
+      background-color: #f5f5f4;
+      font-family: ui-monospace, monospace;
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Catálogo de etiquetas</h1>
+  <p class="bajada">
+    Cómo se ve cada etiqueta con los estilos por defecto del navegador y qué
+    significa cada una.
+  </p>
+
+  <h2>Semántica de texto</h2>
+  <dl>
+    <dt>strong</dt>
+    <dd>Este dato es <strong>importante</strong> para entender el ejercicio.</dd>
+
+    <dt>em</dt>
+    <dd>No dije <em>mañana</em>, dije <em>hoy</em>.</dd>
+
+    <dt>b</dt>
+    <dd>El paquete <b>express</b> se instala con npm.</dd>
+
+    <dt>i</dt>
+    <dd>El término <i lang="en">responsive</i> se usa en inglés.</dd>
+
+    <dt>mark</dt>
+    <dd>La fecha límite es el <mark>14 de marzo</mark>.</dd>
+
+    <dt>small</dt>
+    <dd>Precio final con impuestos incluidos. <small>Promoción válida hasta agotar stock.</small></dd>
+
+    <dt>s / del / ins</dt>
+    <dd>
+      Precio anterior: <s>$12.000</s>. Precio actual: <ins>$9.800</ins>.
+      Se eliminó el <del>recargo por inscripción</del>.
+    </dd>
+
+    <dt>abbr</dt>
+    <dd><abbr title="HyperText Markup Language">HTML</abbr> estructura el contenido.</dd>
+
+    <dt>cite / q</dt>
+    <dd>
+      Según <cite>Introducción al lenguaje HTML 5</cite>,
+      <q>el marcado describe la estructura del documento</q>.
+    </dd>
+
+    <dt>code / kbd / samp / var</dt>
+    <dd>
+      La etiqueta <code>&lt;p&gt;</code> se escribe con <kbd>Ctrl</kbd> +
+      <kbd>U</kbd> para ver el código. La salida es
+      <samp>Documento validado</samp> y la variable <var>n</var> vale 3.
+    </dd>
+
+    <dt>time</dt>
+    <dd>La clase es el <time datetime="2026-10-28">28 de octubre de 2026</time>.</dd>
+
+    <dt>blockquote</dt>
+    <dd>
+      <blockquote>
+        <p>La web es más grande que cualquier empresa.</p>
+        <cite>Tim Berners-Lee</cite>
+      </blockquote>
+    </dd>
+  </dl>
+
+  <h2>Bloque y línea</h2>
+  <p>
+    Un elemento de <strong>bloque</strong> ocupa todo el ancho y empieza en
+    una línea nueva. Un elemento de <strong>línea</strong> sigue el texto.
+  </p>
+  <div class="flujo">
+    <p>
+      Texto normal con <span class="linea">un span de línea</span> en el medio
+      y <strong>texto importante</strong> que no corta el párrafo.
+    </p>
+    <div class="bloque">Este es un div de bloque: ocupa todo el ancho.</div>
+    <p>El párrafo siguiente empieza abajo, no al lado.</p>
+  </div>
+
+  <h2>Interacción sin JavaScript</h2>
+  <details>
+    <summary>Ver la respuesta correcta</summary>
+    <p>
+      La etiqueta adecuada para una noticia autónoma es
+      <code>&lt;article&gt;</code>. Si la noticia forma parte de una sección
+      más grande, podés envolverla en un <code>&lt;section&gt;</code>.
+    </p>
+  </details>
+  <details>
+    <summary>Ver otra pista</summary>
+    <p>
+      <code>div</code> y <code>span</code> no aportan significado: se usan
+      solo cuando no existe una etiqueta que describa el contenido.
+    </p>
+  </details>
+</body>
+</html>

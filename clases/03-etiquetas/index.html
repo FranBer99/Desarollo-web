@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Elementos, etiquetas y atributos: clasificación, etiquetas principales y secundarias, y compatibilidad entre navegadores.">
+  <title>Clase 03 · Etiquetas principales y secundarias — Desarrollo de Software III</title>
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/curso.css">
+</head>
+<body>
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <header class="sitio-header">
+    <div class="contenedor">
+      <div class="sitio-header__barra">
+        <a class="marca" href="../../index.html">desarrollo-de-software-iii{}</a>
+        <p class="sitio-header__contexto">&rsaquo; Clase 03 · Etiquetas principales y secundarias</p>
+      </div>
+      <nav class="rail" aria-label="Clases del curso">
+        <a href="../../index.html" aria-label="Clase 0: Presentación del curso">00</a>
+        <a href="../../clases/01-origenes-y-evolucion-de-html/index.html" aria-label="Clase 1: Orígenes y evolución de HTML">01</a>
+        <a href="../../clases/02-estructura-de-un-documento-html/index.html" aria-label="Clase 2: Estructura de un documento HTML">02</a>
+        <a href="../../clases/03-etiquetas/index.html" aria-label="Clase 3: Etiquetas principales y secundarias" aria-current="page">03</a>
+        <a href="../../clases/04-control-de-texto/index.html" aria-label="Clase 4: Control de texto">04</a>
+        <a href="../../clases/05-enlaces/index.html" aria-label="Clase 5: Enlaces e hipervínculos">05</a>
+        <a href="../../clases/06-tablas/index.html" aria-label="Clase 6: Tablas">06</a>
+        <a href="../../clases/07-formularios/index.html" aria-label="Clase 7: Formularios">07</a>
+        <a href="../../clases/08-marcos/index.html" aria-label="Clase 8: Marcos">08</a>
+        <a href="../../clases/09-css-y-responsive/index.html" aria-label="Clase 9: Hojas de estilo y desarrollo responsivo">09</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="contenedor layout">
+    <nav class="toc" aria-labelledby="toc-titulo">
+      <p class="toc__titulo" id="toc-titulo">En esta clase</p>
+      <ol>
+        <li><a href="#elemento-etiqueta-atributo">Elemento, etiqueta y atributo</a></li>
+        <li><a href="#clasificacion">Clasificación</a></li>
+        <li><a href="#principales">Etiquetas principales</a></li>
+        <li><a href="#secundarias">Etiquetas secundarias</a></li>
+        <li><a href="#compatibilidad">Compatibilidad</a></li>
+        <li><a href="#actividad">Actividad práctica</a></li>
+        <li><a href="#resumen">Resumen</a></li>
+      </ol>
+    </nav>
+
+    <main class="contenido" id="contenido" tabindex="-1">
+<header class="encabezado-clase">
+  <p class="etiqueta">Clase 03</p>
+  <h1>Etiquetas principales y secundarias</h1>
+  <p class="lead">
+    HTML ofrece más de cien elementos. Conocer para qué sirve cada uno evita
+    dos extremos: usar siempre <code>div</code> o elegir etiquetas por su
+    apariencia en lugar de por su significado.
+  </p>
+</header>
+
+<aside class="aviso aviso--nota" aria-label="Objetivos de la clase">
+  <span class="aviso__titulo">Objetivos</span>
+  <ul>
+    <li>Distinguir elemento, etiqueta, atributo y contenido.</li>
+    <li>Clasificar las etiquetas según su función y su comportamiento.</li>
+    <li>Reconocer las etiquetas principales y las secundarias.</li>
+    <li>Elegir alternativas actuales a las etiquetas obsoletas.</li>
+  </ul>
+</aside>
+
+<section aria-labelledby="elemento-etiqueta-atributo">
+  <h2 id="elemento-etiqueta-atributo">Elemento, etiqueta y atributo</h2>
+  <p>
+    Estas tres palabras se usan a veces como sinónimos, pero no lo son. La
+    <strong>etiqueta</strong> es la marca escrita; el <strong>elemento</strong>
+    es la pieza completa (apertura, contenido y cierre); el
+    <strong>atributo</strong> agrega información al elemento.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>anatomía</figcaption>
+    <pre><code>&lt;img src="plano.svg" alt="Plano del aula" width="640"&gt;</code></pre>
+  </figure>
+
+  <ul>
+    <li><code>img</code> es la etiqueta y el tipo de elemento.</li>
+    <li><code>src</code>, <code>alt</code> y <code>width</code> son atributos.</li>
+    <li><code>"plano.svg"</code> y <code>"Plano del aula"</code> son los valores de esos atributos.</li>
+    <li>El elemento no tiene contenido ni cierre: es un <strong>elemento vacío</strong>.</li>
+  </ul>
+
+  <h3>Atributos globales y específicos</h3>
+  <p>
+    Los atributos <strong>globales</strong> se pueden usar en cualquier
+    elemento: <code>id</code>, <code>class</code>, <code>lang</code>,
+    <code>title</code>, <code>hidden</code>, <code>tabindex</code>,
+    <code>data-*</code>, <code>aria-*</code> y <code>role</code>. Los
+    <strong>específicos</strong> solo tienen sentido en ciertos elementos:
+    <code>href</code> en <code>a</code>, <code>alt</code> en <code>img</code>,
+    <code>for</code> en <code>label</code>, <code>colspan</code> en
+    <code>td</code>.
+  </p>
+  <aside class="aviso aviso--dato" aria-label="Dato">
+    <span class="aviso__titulo">Un identificador por documento</span>
+    <p>
+      El valor de <code>id</code> debe ser único en toda la página. Se usa para
+      anclas, para asociar etiquetas de formulario y para seleccionar con CSS o
+      JavaScript. Para agrupar varios elementos, se usa <code>class</code>.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="clasificacion">
+  <h2 id="clasificacion">Clasificación de las etiquetas</h2>
+  <p>
+    No existe una única clasificación oficial. La más útil para aprender es
+    combinar tres criterios: la función, el comportamiento en el flujo del
+    texto y la frecuencia de uso.
+  </p>
+
+  <h3>Según su función</h3>
+  <div class="tabla">
+    <table>
+      <caption>Familias de elementos según su función</caption>
+      <thead>
+        <tr>
+          <th scope="col">Familia</th>
+          <th scope="col">Ejemplos</th>
+          <th scope="col">Para qué</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Documento</th>
+          <td><code>html</code>, <code>head</code>, <code>body</code></td>
+          <td>Estructura general del archivo.</td>
+        </tr>
+        <tr>
+          <th scope="row">Semántica estructural</th>
+          <td><code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code>, <code>aside</code>, <code>footer</code></td>
+          <td>Regiones y bloques de contenido.</td>
+        </tr>
+        <tr>
+          <th scope="row">Texto</th>
+          <td><code>h1</code>–<code>h6</code>, <code>p</code>, <code>strong</code>, <code>em</code>, <code>blockquote</code>, <code>code</code></td>
+          <td>Organizar y dar significado al texto.</td>
+        </tr>
+        <tr>
+          <th scope="row">Listas</th>
+          <td><code>ul</code>, <code>ol</code>, <code>li</code>, <code>dl</code>, <code>dt</code>, <code>dd</code></td>
+          <td>Enumeraciones y glosarios.</td>
+        </tr>
+        <tr>
+          <th scope="row">Enlaces y medios</th>
+          <td><code>a</code>, <code>img</code>, <code>picture</code>, <code>audio</code>, <code>video</code>, <code>iframe</code></td>
+          <td>Navegación y contenido incrustado.</td>
+        </tr>
+        <tr>
+          <th scope="row">Tablas</th>
+          <td><code>table</code>, <code>caption</code>, <code>thead</code>, <code>tr</code>, <code>th</code>, <code>td</code></td>
+          <td>Datos tabulares.</td>
+        </tr>
+        <tr>
+          <th scope="row">Formularios</th>
+          <td><code>form</code>, <code>label</code>, <code>input</code>, <code>select</code>, <code>textarea</code>, <code>button</code></td>
+          <td>Recolectar datos del usuario.</td>
+        </tr>
+        <tr>
+          <th scope="row">Interacción</th>
+          <td><code>details</code>, <code>summary</code>, <code>dialog</code></td>
+          <td>Comportamientos nativos sin JavaScript.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Según su comportamiento en el flujo</h3>
+  <div class="tabla">
+    <table>
+      <caption>Elementos de bloque y elementos de línea</caption>
+      <thead>
+        <tr>
+          <th scope="col">Comportamiento</th>
+          <th scope="col">Ejemplos</th>
+          <th scope="col">Cómo se ubican</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Bloque</th>
+          <td><code>h1</code>, <code>p</code>, <code>div</code>, <code>section</code>, <code>ul</code>, <code>table</code>, <code>form</code></td>
+          <td>Empiezan en una línea nueva y ocupan todo el ancho disponible.</td>
+        </tr>
+        <tr>
+          <th scope="row">Línea</th>
+          <td><code>a</code>, <code>span</code>, <code>strong</code>, <code>em</code>, <code>code</code>, <code>label</code></td>
+          <td>Siguen el flujo del texto; no fuerzan un salto de línea.</td>
+        </tr>
+        <tr>
+          <th scope="row">Reemplazados</th>
+          <td><code>img</code>, <code>video</code>, <code>iframe</code>, <code>input</code></td>
+          <td>Se comportan en línea, pero tienen dimensiones propias y contenido externo.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Este comportamiento se puede cambiar con CSS mediante la propiedad
+    <code>display</code>. La etiqueta describe el significado; el CSS decide
+    cómo se muestra.
+  </p>
+
+  <h3>Principales y secundarias</h3>
+  <p>
+    La distinción entre <strong>principales</strong> y
+    <strong>secundarias</strong> es didáctica, no oficial. Las principales son
+    las que aparecen en casi cualquier página y permiten armar la estructura
+    completa. Las secundarias son especializadas: aportan significado en
+    contextos concretos y muchas veces pasan desapercibidas.
+  </p>
+</section>
+
+<section aria-labelledby="principales">
+  <h2 id="principales">Etiquetas principales</h2>
+  <p>
+    Con este conjunto se puede construir la mayor parte de un sitio:
+  </p>
+  <div class="tabla">
+    <table>
+      <caption>Etiquetas principales y su propósito</caption>
+      <thead>
+        <tr>
+          <th scope="col">Etiqueta</th>
+          <th scope="col">Propósito</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>html</code></th><td>Raíz del documento.</td></tr>
+        <tr><th scope="row"><code>head</code></th><td>Metadatos y recursos.</td></tr>
+        <tr><th scope="row"><code>body</code></th><td>Contenido visible.</td></tr>
+        <tr><th scope="row"><code>header</code></th><td>Encabezado de página o sección.</td></tr>
+        <tr><th scope="row"><code>nav</code></th><td>Navegación principal o secundaria.</td></tr>
+        <tr><th scope="row"><code>main</code></th><td>Contenido principal, único por página.</td></tr>
+        <tr><th scope="row"><code>section</code></th><td>Sección temática con encabezado.</td></tr>
+        <tr><th scope="row"><code>article</code></th><td>Pieza autónoma: noticia, tarjeta, comentario.</td></tr>
+        <tr><th scope="row"><code>aside</code></th><td>Contenido complementario.</td></tr>
+        <tr><th scope="row"><code>footer</code></th><td>Pie de página o sección.</td></tr>
+        <tr><th scope="row"><code>h1</code>–<code>h6</code></th><td>Jerarquía de títulos.</td></tr>
+        <tr><th scope="row"><code>p</code></th><td>Párrafo.</td></tr>
+        <tr><th scope="row"><code>a</code></th><td>Enlace.</td></tr>
+        <tr><th scope="row"><code>img</code></th><td>Imagen.</td></tr>
+        <tr><th scope="row"><code>ul</code>, <code>ol</code>, <code>li</code></th><td>Listas.</td></tr>
+        <tr><th scope="row"><code>div</code></th><td>Contenedor genérico de bloque.</td></tr>
+        <tr><th scope="row"><code>span</code></th><td>Contenedor genérico de línea.</td></tr>
+        <tr><th scope="row"><code>table</code></th><td>Datos tabulares.</td></tr>
+        <tr><th scope="row"><code>form</code></th><td>Formulario.</td></tr>
+        <tr><th scope="row"><code>input</code>, <code>button</code></th><td>Controles de formulario.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <aside class="aviso aviso--atencion" aria-label="Atención">
+    <span class="aviso__titulo"><code>div</code> y <code>span</code> no son la opción por defecto</span>
+    <p>
+      Son contenedores sin significado. Se usan cuando ningún elemento
+      semántico describe el contenido, por ejemplo para agrupar elementos con
+      fines de diseño. Si el contenido es un párrafo, un título, una lista o
+      una navegación, corresponde la etiqueta semántica.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="secundarias">
+  <h2 id="secundarias">Etiquetas secundarias</h2>
+  <p>
+    Las etiquetas secundarias agregan matices de significado. Estas son las
+    más útiles:
+  </p>
+  <div class="tabla">
+    <table>
+      <caption>Etiquetas secundarias de uso frecuente</caption>
+      <thead>
+        <tr>
+          <th scope="col">Etiqueta</th>
+          <th scope="col">Significado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>strong</code></th><td>Importancia, gravedad o urgencia.</td></tr>
+        <tr><th scope="row"><code>em</code></th><td>Énfasis en la entonación.</td></tr>
+        <tr><th scope="row"><code>b</code></th><td>Texto al que se quiere llamar la atención sin dar importancia (palabras clave, nombres de producto).</td></tr>
+        <tr><th scope="row"><code>i</code></th><td>Texto en otra voz o idioma, términos técnicos, pensamientos.</td></tr>
+        <tr><th scope="row"><code>mark</code></th><td>Texto resaltado por relevancia en un contexto.</td></tr>
+        <tr><th scope="row"><code>small</code></th><td>Comentarios al margen, letra chica, avisos legales.</td></tr>
+        <tr><th scope="row"><code>s</code>, <code>del</code>, <code>ins</code></th><td>Contenido obsoleto, eliminado o insertado.</td></tr>
+        <tr><th scope="row"><code>abbr</code></th><td>Sigla o abreviatura; el significado va en <code>title</code>.</td></tr>
+        <tr><th scope="row"><code>cite</code></th><td>Título de una obra.</td></tr>
+        <tr><th scope="row"><code>q</code></th><td>Cita corta en línea.</td></tr>
+        <tr><th scope="row"><code>blockquote</code></th><td>Cita en bloque, con <code>cite</code> opcional.</td></tr>
+        <tr><th scope="row"><code>code</code></th><td>Fragmento de código.</td></tr>
+        <tr><th scope="row"><code>pre</code></th><td>Texto preformateado; conserva espacios y saltos.</td></tr>
+        <tr><th scope="row"><code>kbd</code>, <code>samp</code>, <code>var</code></th><td>Entrada del usuario, salida de un programa y variable.</td></tr>
+        <tr><th scope="row"><code>time</code></th><td>Fecha u hora legible por máquinas (<code>datetime</code>).</td></tr>
+        <tr><th scope="row"><code>address</code></th><td>Datos de contacto del autor o de la sección.</td></tr>
+        <tr><th scope="row"><code>details</code>, <code>summary</code></th><td>Bloque desplegable nativo, sin JavaScript.</td></tr>
+        <tr><th scope="row"><code>figure</code>, <code>figcaption</code></th><td>Figura autocontenida y su leyenda.</td></tr>
+        <tr><th scope="row"><code>picture</code>, <code>source</code></th><td>Selección de imagen según formato o tamaño de pantalla.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <aside class="aviso aviso--dato" aria-label="Dato">
+    <span class="aviso__titulo"><code>b</code>, <code>i</code> y <code>u</code> siguen siendo válidas</span>
+    <p>
+      No están obsoletas, pero no aportan significado semántico. Si querés
+      indicar importancia, usá <code>strong</code>; si querés indicar énfasis,
+      usá <code>em</code>. El subrayado (<code>u</code>) se confunde con un
+      enlace: reservalo para errores ortográficos o nombres propios en chino,
+      y para el resto usá CSS.
+    </p>
+  </aside>
+
+  <figure class="demo">
+    <iframe src="ejemplos/catalogo.html"
+            title="Catálogo de etiquetas semánticas y de bloque"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>Catálogo de etiquetas con los estilos por defecto del navegador.</span>
+      <a href="ejemplos/catalogo.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="compatibilidad">
+  <h2 id="compatibilidad">Compatibilidad y renderizado</h2>
+  <p>
+    Todos los navegadores actuales implementan el mismo estándar, pero no al
+    mismo ritmo. Una función reciente puede no existir en un navegador viejo o
+    comportarse distinto. La estrategia es escribir HTML válido, verificar el
+    soporte y prever una alternativa.
+  </p>
+  <ul>
+    <li>
+      Consultar <a href="https://caniuse.com/">Can I use</a> antes de adoptar
+      una etiqueta o propiedad nueva.
+    </li>
+    <li>
+      Revisar la tabla de compatibilidad de MDN, que indica desde qué versión
+      está disponible cada función.
+    </li>
+    <li>
+      Probar en al menos dos motores distintos (por ejemplo, Chromium y
+      Firefox) y en un dispositivo móvil real o emulado.
+    </li>
+    <li>
+      Aplicar mejora progresiva: el contenido y las funciones básicas deben
+      funcionar sin lo último; las mejoras se agregan si el navegador las
+      soporta.
+    </li>
+    <li>
+      Validar el HTML: los navegadores toleran errores, pero cada uno los
+      corrige a su manera.
+    </li>
+  </ul>
+
+  <h3>Etiquetas obsoletas y sus reemplazos</h3>
+  <div class="tabla">
+    <table>
+      <caption>Elementos retirados del estándar</caption>
+      <thead>
+        <tr>
+          <th scope="col">Obsoleta</th>
+          <th scope="col">Alternativa actual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>center</code></th><td>CSS: <code>text-align</code>, <code>margin-inline: auto</code>.</td></tr>
+        <tr><th scope="row"><code>font</code></th><td>CSS: <code>font-family</code>, <code>font-size</code>, <code>color</code>.</td></tr>
+        <tr><th scope="row"><code>big</code>, <code>tt</code></th><td>CSS y etiquetas semánticas como <code>code</code> o <code>kbd</code>.</td></tr>
+        <tr><th scope="row"><code>strike</code></th><td><code>s</code> o <code>del</code>, según el significado.</td></tr>
+        <tr><th scope="row"><code>acronym</code></th><td><code>abbr</code>.</td></tr>
+        <tr><th scope="row"><code>applet</code></th><td><code>object</code> o contenido nativo.</td></tr>
+        <tr><th scope="row"><code>frame</code>, <code>frameset</code></th><td><code>iframe</code> o diseño con CSS (clase 8).</td></tr>
+        <tr><th scope="row"><code>marquee</code>, <code>blink</code></th><td>Animaciones CSS con <code>prefers-reduced-motion</code> (clase 9).</td></tr>
+        <tr><th scope="row"><code>dir</code></th><td><code>ul</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Etiquetas desconocidas</h3>
+  <p>
+    Si el navegador encuentra una etiqueta que no conoce, no rompe la página:
+    la trata como un elemento genérico en línea. Eso no significa que sea una
+    buena idea inventar etiquetas: los elementos personalizados válidos llevan
+    un guion (<code>mi-componente</code>) y necesitan JavaScript para
+    definirse. Para dar estilo, usá clases sobre elementos existentes.
+  </p>
+</section>
+
+<div class="ejercicio">
+  <h2 id="actividad">Actividad práctica</h2>
+  <h3>Refactorizar una noticia</h3>
+  <p>Partí de este marcado y reescribilo con etiquetas semánticas:</p>
+  <figure class="bloque-codigo">
+    <figcaption>antes.html</figcaption>
+    <pre><code>&lt;div class="noticia"&gt;
+  &lt;div class="titulo"&gt;Nueva inscripción al ciclo 2026&lt;/div&gt;
+  &lt;div class="texto"&gt;
+    La inscripción estará abierta del 3 al 14 de marzo.
+  &lt;/div&gt;
+  &lt;div class="fecha"&gt;28 de febrero de 2026&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </figure>
+  <ol>
+    <li>Convertir el contenedor en un <code>article</code> y el título en un <code>h2</code>.</li>
+    <li>Usar <code>p</code> para el texto y <code>time</code> con <code>datetime</code> para la fecha.</li>
+    <li>Agregar un <code>footer</code> dentro del artículo con la fuente.</li>
+    <li>Marcar una palabra clave con <code>strong</code> y una fecha límite con <code>mark</code>.</li>
+    <li>Verificar el documento con el validador del W3C.</li>
+    <li>Inspeccionar el resultado en <em>Elements</em> y comprobar que la estructura coincide con el significado.</li>
+  </ol>
+  <p>
+    <strong>Para entregar</strong>: el HTML refactorizado y una lista de las
+    etiquetas usadas con una frase que explique por qué cada una es la
+    adecuada.
+  </p>
+</div>
+
+<div class="resumen">
+  <h2 id="resumen">Resumen</h2>
+  <ul>
+    <li>Un elemento combina etiqueta, atributos y contenido; los vacíos no tienen cierre.</li>
+    <li>Los atributos globales sirven en cualquier elemento; los específicos, solo en algunos.</li>
+    <li>Las etiquetas se clasifican por función, por comportamiento en el flujo y por frecuencia de uso.</li>
+    <li>Las principales estructuran el documento; las secundarias aportan matices de significado.</li>
+    <li><code>div</code> y <code>span</code> son contenedores sin semántica: no son la opción por defecto.</li>
+    <li>Las etiquetas obsoletas se reemplazan por CSS o por elementos semánticos actuales.</li>
+  </ul>
+</div>
+
+<div class="bibliografia">
+  <h2>Bibliografía del tema</h2>
+  <ul>
+    <li>
+      Celaya Luna, A. (2014). <cite>Creación de páginas web: HTML 5</cite>.
+      Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/56045">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Toharia Rabasco, J. P. y Raya González, L. (2015).
+      <cite>Lenguajes de marcas y sistemas de gestión de la información</cite>.
+      RA-MA Editorial.
+      <a href="https://elibro.net/es/ereader/kennedy/62483">Acceso en eLibro</a>.
+    </li>
+    <li>
+      MDN Web Docs.
+      <a href="https://developer.mozilla.org/es/docs/Web/HTML/Element">Referencia de elementos HTML</a>.
+    </li>
+    <li>
+      WHATWG.
+      <a href="https://html.spec.whatwg.org/multipage/">HTML Living Standard</a>.
+    </li>
+  </ul>
+</div>
+
+    <nav class="pager" aria-label="Navegación entre clases">
+      <a class="pager__anterior" rel="prev" href="../../clases/02-estructura-de-un-documento-html/index.html">
+        <span class="pager__direccion">← Anterior</span>
+        <span class="pager__titulo">Clase 02 · Estructura de un documento HTML</span>
+      </a>
+      <a class="pager__siguiente" rel="next" href="../../clases/04-control-de-texto/index.html">
+        <span class="pager__direccion">Siguiente →</span>
+        <span class="pager__titulo">Clase 04 · Control de texto</span>
+      </a>
+    </nav>
+    </main>
+  </div>
+
+  <footer class="sitio-footer">
+    <div class="contenedor sitio-footer__contenido">
+      <p><strong>Desarrollo de Software III</strong> · Licenciatura en Sistemas ·
+        Universidad John F. Kennedy</p>
+      <p><a href="../../index.html">Índice del curso</a> ·
+        <a href="../../index.html#bibliografia">Bibliografía</a></p>
+    </div>
+  </footer>
+</body>
+</html>

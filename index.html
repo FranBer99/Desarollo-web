@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Presentación, programa, metodología, evaluación y bibliografía de Desarrollo de Software III.">
+  <title>Desarrollo de Software III — Material de clases</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/curso.css">
+</head>
+<body>
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <header class="sitio-header">
+    <div class="contenedor">
+      <div class="sitio-header__barra">
+        <a class="marca" href="index.html">desarrollo-de-software-iii{}</a>
+        <p class="sitio-header__contexto">&rsaquo; Presentación del curso</p>
+      </div>
+      <nav class="rail" aria-label="Clases del curso">
+        <a href="index.html" aria-label="Clase 0: Presentación del curso" aria-current="page">00</a>
+        <a href="clases/01-origenes-y-evolucion-de-html/index.html" aria-label="Clase 1: Orígenes y evolución de HTML">01</a>
+        <a href="clases/02-estructura-de-un-documento-html/index.html" aria-label="Clase 2: Estructura de un documento HTML">02</a>
+        <a href="clases/03-etiquetas/index.html" aria-label="Clase 3: Etiquetas principales y secundarias">03</a>
+        <a href="clases/04-control-de-texto/index.html" aria-label="Clase 4: Control de texto">04</a>
+        <a href="clases/05-enlaces/index.html" aria-label="Clase 5: Enlaces e hipervínculos">05</a>
+        <a href="clases/06-tablas/index.html" aria-label="Clase 6: Tablas">06</a>
+        <a href="clases/07-formularios/index.html" aria-label="Clase 7: Formularios">07</a>
+        <a href="clases/08-marcos/index.html" aria-label="Clase 8: Marcos">08</a>
+        <a href="clases/09-css-y-responsive/index.html" aria-label="Clase 9: Hojas de estilo y desarrollo responsivo">09</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="contenedor layout">
+    <nav class="toc" aria-labelledby="toc-titulo">
+      <p class="toc__titulo" id="toc-titulo">En esta página</p>
+      <ol>
+        <li><a href="#presentacion">La materia</a></li>
+        <li><a href="#como-usar">Cómo usar el sitio</a></li>
+        <li><a href="#programa">Programa analítico</a></li>
+        <li><a href="#metodologia">Metodología</a></li>
+        <li><a href="#evaluacion">Evaluación</a></li>
+        <li><a href="#bibliografia">Bibliografía</a></li>
+        <li><a href="#clases">Clases</a></li>
+      </ol>
+    </nav>
+
+    <main class="contenido" id="contenido" tabindex="-1">
+<header class="portada">
+  <p class="etiqueta">Licenciatura en Sistemas · U. J. F. Kennedy</p>
+  <h1>Desarrollo de Software III</h1>
+  <p class="portada__bajada">
+    Material de clases sobre HTML y CSS: desde los orígenes del lenguaje de
+    marcado hasta el diseño de interfaces responsivas, accesibles y mantenibles.
+  </p>
+  <p>
+    <strong>Programa 2023</strong> · 64 horas · Régimen cuatrimestral ·
+    Código 32317
+  </p>
+</header>
+
+<section aria-labelledby="presentacion">
+  <h2 id="presentacion">La materia</h2>
+  <p>
+    HTML es el lenguaje con el que se construye la web. Define la estructura y
+    el contenido de una página —encabezados, párrafos, listas, enlaces,
+    imágenes, tablas, formularios— y establece cómo se relacionan esas piezas
+    entre sí. CSS, por su parte, se ocupa de la presentación: tipografía,
+    color, espaciado, disposición y comportamiento en distintas pantallas.
+  </p>
+  <p>
+    El objetivo de la materia es comprender los conceptos fundamentales para
+    construir una página o una aplicación web de forma eficaz, eligiendo la
+    herramienta adecuada según el requerimiento y cuidando el rendimiento, la
+    accesibilidad y la compatibilidad entre navegadores.
+  </p>
+  <h3>Al terminar la cursada vas a poder</h3>
+  <ul>
+    <li>Escribir documentos HTML válidos, semánticos y accesibles.</li>
+    <li>Estructurar contenido con la etiqueta adecuada para cada caso.</li>
+    <li>Construir enlaces, tablas, formularios y contenido embebido.</li>
+    <li>Aplicar estilos con CSS entendiendo la cascada, la herencia y la especificidad.</li>
+    <li>Diseñar interfaces adaptables a celulares, tablets y escritorio.</li>
+    <li>Leer y validar el código de cualquier sitio con las herramientas del navegador.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="como-usar">
+  <h2 id="como-usar">Cómo usar el sitio</h2>
+  <p>
+    El sitio está organizado como un recorrido: la clase 0 presenta la materia
+    y cada clase siguiente desarrolla una unidad del programa. Podés avanzar
+    con los enlaces <em>anterior</em> y <em>siguiente</em> que aparecen al final
+    de cada página, o volver al índice desde el número <code>00</code> del
+    encabezado.
+  </p>
+  <p>Cada clase sigue la misma estructura:</p>
+  <ul>
+    <li><strong>Objetivos y desarrollo teórico</strong>, con definiciones y ejemplos.</li>
+    <li><strong>Ejemplos interactivos</strong>: se muestran embebidos y también se pueden abrir en una pestaña aparte para leer y modificar el código.</li>
+    <li><strong>Errores comunes</strong>, para reconocerlos antes de que aparezcan.</li>
+    <li><strong>Actividad práctica</strong>, pensada para resolver en clase.</li>
+    <li><strong>Resumen y bibliografía</strong> del tema.</li>
+  </ul>
+
+  <aside class="aviso aviso--dato" aria-label="Dato">
+    <span class="aviso__titulo">Este sitio es parte del material</span>
+    <p>
+      Está hecho con HTML y CSS, sin frameworks, sin JavaScript y sin paso de
+      compilación. Podés ver el código fuente con <kbd>Ctrl</kbd> + <kbd>U</kbd>
+      (o <kbd>Cmd</kbd> + <kbd>U</kbd> en macOS) y usar las herramientas de
+      desarrollo con <kbd>F12</kbd> para inspeccionar el DOM y los estilos.
+    </p>
+  </aside>
+
+  <h3>Herramientas recomendadas</h3>
+  <ul>
+    <li>Un navegador actualizado (Firefox, Chrome, Edge o Safari).</li>
+    <li>Un editor de código con resaltado y autocompletado: VS Code, Sublime Text, Neovim o similares.</li>
+    <li>Las herramientas de desarrollo del navegador: pestañas <em>Elements</em>, <em>Console</em> y <em>Network</em>.</li>
+    <li>El validador del W3C para comprobar el HTML antes de entregar.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="programa">
+  <h2 id="programa">Programa analítico</h2>
+  <p>
+    El programa se organiza en nueve unidades. Cada una tiene su clase
+    correspondiente y una actividad práctica asociada.
+  </p>
+  <div class="tabla">
+    <table>
+      <caption>Unidades del programa y contenidos principales</caption>
+      <thead>
+        <tr>
+          <th scope="col">Unidad</th>
+          <th scope="col">Tema</th>
+          <th scope="col">Contenidos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Orígenes y evolución de HTML</td>
+          <td>Introducción al lenguaje, historia del estándar, fundamentos de HTML y CSS.</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Estructura de un documento HTML</td>
+          <td>Modelo de objetos del documento (DOM), componentes, encabezado y cuerpo.</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Etiquetas principales y secundarias</td>
+          <td>Elementos, etiquetas y atributos, clasificación, compatibilidad entre navegadores.</td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td>Control de texto</td>
+          <td>Inserción y organización del texto, jerarquización, formato y estilos.</td>
+        </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td>Enlaces e hipervínculos</td>
+          <td>Navegación web, URLs, enlaces internos y externos, anclajes, <code>target</code> y <code>download</code>.</td>
+        </tr>
+        <tr>
+          <th scope="row">6</th>
+          <td>Tablas</td>
+          <td>Origen y uso actual, estructura básica, tablas complejas y contenido interno.</td>
+        </tr>
+        <tr>
+          <th scope="row">7</th>
+          <td>Formularios</td>
+          <td>Propósito y funcionamiento, estructura, campos, listas desplegables, botones y estilos.</td>
+        </tr>
+        <tr>
+          <th scope="row">8</th>
+          <td>Marcos</td>
+          <td>Definición y usos, ventajas e inconvenientes, <code>frameset</code> e <code>iframe</code>.</td>
+        </tr>
+        <tr>
+          <th scope="row">9</th>
+          <td>Hojas de estilo y desarrollo responsivo</td>
+          <td>Selectores, cascada y herencia, propiedades, medios, animaciones y diseño adaptable.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section aria-labelledby="metodologia">
+  <h2 id="metodologia">Metodología</h2>
+  <p>
+    La cursada es cuatrimestral, presencial y tiene una carga total de 64 horas
+    reloj, distribuidas en quince encuentros de cuatro horas: dos horas
+    teóricas y dos horas prácticas.
+  </p>
+  <ul>
+    <li>
+      La teoría se desarrolla sobre la base de textos que se leen antes de la
+      clase. Las primeras horas se destinan a consultas y a profundizar los
+      conceptos principales.
+    </li>
+    <li>
+      La práctica consiste en ejercicios individuales y en un trabajo práctico
+      grupal de aplicación.
+    </li>
+    <li>
+      Se requiere una asistencia mínima del 75 % y la aprobación de un examen
+      final.
+    </li>
+  </ul>
+</section>
+
+<section aria-labelledby="evaluacion">
+  <h2 id="evaluacion">Evaluación</h2>
+  <ul>
+    <li>Dos evaluaciones parciales teórico-prácticas, ambas recuperables.</li>
+    <li>Carpeta de trabajos prácticos.</li>
+    <li>Trabajo práctico grupal.</li>
+    <li>Opinión formada por el docente a lo largo de la cursada.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="bibliografia">
+  <h2 id="bibliografia">Bibliografía</h2>
+  <p>
+    Los enlaces a eLibro requieren iniciar sesión con las credenciales de la
+    biblioteca virtual de la universidad.
+  </p>
+
+  <h3>Obligatoria</h3>
+  <ul>
+    <li>
+      Celaya Luna, A. (2014). <cite>Creación de páginas web: HTML 5</cite>.
+      Málaga, España: Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/56045">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Pérez Rodríguez, M. D. (Coord.) (2012).
+      <cite>Introducción al lenguaje HTML 5</cite>. Málaga, España: Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/225270">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Toharia Rabasco, J. P. y Raya González, L. (2015).
+      <cite>Lenguajes de marcas y sistemas de gestión de la información</cite>.
+      Madrid, España: RA-MA Editorial.
+      <a href="https://elibro.net/es/ereader/kennedy/62483">Acceso en eLibro</a>.
+    </li>
+  </ul>
+
+  <h3>Suplementaria</h3>
+  <ul>
+    <li>
+      Orós Cabello, J. C. (2014).
+      <cite>Diseño de páginas Web con XHTML, JavaScript y CSS</cite>.
+      Paracuellos de Jarama, Madrid: RA-MA Editorial.
+      <a href="https://elibro.net/es/ereader/kennedy/106414">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Biblioteca Virtual de la U. J. F. Kennedy.
+      <a href="https://elibro.net/es/lc/kennedy/inicio">Acceso general a eLibro</a>.
+    </li>
+  </ul>
+</section>
+
+<section aria-labelledby="clases">
+  <h2 id="clases">Clases</h2>
+  <p>
+    Cada clase corresponde a una unidad del programa. Se recomienda leer la
+    bibliografía del tema antes del encuentro y tener el código a mano para
+    probar los ejemplos.
+  </p>
+  <ul class="grilla-clases">
+    <li>
+      <a class="tarjeta-clase" href="clases/01-origenes-y-evolucion-de-html/index.html">
+        <span class="tarjeta-clase__numero">Clase 01</span>
+        <span class="tarjeta-clase__titulo">Orígenes y evolución de HTML</span>
+        <span class="tarjeta-clase__resumen">Qué es HTML, cómo nació, cómo cambió el estándar y cuáles son las bases de HTML y CSS.</span>
+      </a>
+    </li>
+    <li>
+      <a class="tarjeta-clase" href="clases/02-estructura-de-un-documento-html/index.html">
+        <span class="tarjeta-clase__numero">Clase 02</span>
+        <span class="tarjeta-clase__titulo">Estructura de un documento HTML</span>
+        <span class="tarjeta-clase__resumen">El DOM, las partes de un documento y la organización del encabezado y el cuerpo.</span>
+      </a>
+    </li>
+    <li>
+      <a class="tarjeta-clase" href="clases/03-etiquetas/index.html">
+        <span class="tarjeta-clase__numero">Clase 03</span>
+        <span class="tarjeta-clase__titulo">Etiquetas principales y secundarias</span>
+        <span class="tarjeta-clase__resumen">Elementos, atributos, clasificación de etiquetas y compatibilidad entre navegadores.</span>
+      </a>
+    </li>
+    <li>
+      <a class="tarjeta-clase" href="clases/04-control-de-texto/index.html">
+        <span class="tarjeta-clase__numero">Clase 04</span>
+        <span class="tarjeta-clase__titulo">Control de texto</span>
+        <span class="tarjeta-clase__resumen">Párrafos, encabezados, listas, énfasis, comentarios y estilos tipográficos.</span>
+      </a>
+    </li>
+    <li>
+      <a class="tarjeta-clase" href="clases/05-enlaces/index.html">
+        <span class="tarjeta-clase__numero">Clase 05</span>
+        <span class="tarjeta-clase__titulo">Enlaces e hipervínculos</span>
+        <span class="tarjeta-clase__resumen">URLs, rutas relativas y absolutas, anclajes, target, download y enlaces accesibles.</span>
+      </a>
+    </li>
+    <li>
+      <a class="tarjeta-clase" href="clases/06-tablas/index.html">
+        <span class="tarjeta-clase__numero">Clase 06</span>
+        <span class="tarjeta-clase__titulo">Tablas</span>
+        <span class="tarjeta-clase__resumen">Del maquetado con tablas a los datos tabulares: estructura, tablas complejas y accesibilidad.</span>
+      </a>
+    </li>
+    <li>
+      <a class="tarjeta-clase" href="clases/07-formularios/index.html">
+        <span class="tarjeta-clase__numero">Clase 07</span>
+        <span class="tarjeta-clase__titulo">Formularios</span>
+        <span class="tarjeta-clase__resumen">Campos, etiquetas, validación nativa, listas desplegables, botones y estilos.</span>
+      </a>
+    </li>
+    <li>
+      <a class="tarjeta-clase" href="clases/08-marcos/index.html">
+        <span class="tarjeta-clase__numero">Clase 08</span>
+        <span class="tarjeta-clase__titulo">Marcos</span>
+        <span class="tarjeta-clase__resumen">Por qué frameset quedó obsoleto, cómo se usa iframe hoy y qué precauciones de seguridad requiere.</span>
+      </a>
+    </li>
+    <li>
+      <a class="tarjeta-clase" href="clases/09-css-y-responsive/index.html">
+        <span class="tarjeta-clase__numero">Clase 09</span>
+        <span class="tarjeta-clase__titulo">Hojas de estilo y desarrollo responsivo</span>
+        <span class="tarjeta-clase__resumen">Selectores, cascada, modelo de caja, tipografía, color, medios, animaciones y responsive.</span>
+      </a>
+    </li>
+  </ul>
+</section>
+
+    <nav class="pager" aria-label="Navegación entre clases">
+      <a rel="next" href="clases/01-origenes-y-evolucion-de-html/index.html">
+        <span class="pager__direccion">Siguiente →</span>
+        <span class="pager__titulo">Clase 01 · Orígenes y evolución de HTML</span>
+      </a>
+    </nav>
+    </main>
+  </div>
+
+  <footer class="sitio-footer">
+    <div class="contenedor sitio-footer__contenido">
+      <p><strong>Desarrollo de Software III</strong> · Licenciatura en Sistemas ·
+        Universidad John F. Kennedy</p>
+      <p><a href="index.html">Índice del curso</a> ·
+        <a href="index.html#bibliografia">Bibliografía</a></p>
+    </div>
+  </footer>
+</body>
+</html>

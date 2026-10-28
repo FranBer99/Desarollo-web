@@ -1,0 +1,13 @@
+GUÍA RÁPIDA DE ENLACES
+======================
+
+1. Un enlace se crea con <a href="destino">texto descriptivo</a>.
+2. Usá rutas relativas dentro del mismo sitio.
+3. Para un ancla, el destino debe tener un id único: <section id="seccion">.
+4. Los enlaces externos llevan la URL completa, con https://.
+5. Si usás target="_blank", agregá rel="noopener noreferrer" y avisá en el texto.
+6. Para descargar un archivo, agregá el atributo download.
+7. El texto del enlace debe entenderse sin el resto del párrafo.
+8. Verificá el foco visible y el recorrido con la tecla Tab.
+
+Este archivo existe para probar el atributo download.

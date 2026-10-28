@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enlaces de la clase — Clase 5</title>
+  <meta name="description" content="Ejemplos de enlaces internos, externos, anclas y descargas.">
+  <style>
+    :root {
+      color-scheme: light;
+      --texto: #292524;
+      --tenue: #78716c;
+      --borde: #e7e5e4;
+      --indigo: #4f46e5;
+      --indigo-oscuro: #3730a3;
+      --indigo-suave: #eef2ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 1rem;
+    }
+
+    body {
+      margin: 0;
+      background-color: #fafaf9;
+      color: var(--texto);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.65;
+    }
+
+    .contenedor {
+      max-width: 46rem;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    .salto {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.35rem;
+      background-color: var(--indigo);
+      color: #ffffff;
+      font-weight: 600;
+      text-decoration: none;
+      transform: translateY(-150%);
+    }
+
+    .salto:focus {
+      transform: translateY(0);
+    }
+
+    header {
+      padding: 1.25rem;
+      border: 1px solid #c7d2fe;
+      border-radius: 0.6rem;
+      background-color: var(--indigo-suave);
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--indigo-oscuro);
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      line-height: 1.2;
+    }
+
+    .bajada {
+      margin: 0.4rem 0 0;
+      color: var(--tenue);
+      font-size: 0.95rem;
+    }
+
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 0.4rem 0.7rem;
+      border: 1px solid #c7d2fe;
+      border-radius: 0.4rem;
+      background-color: #ffffff;
+      color: var(--indigo-oscuro);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      border-color: var(--indigo);
+      background-color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 0.18em;
+    }
+
+    main {
+      margin-top: 1rem;
+    }
+
+    section {
+      margin-top: 1rem;
+      padding: 1rem 1.15rem;
+      border: 1px solid var(--borde);
+      border-radius: 0.6rem;
+      background-color: #ffffff;
+      scroll-margin-top: 1rem;
+    }
+
+    section:target {
+      border-color: var(--indigo);
+      box-shadow: 0 0 0 3px #c7d2fe;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.15rem;
+    }
+
+    p {
+      margin: 0.6rem 0 0;
+    }
+
+    a {
+      color: var(--indigo);
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover {
+      color: var(--indigo-oscuro);
+    }
+
+    .volver {
+      margin-top: 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    .volver a {
+      display: inline-block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 0.3rem;
+      background-color: var(--indigo-suave);
+      text-decoration: none;
+    }
+
+    .volver a:hover {
+      text-decoration: underline;
+    }
+
+    code {
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+      background-color: #e0e7ff;
+      color: #312e81;
+      font-family: ui-monospace, monospace;
+      font-size: 0.85em;
+    }
+
+    footer {
+      margin-top: 1.25rem;
+      color: var(--tenue);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--indigo);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+
+  <div class="contenedor">
+    <header id="inicio">
+      <h1>Recursos de la clase</h1>
+      <p class="bajada">
+        Todos los tipos de enlace que necesitás, en una sola página.
+      </p>
+      <nav aria-label="Secciones de la página">
+        <ul>
+          <li><a href="#internos">Enlaces internos</a></li>
+          <li><a href="#externos">Enlaces externos</a></li>
+          <li><a href="#descargas">Descargas</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="contenido" tabindex="-1">
+      <section id="internos">
+        <h2>Enlaces internos y anclas</h2>
+        <p>
+          Este enlace lleva a la sección de
+          <a href="#externos">enlaces externos</a> de esta misma página. El
+          destino es el <code>id="externos"</code> del <code>section</code>.
+        </p>
+        <p>
+          También podés volver al <a href="#inicio">inicio de la página</a> o
+          ir directamente a <a href="#descargas">las descargas</a>.
+        </p>
+        <p class="volver"><a href="#inicio">↑ Volver arriba</a></p>
+      </section>
+
+      <section id="externos">
+        <h2>Enlaces externos y de contacto</h2>
+        <p>
+          Documentación oficial:
+          <a href="https://developer.mozilla.org/es/docs/Web/HTML/Element/a"
+             target="_blank" rel="noopener noreferrer">
+            El elemento <code>a</code> en MDN (se abre en una pestaña nueva)
+          </a>.
+        </p>
+        <p>
+          Para escribir a la cátedra:
+          <a href="mailto:desarrollo3@ejemplo.edu.ar?subject=Consulta%20sobre%20enlaces">
+            desarrollo3@ejemplo.edu.ar
+          </a>.
+        </p>
+        <p>
+          Para llamar a la facultad:
+          <a href="tel:+541112345678">+54 11 1234-5678</a>.
+        </p>
+        <p class="volver"><a href="#inicio">↑ Volver arriba</a></p>
+      </section>
+
+      <section id="descargas">
+        <h2>Descargas</h2>
+        <p>
+          <a href="guia.txt" download="guia-de-enlaces.txt">
+            Descargar la guía de enlaces (TXT, menos de 1 KB)
+          </a>
+        </p>
+        <p>
+          El atributo <code>download</code> sugiere el nombre del archivo. Si el
+          recurso estuviera en otro dominio, el navegador podría abrirlo en
+          lugar de descargarlo.
+        </p>
+        <p class="volver"><a href="#inicio">↑ Volver arriba</a></p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Desarrollo de Software III · Ejemplo didáctico de la clase 5</p>
+    </footer>
+  </div>
+</body>
+</html>

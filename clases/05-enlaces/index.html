@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Navegación web, partes de una URL, enlaces internos, externos y anclajes, y los atributos target y download.">
+  <title>Clase 05 · Enlaces e hipervínculos — Desarrollo de Software III</title>
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/curso.css">
+</head>
+<body>
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <header class="sitio-header">
+    <div class="contenedor">
+      <div class="sitio-header__barra">
+        <a class="marca" href="../../index.html">desarrollo-de-software-iii{}</a>
+        <p class="sitio-header__contexto">&rsaquo; Clase 05 · Enlaces e hipervínculos</p>
+      </div>
+      <nav class="rail" aria-label="Clases del curso">
+        <a href="../../index.html" aria-label="Clase 0: Presentación del curso">00</a>
+        <a href="../../clases/01-origenes-y-evolucion-de-html/index.html" aria-label="Clase 1: Orígenes y evolución de HTML">01</a>
+        <a href="../../clases/02-estructura-de-un-documento-html/index.html" aria-label="Clase 2: Estructura de un documento HTML">02</a>
+        <a href="../../clases/03-etiquetas/index.html" aria-label="Clase 3: Etiquetas principales y secundarias">03</a>
+        <a href="../../clases/04-control-de-texto/index.html" aria-label="Clase 4: Control de texto">04</a>
+        <a href="../../clases/05-enlaces/index.html" aria-label="Clase 5: Enlaces e hipervínculos" aria-current="page">05</a>
+        <a href="../../clases/06-tablas/index.html" aria-label="Clase 6: Tablas">06</a>
+        <a href="../../clases/07-formularios/index.html" aria-label="Clase 7: Formularios">07</a>
+        <a href="../../clases/08-marcos/index.html" aria-label="Clase 8: Marcos">08</a>
+        <a href="../../clases/09-css-y-responsive/index.html" aria-label="Clase 9: Hojas de estilo y desarrollo responsivo">09</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="contenedor layout">
+    <nav class="toc" aria-labelledby="toc-titulo">
+      <p class="toc__titulo" id="toc-titulo">En esta clase</p>
+      <ol>
+        <li><a href="#que-es-un-enlace">¿Qué es un enlace?</a></li>
+        <li><a href="#url">Anatomía de una URL</a></li>
+        <li><a href="#tipos">Tipos de enlaces</a></li>
+        <li><a href="#atributos">Atributos de enlace</a></li>
+        <li><a href="#accesibilidad">Enlaces accesibles</a></li>
+        <li><a href="#actividad">Actividad práctica</a></li>
+        <li><a href="#resumen">Resumen</a></li>
+      </ol>
+    </nav>
+
+    <main class="contenido" id="contenido" tabindex="-1">
+<header class="encabezado-clase">
+  <p class="etiqueta">Clase 05</p>
+  <h1>Enlaces e hipervínculos</h1>
+  <p class="lead">
+    Los enlaces son lo que convierte documentos sueltos en una web. Esta clase
+    cubre cómo se construye una URL, qué tipos de enlaces existen y cómo
+    escribirlos para que sean claros, seguros y accesibles.
+  </p>
+</header>
+
+<aside class="aviso aviso--nota" aria-label="Objetivos de la clase">
+  <span class="aviso__titulo">Objetivos</span>
+  <ul>
+    <li>Comprender el concepto de navegación y de hipertexto.</li>
+    <li>Identificar las partes de una URL y distinguir rutas absolutas y relativas.</li>
+    <li>Crear enlaces internos, externos, anclas y enlaces de descarga.</li>
+    <li>Usar <code>target</code>, <code>rel</code> y <code>download</code> con criterio.</li>
+    <li>Escribir enlaces accesibles y seguros.</li>
+  </ul>
+</aside>
+
+<section aria-labelledby="que-es-un-enlace">
+  <h2 id="que-es-un-enlace">¿Qué es un enlace?</h2>
+  <p>
+    Un <strong>enlace</strong> es una referencia de un documento a otro
+    recurso: otra página, una sección dentro de la misma página, un archivo,
+    una dirección de correo o un número de teléfono. En HTML se crea con el
+    elemento <code>&lt;a&gt;</code> (<em>anchor</em>) y el atributo
+    <code>href</code> (<em>hypertext reference</em>).
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>enlace.html</figcaption>
+    <pre><code>&lt;a href="https://developer.mozilla.org/es/"&gt;Documentación de MDN&lt;/a&gt;</code></pre>
+  </figure>
+
+  <p>
+    El contenido del enlace es lo que se ve y se clickea. Puede ser texto, una
+    imagen o ambos, pero debe describir el destino. El atributo
+    <code>href</code> es obligatorio: sin él, el elemento no es un enlace.
+  </p>
+
+  <aside class="aviso aviso--dato" aria-label="Dato">
+    <span class="aviso__titulo">Enlace o botón</span>
+    <p>
+      Un enlace <strong>navega</strong> a otro recurso. Un botón
+      <strong>ejecuta una acción</strong>: enviar un formulario, abrir un menú,
+      reproducir un video. No uses un <code>&lt;a&gt;</code> con
+      <code>href="#"</code> para simular un botón, ni un <code>&lt;div&gt;</code>
+      con un clic para simular un enlace: rompen el teclado y los lectores de
+      pantalla.
+    </p>
+  </aside>
+
+  <p>
+    La web se puede pensar como un grafo: cada página es un nodo y cada enlace
+    una arista. Esa estructura es la que permite pasar de un documento a otro
+    sin conocer de antemano dónde está la información.
+  </p>
+</section>
+
+<section aria-labelledby="url">
+  <h2 id="url">Anatomía de una URL</h2>
+  <p>
+    Una <strong>URL</strong> (<em>Uniform Resource Locator</em>) es la dirección
+    de un recurso. No es lo mismo que un <strong>URI</strong> (identificador) ni
+    que un <strong>dominio</strong> (el nombre del servidor): la URL incluye
+    todo lo necesario para localizar el recurso.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>partes de una URL</figcaption>
+    <pre><code>https://www.ejemplo.edu.ar:443/carreras/sistemas?plan=2023#horarios
+└─┬─┘   └───────┬───────┘└┬─┘└──────┬───────┘└───┬────┘└───┬───┘
+esquema      host      puerto   ruta      consulta   fragmento</code></pre>
+  </figure>
+
+  <div class="tabla">
+    <table>
+      <caption>Componentes de una URL</caption>
+      <thead>
+        <tr>
+          <th scope="col">Parte</th>
+          <th scope="col">Ejemplo</th>
+          <th scope="col">Qué indica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Esquema</th><td><code>https:</code></td><td>Protocolo de acceso: HTTP seguro, correo, teléfono, archivo.</td></tr>
+        <tr><th scope="row">Host</th><td><code>www.ejemplo.edu.ar</code></td><td>Nombre del servidor.</td></tr>
+        <tr><th scope="row">Puerto</th><td><code>:443</code></td><td>Puerto de red; se omite si es el predeterminado del esquema.</td></tr>
+        <tr><th scope="row">Ruta</th><td><code>/carreras/sistemas</code></td><td>Ubicación del recurso dentro del servidor.</td></tr>
+        <tr><th scope="row">Consulta</th><td><code>?plan=2023</code></td><td>Parámetros para el servidor o la aplicación.</td></tr>
+        <tr><th scope="row">Fragmento</th><td><code>#horarios</code></td><td>Parte del documento a la que se salta; no se envía al servidor.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Rutas absolutas y relativas</h3>
+  <div class="tabla">
+    <table>
+      <caption>Tipos de rutas en <code>href</code></caption>
+      <thead>
+        <tr>
+          <th scope="col">Tipo</th>
+          <th scope="col">Ejemplo</th>
+          <th scope="col">Uso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Absoluta</th>
+          <td><code>https://ejemplo.edu.ar/cursos/</code></td>
+          <td>Destino completo. Necesaria para otros sitios.</td>
+        </tr>
+        <tr>
+          <th scope="row">Relativa al documento</th>
+          <td><code>../contacto.html</code></td>
+          <td>Dentro del mismo sitio; depende de la ubicación actual.</td>
+        </tr>
+        <tr>
+          <th scope="row">Relativa a la raíz</th>
+          <td><code>/cursos/contacto.html</code></td>
+          <td>Desde la raíz del dominio.</td>
+        </tr>
+        <tr>
+          <th scope="row">Ancla</th>
+          <td><code>#horarios</code></td>
+          <td>Un elemento con <code>id="horarios"</code> en la misma página.</td>
+        </tr>
+        <tr>
+          <th scope="row">Otros esquemas</th>
+          <td><code>mailto:</code>, <code>tel:</code></td>
+          <td>Abrir el cliente de correo o el teléfono.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    Las rutas relativas hacen que el sitio funcione igual en local, en un
+    subdirectorio o en un dominio propio. Por ejemplo, este material usa rutas
+    relativas para poder publicarse en GitHub Pages sin cambios.
+  </p>
+
+  <aside class="aviso aviso--atencion" aria-label="Atención">
+    <span class="aviso__titulo">Caracteres reservados</span>
+    <p>
+      Los espacios y muchos caracteres especiales deben codificarse en la URL:
+      un espacio se escribe <code>%20</code> y la ñ, <code>%C3%B1</code>. En la
+      práctica, conviene usar nombres de archivo en minúsculas, sin espacios y
+      sin tildes: <code>horarios-2026.html</code> en lugar de
+      <code>Horarios 2026.html</code>.
+    </p>
+  </aside>
+
+  <h3>Anclas</h3>
+  <p>
+    Un ancla es un enlace a un <code>id</code> dentro del documento. El destino
+    debe tener ese identificador, que es único y distingue mayúsculas de
+    minúsculas. Es la base de los índices de contenidos, los “volver arriba” y
+    la navegación dentro de una página larga.
+  </p>
+  <p>
+    Cuando el encabezado queda tapado por una barra fija, se corrige con
+    <code>scroll-margin-top</code> en el elemento destino. También se puede
+    resaltar el destino con la pseudoclase <code>:target</code>.
+  </p>
+</section>
+
+<section aria-labelledby="tipos">
+  <h2 id="tipos">Tipos de enlaces</h2>
+
+  <h3>Internos</h3>
+  <p>
+    Apuntan a otra página o recurso del mismo sitio. Se escriben con rutas
+    relativas y son la estructura de la navegación: menú principal, migas de
+    pan, enlaces entre clases. Si el destino es una carpeta, el servidor
+    devuelve su <code>index.html</code>; conviene ser explícito y escribir la
+    ruta completa del archivo.
+  </p>
+
+  <h3>Externos</h3>
+  <p>
+    Apuntan a otro dominio. Se escriben con la URL absoluta, incluido
+    <code>https://</code>. Un enlace externo no necesita
+    <code>target="_blank"</code>: abrir una pestaña nueva sin avisar desorienta
+    y rompe el botón “atrás”. Si hay una razón para hacerlo, se avisa en el
+    texto o con un ícono acompañado de texto alternativo.
+  </p>
+
+  <h3>Anclajes</h3>
+  <p>
+    Pueden ser internos (<code>#seccion</code>) o combinar página y fragmento
+    (<code>otra-pagina.html#seccion</code>). Son ideales para índices,
+    preguntas frecuentes y documentación.
+  </p>
+
+  <h3>Enlaces de acción</h3>
+  <ul>
+    <li><code>mailto:contacto@ejemplo.edu.ar</code> abre el cliente de correo.</li>
+    <li><code>tel:+541112345678</code> inicia una llamada en dispositivos compatibles.</li>
+    <li><code>download</code> descarga un archivo en lugar de navegarlo, cuando el navegador lo permite.</li>
+  </ul>
+
+  <figure class="demo">
+    <iframe src="ejemplos/enlaces.html"
+            title="Ejemplo de enlaces internos, externos, anclas y descargas"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>Enlaces internos, externos, anclas, correo y descarga en una misma página.</span>
+      <a href="ejemplos/enlaces.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="atributos">
+  <h2 id="atributos">Atributos de enlace</h2>
+
+  <div class="tabla">
+    <table>
+      <caption>Atributos de <code>&lt;a&gt;</code></caption>
+      <thead>
+        <tr>
+          <th scope="col">Atributo</th>
+          <th scope="col">Para qué sirve</th>
+          <th scope="col">Valores habituales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><code>href</code></th>
+          <td>Destino del enlace. Es obligatorio.</td>
+          <td>URL, ruta relativa o fragmento.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>target</code></th>
+          <td>Dónde se abre el destino.</td>
+          <td><code>_self</code> (predeterminado), <code>_blank</code>, <code>_parent</code>, <code>_top</code>.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>rel</code></th>
+          <td>Relación entre el documento actual y el destino.</td>
+          <td><code>noopener</code>, <code>noreferrer</code>, <code>nofollow</code>.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>download</code></th>
+          <td>Sugiere descargar el recurso en lugar de abrirlo.</td>
+          <td>Vacío o un nombre de archivo.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>hreflang</code></th>
+          <td>Idioma del recurso enlazado.</td>
+          <td><code>es</code>, <code>en</code>, <code>pt-BR</code>.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>type</code></th>
+          <td>Tipo MIME del recurso.</td>
+          <td><code>application/pdf</code>, <code>text/html</code>.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>title</code></th>
+          <td>Información adicional. No reemplaza al texto del enlace.</td>
+          <td>Texto breve.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3><code>target</code></h3>
+  <p>
+    <code>_self</code> abre en la misma pestaña y es el comportamiento
+    predeterminado. <code>_blank</code> abre en una pestaña nueva.
+    <code>_parent</code> y <code>_top</code> solo tienen sentido dentro de
+    marcos (clase 8). No se usan nombres arbitrarios de ventana: están
+    asociados a la navegación con marcos.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>enlace-externo.html</figcaption>
+    <pre><code>&lt;a href="https://www.w3.org/" target="_blank"
+   rel="noopener noreferrer"&gt;
+  Sitio del W3C (se abre en una pestaña nueva)
+&lt;/a&gt;</code></pre>
+  </figure>
+
+  <h3><code>rel</code> y seguridad</h3>
+  <p>
+    Cuando un enlace con <code>target="_blank"</code> abre una página externa,
+    esa página podría acceder a la ventana que la abrió. El atributo
+    <code>rel="noopener"</code> corta esa relación; <code>noreferrer</code>
+    además evita enviar la URL de origen. Los navegadores actuales aplican
+    <code>noopener</code> por defecto, pero conviene declararlo para los
+    navegadores antiguos y para que la intención quede explícita.
+  </p>
+  <p>
+    <code>rel="nofollow"</code> indica a los buscadores que no sigan el enlace.
+    Se usa en comentarios, publicidad o contenido generado por usuarios, no en
+    enlaces propios de confianza.
+  </p>
+
+  <h3><code>download</code></h3>
+  <p>
+    <code>download</code> sugiere descargar el recurso. El navegador solo lo
+    respeta para recursos del mismo origen; si el archivo está en otro dominio,
+    puede abrirlo en su visor. El valor opcional define el nombre sugerido:
+  </p>
+  <figure class="bloque-codigo">
+    <figcaption>descarga.html</figcaption>
+    <pre><code>&lt;a href="guia.pdf" download="guia-de-enlaces.pdf"&gt;
+  Descargar la guía en PDF (1,2 MB)
+&lt;/a&gt;</code></pre>
+  </figure>
+  <p>
+    En el texto conviene indicar el formato y el tamaño del archivo: quien
+    navega con datos móviles o con un lector de pantalla necesita saber qué va
+    a descargar antes de hacer clic.
+  </p>
+
+  <h3>Lo que no se hace</h3>
+  <ul>
+    <li><code>href="#"</code> para simular una acción: recarga la página y salta al inicio.</li>
+    <li><code>href="javascript:..."</code>: mezcla comportamiento con estructura, bloquea la CSP y es un riesgo de seguridad.</li>
+    <li><code>href=""</code> o sin <code>href</code>: el elemento no es un enlace navegable.</li>
+    <li>Usar una imagen sin texto alternativo como único contenido del enlace.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="accesibilidad">
+  <h2 id="accesibilidad">Enlaces accesibles</h2>
+  <p>
+    Un enlace tiene que poder usarse con teclado, con lector de pantalla y con
+    el dedo. Estas son las reglas que más impacto tienen:
+  </p>
+  <ul>
+    <li>
+      <strong>Texto descriptivo.</strong> “Ver el cronograma de exámenes” es
+      mejor que “click aquí” o “más información”. Los lectores de pantalla
+      pueden listar todos los enlaces de la página: cada uno debe entenderse
+      fuera de contexto.
+    </li>
+    <li>
+      <strong>Foco visible.</strong> No elimines el <code>outline</code> sin
+      reemplazarlo por un indicador claro. Este sitio usa
+      <code>:focus-visible</code>.
+    </li>
+    <li>
+      <strong>Área clickeable suficiente.</strong> WCAG 2.2 recomienda un mínimo
+      de 24 × 24 píxeles. En móviles conviene más.
+    </li>
+    <li>
+      <strong>No depender del color.</strong> El subrayado ayuda a distinguir un
+      enlace del texto normal, sobre todo para personas con daltonismo.
+    </li>
+    <li>
+      <strong>Saltar al contenido.</strong> Un enlace al inicio del documento
+      permite evitar el menú y llegar al contenido con el teclado.
+    </li>
+    <li>
+      <strong>Página actual.</strong> En un menú, marcar el enlace activo con
+      <code>aria-current="page"</code>.
+    </li>
+  </ul>
+
+  <figure class="bloque-codigo">
+    <figcaption>enlace-omitir.html</figcaption>
+    <pre><code>&lt;a class="saltar-contenido" href="#contenido"&gt;
+  Saltar al contenido
+&lt;/a&gt;
+...
+&lt;main id="contenido" tabindex="-1"&gt;...&lt;/main&gt;</code></pre>
+  </figure>
+
+  <aside class="aviso aviso--nota" aria-label="Nota">
+    <span class="aviso__titulo">Enlaces y botones no son intercambiables</span>
+    <p>
+      Si el elemento lleva a otra URL, es un enlace y funciona con
+      <kbd>Enter</kbd>. Si ejecuta una acción en la página, es un
+      <code>&lt;button&gt;</code> y funciona con <kbd>Enter</kbd> y
+      <kbd>Espacio</kbd>. Cambiar uno por otro obliga a reimplementar el
+      teclado y el rol semántico.
+    </p>
+  </aside>
+</section>
+
+<div class="ejercicio">
+  <h2 id="actividad">Actividad práctica</h2>
+  <p>
+    Construir una página de recursos con todos los tipos de enlace y auditar su
+    accesibilidad.
+  </p>
+  <ol>
+    <li>Crear un documento con un índice de tres secciones y enlaces de ancla a cada una.</li>
+    <li>Agregar un menú de navegación con enlaces internos a otras páginas del ejercicio.</li>
+    <li>Incluir un enlace externo a la documentación de MDN que se abra en una pestaña nueva, con <code>rel</code> adecuado y aviso en el texto.</li>
+    <li>Agregar un enlace <code>mailto:</code> y otro <code>tel:</code>.</li>
+    <li>Ofrecer la descarga de un archivo de texto propio con <code>download</code> e indicar formato y tamaño.</li>
+    <li>Incluir un enlace “Volver arriba” al final de cada sección.</li>
+    <li>Recorrer la página solo con <kbd>Tab</kbd>: comprobar el orden, el foco visible y que <kbd>Enter</kbd> active cada enlace.</li>
+    <li>Revisar que ningún enlace diga “click aquí” y que todos se entiendan fuera de contexto.</li>
+  </ol>
+  <p>
+    <strong>Para entregar</strong>: el HTML, el archivo descargable y una lista
+    de comprobación con los ocho puntos anteriores.
+  </p>
+</div>
+
+<div class="resumen">
+  <h2 id="resumen">Resumen</h2>
+  <ul>
+    <li>Un enlace es una referencia a otro recurso; se crea con <code>a</code> y <code>href</code>.</li>
+    <li>Una URL combina esquema, host, puerto, ruta, consulta y fragmento.</li>
+    <li>Las rutas relativas hacen que el sitio sea portable; las absolutas se usan para otros dominios.</li>
+    <li>Los enlaces internos, externos, anclas y de acción cubren necesidades distintas.</li>
+    <li><code>target="_blank"</code> se acompaña de <code>rel="noopener noreferrer"</code> y de un aviso.</li>
+    <li><code>download</code> sugiere la descarga y conviene informar formato y tamaño.</li>
+    <li>El texto del enlace debe describir el destino; el foco debe ser visible y el área, suficiente.</li>
+  </ul>
+</div>
+
+<div class="bibliografia">
+  <h2>Bibliografía del tema</h2>
+  <ul>
+    <li>
+      Celaya Luna, A. (2014). <cite>Creación de páginas web: HTML 5</cite>.
+      Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/56045">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Pérez Rodríguez, M. D. (Coord.) (2012).
+      <cite>Introducción al lenguaje HTML 5</cite>. Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/225270">Acceso en eLibro</a>.
+    </li>
+    <li>
+      MDN Web Docs.
+      <a href="https://developer.mozilla.org/es/docs/Web/HTML/Element/a">El elemento de anclaje</a>.
+    </li>
+    <li>
+      W3C.
+      <a href="https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html">Propósito del enlace en contexto (WCAG 2.2)</a>.
+    </li>
+  </ul>
+</div>
+
+    <nav class="pager" aria-label="Navegación entre clases">
+      <a class="pager__anterior" rel="prev" href="../../clases/04-control-de-texto/index.html">
+        <span class="pager__direccion">← Anterior</span>
+        <span class="pager__titulo">Clase 04 · Control de texto</span>
+      </a>
+      <a class="pager__siguiente" rel="next" href="../../clases/06-tablas/index.html">
+        <span class="pager__direccion">Siguiente →</span>
+        <span class="pager__titulo">Clase 06 · Tablas</span>
+      </a>
+    </nav>
+    </main>
+  </div>
+
+  <footer class="sitio-footer">
+    <div class="contenedor sitio-footer__contenido">
+      <p><strong>Desarrollo de Software III</strong> · Licenciatura en Sistemas ·
+        Universidad John F. Kennedy</p>
+      <p><a href="../../index.html">Índice del curso</a> ·
+        <a href="../../index.html#bibliografia">Bibliografía</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Inserción y organización del texto, jerarquía de encabezados, listas, formato semántico y estilos tipográficos.">
+  <title>Clase 04 · Control de texto — Desarrollo de Software III</title>
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/curso.css">
+</head>
+<body>
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <header class="sitio-header">
+    <div class="contenedor">
+      <div class="sitio-header__barra">
+        <a class="marca" href="../../index.html">desarrollo-de-software-iii{}</a>
+        <p class="sitio-header__contexto">&rsaquo; Clase 04 · Control de texto</p>
+      </div>
+      <nav class="rail" aria-label="Clases del curso">
+        <a href="../../index.html" aria-label="Clase 0: Presentación del curso">00</a>
+        <a href="../../clases/01-origenes-y-evolucion-de-html/index.html" aria-label="Clase 1: Orígenes y evolución de HTML">01</a>
+        <a href="../../clases/02-estructura-de-un-documento-html/index.html" aria-label="Clase 2: Estructura de un documento HTML">02</a>
+        <a href="../../clases/03-etiquetas/index.html" aria-label="Clase 3: Etiquetas principales y secundarias">03</a>
+        <a href="../../clases/04-control-de-texto/index.html" aria-label="Clase 4: Control de texto" aria-current="page">04</a>
+        <a href="../../clases/05-enlaces/index.html" aria-label="Clase 5: Enlaces e hipervínculos">05</a>
+        <a href="../../clases/06-tablas/index.html" aria-label="Clase 6: Tablas">06</a>
+        <a href="../../clases/07-formularios/index.html" aria-label="Clase 7: Formularios">07</a>
+        <a href="../../clases/08-marcos/index.html" aria-label="Clase 8: Marcos">08</a>
+        <a href="../../clases/09-css-y-responsive/index.html" aria-label="Clase 9: Hojas de estilo y desarrollo responsivo">09</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="contenedor layout">
+    <nav class="toc" aria-labelledby="toc-titulo">
+      <p class="toc__titulo" id="toc-titulo">En esta clase</p>
+      <ol>
+        <li><a href="#texto">Insertar texto</a></li>
+        <li><a href="#jerarquia">Jerarquizar el contenido</a></li>
+        <li><a href="#formato">Formato semántico</a></li>
+        <li><a href="#listas">Listas</a></li>
+        <li><a href="#comentarios">Comentarios</a></li>
+        <li><a href="#estilos">Estilos de texto con CSS</a></li>
+        <li><a href="#actividad">Actividad práctica</a></li>
+        <li><a href="#resumen">Resumen</a></li>
+      </ol>
+    </nav>
+
+    <main class="contenido" id="contenido" tabindex="-1">
+<header class="encabezado-clase">
+  <p class="etiqueta">Clase 04</p>
+  <h1>Control de texto</h1>
+  <p class="lead">
+    El texto es el contenido más importante de la web. Esta clase trata cómo
+    insertarlo, cómo jerarquizarlo, cómo darle significado y cómo definir su
+    apariencia con CSS sin volver a mezclar estructura y presentación.
+  </p>
+</header>
+
+<aside class="aviso aviso--nota" aria-label="Objetivos de la clase">
+  <span class="aviso__titulo">Objetivos</span>
+  <ul>
+    <li>Insertar texto y caracteres especiales de forma correcta.</li>
+    <li>Organizar el contenido con encabezados, párrafos y listas.</li>
+    <li>Elegir etiquetas semánticas de formato en lugar de etiquetas visuales.</li>
+    <li>Aplicar estilos tipográficos legibles y responsivos con CSS.</li>
+  </ul>
+</aside>
+
+<section aria-labelledby="texto">
+  <h2 id="texto">Insertar texto</h2>
+  <p>
+    El texto se escribe directamente dentro del <code>body</code>, agrupado en
+    párrafos con <code>&lt;p&gt;</code>. El navegador
+    <strong>colapsa</strong> los espacios en blanco: varios espacios, tabulaciones
+    y saltos de línea se muestran como un solo espacio. Para conservar el
+    formato original se usa <code>&lt;pre&gt;</code> o la propiedad CSS
+    <code>white-space</code>.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>parrafos.html</figcaption>
+    <pre><code>&lt;p&gt;Este párrafo tiene
+varios saltos de línea y    espacios repetidos.&lt;/p&gt;
+&lt;p&gt;El navegador los muestra como un solo espacio.&lt;/p&gt;</code></pre>
+  </figure>
+
+  <h3>Caracteres especiales y entidades</h3>
+  <p>
+    Algunos caracteres tienen significado en HTML y no se pueden escribir
+    directamente: si escribís <code>&lt;</code> el navegador cree que empieza
+    una etiqueta. Para mostrarlos se usan <strong>entidades</strong>, que
+    comienzan con <code>&amp;</code> y terminan con <code>;</code>.
+  </p>
+
+  <div class="tabla">
+    <table>
+      <caption>Entidades HTML de uso frecuente</caption>
+      <thead>
+        <tr>
+          <th scope="col">Se escribe</th>
+          <th scope="col">Se ve</th>
+          <th scope="col">Cuándo usarla</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>&amp;lt;</code></td><td>&lt;</td><td>Mostrar el signo menor.</td></tr>
+        <tr><td><code>&amp;gt;</code></td><td>&gt;</td><td>Mostrar el signo mayor.</td></tr>
+        <tr><td><code>&amp;amp;</code></td><td>&amp;</td><td>Mostrar el ampersand.</td></tr>
+        <tr><td><code>&amp;quot;</code></td><td>&quot;</td><td>Comillas dentro de atributos.</td></tr>
+        <tr><td><code>&amp;nbsp;</code></td><td>&nbsp;</td><td>Espacio que no se corta entre dos palabras.</td></tr>
+        <tr><td><code>&amp;copy;</code></td><td>&copy;</td><td>Símbolo de copyright.</td></tr>
+        <tr><td><code>&amp;mdash;</code></td><td>&mdash;</td><td>Raya o guion largo.</td></tr>
+        <tr><td><code>&amp;hellip;</code></td><td>&hellip;</td><td>Puntos suspensivos.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    También existen referencias numéricas: <code>&amp;#169;</code> produce
+    &copy; y <code>&amp;#xA9;</code> produce el mismo carácter en hexadecimal.
+  </p>
+
+  <h3>Codificación</h3>
+  <p>
+    El texto se guarda como bytes. La <strong>codificación</strong> indica qué
+    carácter corresponde a cada byte. Si el archivo está guardado en UTF-8 pero
+    el navegador lo interpreta como ISO-8859-1, las tildes y la ñ se ven como
+    símbolos raros. Declarar <code>&lt;meta charset="utf-8"&gt;</code> y guardar
+    el archivo en UTF-8 evita el problema.
+  </p>
+
+  <h3>Saltos de línea y separadores</h3>
+  <p>
+    <code>&lt;br&gt;</code> inserta un salto de línea dentro del mismo bloque.
+    Se usa en poemas, direcciones y letras de canciones, no para separar
+    párrafos: para eso se usa un nuevo <code>&lt;p&gt;</code> o márgenes CSS.
+    <code>&lt;hr&gt;</code> representa un cambio temático entre secciones; no
+    es una línea decorativa.
+  </p>
+</section>
+
+<section aria-labelledby="jerarquia">
+  <h2 id="jerarquia">Jerarquizar el contenido</h2>
+  <p>
+    Los encabezados <code>&lt;h1&gt;</code> a <code>&lt;h6&gt;</code> expresan
+    la estructura del documento, como los títulos y subtítulos de un libro.
+    No son tamaños de letra: el tamaño se cambia con CSS. Un lector de pantalla,
+    un buscador o una herramienta de resumen usan esa jerarquía para navegar.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>jerarquia.html</figcaption>
+    <pre><code>&lt;h1&gt;Desarrollo de Software III&lt;/h1&gt;
+  &lt;h2&gt;Unidad 4: Control de texto&lt;/h2&gt;
+    &lt;h3&gt;Encabezados&lt;/h3&gt;
+    &lt;h3&gt;Párrafos&lt;/h3&gt;
+  &lt;h2&gt;Unidad 5: Enlaces&lt;/h2&gt;</code></pre>
+  </figure>
+
+  <ul>
+    <li>Un solo <code>h1</code> por página, que describa el contenido principal.</li>
+    <li>No saltear niveles: un <code>h3</code> va después de un <code>h2</code>, no directamente después del <code>h1</code>.</li>
+    <li>No elegir el nivel por el tamaño que se ve: elegilo por la relación con el contenido.</li>
+    <li>No usar encabezados vacíos ni encabezados solo para aplicar negrita.</li>
+    <li>Cada <code>section</code> conviene que tenga su propio encabezado.</li>
+  </ul>
+
+  <aside class="aviso aviso--dato" aria-label="Dato">
+    <span class="aviso__titulo">Un encabezado, un tema</span>
+    <p>
+      Si un texto no necesita un título en el índice del documento, probablemente
+      no sea un encabezado. Para destacar una frase se usa
+      <code>strong</code> o CSS, no un <code>h4</code>.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="formato">
+  <h2 id="formato">Formato y estilos de texto</h2>
+  <p>
+    HTML tiene dos grupos de etiquetas para el texto: las que aportan
+    <strong>significado</strong> y las que solo cambian la
+    <strong>apariencia</strong>. Las primeras son preferibles porque siguen
+    siendo útiles cuando el CSS no carga, en lectores de pantalla y en
+    buscadores.
+  </p>
+
+  <div class="tabla">
+    <table>
+      <caption>Formato semántico frente a formato visual</caption>
+      <thead>
+        <tr>
+          <th scope="col">Semántica</th>
+          <th scope="col">Visual</th>
+          <th scope="col">Diferencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><code>strong</code></th>
+          <td><code>b</code></td>
+          <td><code>strong</code> indica importancia; <code>b</code> solo llama la atención.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>em</code></th>
+          <td><code>i</code></td>
+          <td><code>em</code> indica énfasis; <code>i</code> indica otra voz o idioma.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>del</code></th>
+          <td><code>s</code></td>
+          <td><code>del</code> marca contenido eliminado; <code>s</code>, contenido obsoleto.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>code</code></th>
+          <td><code>tt</code> (obsoleta)</td>
+          <td><code>code</code> identifica código; <code>tt</code> era solo tipografía.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Énfasis e importancia</h3>
+  <p>
+    <strong>strong</strong> se usa para advertencias, datos críticos y palabras
+    clave; <strong>em</strong>, para cambiar la entonación de una frase. Se
+    pueden anidar: <code>&lt;strong&gt;&lt;em&gt;muy importante&lt;/em&gt;&lt;/strong&gt;</code>.
+  </p>
+
+  <h3>Citas</h3>
+  <p>
+    <code>&lt;q&gt;</code> es una cita corta en línea y el navegador agrega las
+    comillas. <code>&lt;blockquote&gt;</code> es una cita en bloque. El atributo
+    <code>cite</code> acepta la URL de la fuente, no el nombre del autor.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>citas.html</figcaption>
+    <pre><code>&lt;p&gt;Como dijo Tim Berners-Lee: &lt;q&gt;la web es para todos&lt;/q&gt;.&lt;/p&gt;
+&lt;blockquote cite="https://www.w3.org/People/Berners-Lee/"&gt;
+  &lt;p&gt;La web es más grande que cualquier empresa.&lt;/p&gt;
+  &lt;footer&gt;— Tim Berners-Lee&lt;/footer&gt;
+&lt;/blockquote&gt;</code></pre>
+  </figure>
+
+  <h3>Texto preformateado y código</h3>
+  <p>
+    <code>&lt;pre&gt;</code> conserva espacios y saltos de línea;
+    <code>&lt;code&gt;</code> marca un fragmento de código. Se combinan para
+    mostrar bloques de código, como en este sitio. Para la entrada del usuario
+    se usa <code>kbd</code>; para la salida de un programa, <code>samp</code>;
+    para variables, <code>var</code>.
+  </p>
+
+  <h3>Fechas, abreviaturas y datos de contacto</h3>
+  <ul>
+    <li><code>&lt;time datetime="2026-10-28"&gt;</code>: fecha legible por máquinas.</li>
+    <li><code>&lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;</code>: sigla con su significado.</li>
+    <li><code>&lt;address&gt;</code>: datos de contacto del autor o de la sección, no una dirección postal cualquiera.</li>
+    <li><code>&lt;cite&gt;</code>: título de una obra, no el nombre de la persona que la escribió.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="listas">
+  <h2 id="listas">Listas</h2>
+  <p>
+    Las listas organizan elementos relacionados. HTML ofrece tres tipos:
+  </p>
+  <ul>
+    <li><strong>No ordenadas</strong> (<code>ul</code>): el orden no importa.</li>
+    <li><strong>Ordenadas</strong> (<code>ol</code>): el orden importa; se numeran solas.</li>
+    <li><strong>De descripción</strong> (<code>dl</code>): pares de término y definición.</li>
+  </ul>
+
+  <figure class="bloque-codigo">
+    <figcaption>listas.html</figcaption>
+    <pre><code>&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS
+    &lt;ul&gt;
+      &lt;li&gt;Selectores&lt;/li&gt;
+      &lt;li&gt;Cascada&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol start="3" reversed&gt;
+  &lt;li&gt;Tercer paso&lt;/li&gt;
+  &lt;li&gt;Segundo paso&lt;/li&gt;
+  &lt;li&gt;Primer paso&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+  </figure>
+
+  <p>
+    <code>ol</code> acepta <code>start</code> (número inicial),
+    <code>reversed</code> (orden inverso) y <code>type</code> (1, a, A, i, I).
+    Cada <code>li</code> puede llevar <code>value</code> para forzar su número.
+  </p>
+  <p>
+    Las listas de navegación también son listas: un <code>nav</code> con un
+    <code>ul</code> y varios <code>li</code> es más accesible que una serie de
+    enlaces sueltos. Con CSS se pueden mostrar en horizontal y sin viñetas.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>estilos-de-lista.css</figcaption>
+    <pre><code>nav ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+li::marker {
+  color: #4f46e5;
+}</code></pre>
+  </figure>
+</section>
+
+<section aria-labelledby="comentarios">
+  <h2 id="comentarios">Comentarios</h2>
+  <p>
+    Los comentarios se escriben entre <code>&lt;!--</code> y
+    <code>--&gt;</code>. No se muestran en la página, pero sí viajan en el
+    archivo y son visibles en el código fuente.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>comentario.html</figcaption>
+    <pre><code>&lt;!-- Inicio de la sección de contacto --&gt;
+&lt;section id="contacto"&gt;
+  ...
+&lt;/section&gt;
+&lt;!-- Fin de la sección de contacto --&gt;</code></pre>
+  </figure>
+
+  <aside class="aviso aviso--atencion" aria-label="Atención">
+    <span class="aviso__titulo">Los comentarios no son privados</span>
+    <p>
+      Cualquiera puede verlos con “ver código fuente”. Nunca escribas
+      contraseñas, claves de API, datos personales ni instrucciones internas en
+      un comentario. Tampoco uses comentarios para “desactivar” código que ya no
+      se usa: conviene eliminarlo y dejarlo en el control de versiones.
+    </p>
+  </aside>
+
+  <p>
+    Un comentario útil explica <em>por qué</em> se tomó una decisión o delimita
+    una sección larga. Un comentario que repite lo que la etiqueta ya dice
+    (<code>&lt;!-- párrafo --&gt;</code> antes de un <code>p</code>) agrega
+    ruido.
+  </p>
+</section>
+
+<section aria-labelledby="estilos">
+  <h2 id="estilos">Estilos de texto con CSS</h2>
+  <p>
+    La apariencia del texto se define con CSS. Estas son las propiedades
+    fundamentales:
+  </p>
+
+  <div class="tabla">
+    <table>
+      <caption>Propiedades CSS para texto</caption>
+      <thead>
+        <tr>
+          <th scope="col">Propiedad</th>
+          <th scope="col">Qué controla</th>
+          <th scope="col">Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>font-family</code></th><td>Tipografía.</td><td><code>system-ui, sans-serif</code></td></tr>
+        <tr><th scope="row"><code>font-size</code></th><td>Tamaño.</td><td><code>1.125rem</code></td></tr>
+        <tr><th scope="row"><code>font-weight</code></th><td>Grosor.</td><td><code>600</code></td></tr>
+        <tr><th scope="row"><code>line-height</code></th><td>Altura de línea.</td><td><code>1.6</code></td></tr>
+        <tr><th scope="row"><code>letter-spacing</code></th><td>Espacio entre letras.</td><td><code>0.01em</code></td></tr>
+        <tr><th scope="row"><code>text-align</code></th><td>Alineación.</td><td><code>left</code></td></tr>
+        <tr><th scope="row"><code>text-transform</code></th><td>Mayúsculas y minúsculas.</td><td><code>uppercase</code></td></tr>
+        <tr><th scope="row"><code>text-decoration</code></th><td>Subrayado, tachado.</td><td><code>none</code></td></tr>
+        <tr><th scope="row"><code>text-indent</code></th><td>Sangría de primera línea.</td><td><code>1.5em</code></td></tr>
+        <tr><th scope="row"><code>color</code></th><td>Color del texto.</td><td><code>#292524</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure class="bloque-codigo">
+    <figcaption>tipografia.css</figcaption>
+    <pre><code>body {
+  max-width: 65ch;
+  margin-inline: auto;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  line-height: 1.65;
+  color: #292524;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 1.2rem + 2vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}</code></pre>
+  </figure>
+
+  <h3>Legibilidad</h3>
+  <ul>
+    <li>El ancho de lectura ideal ronda los 45 a 75 caracteres; en CSS se limita con <code>max-width: 65ch</code>.</li>
+    <li>La altura de línea cómoda para texto corrido está entre 1.5 y 1.8.</li>
+    <li>El texto alineado a la izquierda es más fácil de leer que el justificado, que genera ríos de espacio.</li>
+    <li>El contraste mínimo recomendado es 4.5:1 para texto normal y 3:1 para texto grande.</li>
+    <li>No uses mayúsculas sostenidas para párrafos largos.</li>
+    <li>Respetá el zoom del navegador: usá unidades relativas (<code>rem</code>, <code>em</code>) y evitá bloquear el escalado.</li>
+  </ul>
+
+  <aside class="aviso aviso--nota" aria-label="Nota">
+    <span class="aviso__titulo">El texto no se convierte en imagen</span>
+    <p>
+      Nunca uses una imagen para mostrar texto: no se puede seleccionar, no se
+      traduce, no se lee con lectores de pantalla y no se adapta al tamaño de
+      la pantalla. HTML y CSS cubren todas las necesidades tipográficas.
+    </p>
+  </aside>
+
+  <figure class="demo">
+    <iframe src="ejemplos/texto.html"
+            title="Artículo de ejemplo con jerarquía y estilos de texto"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>Artículo con jerarquía de encabezados, citas, listas y tipografía legible.</span>
+      <a href="ejemplos/texto.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+</section>
+
+<div class="ejercicio">
+  <h2 id="actividad">Actividad práctica</h2>
+  <p>
+    Escribir una nota periodística sobre la historia de la web y aplicar todo
+    lo visto sobre texto.
+  </p>
+  <ol>
+    <li>Crear un documento con un <code>h1</code> y una bajada de dos líneas.</li>
+    <li>Organizar el cuerpo en tres secciones con <code>h2</code>; si hace falta, agregar un <code>h3</code> dentro de alguna.</li>
+    <li>Incluir al menos una cita en bloque con su fuente y una cita corta.</li>
+    <li>Usar una lista ordenada para una cronología y una lista no ordenada para los protagonistas.</li>
+    <li>Marcar una fecha con <code>time</code>, una sigla con <code>abbr</code> y una palabra clave con <code>strong</code>.</li>
+    <li>Agregar un bloque de código o una muestra de texto preformateado.</li>
+    <li>Definir en CSS la tipografía, el ancho de lectura, la altura de línea y el color; comprobar el contraste.</li>
+    <li>Validar el HTML y revisar la página al 200 % de zoom.</li>
+  </ol>
+  <p>
+    <strong>Para entregar</strong>: el HTML, el CSS y una captura de la página
+    con la jerarquía de encabezados visible en el panel <em>Elements</em>.
+  </p>
+</div>
+
+<div class="resumen">
+  <h2 id="resumen">Resumen</h2>
+  <ul>
+    <li>El navegador colapsa los espacios; <code>pre</code> conserva el formato original.</li>
+    <li>Las entidades permiten mostrar caracteres reservados como <code>&amp;lt;</code> y <code>&amp;amp;</code>.</li>
+    <li>Los encabezados expresan jerarquía, no tamaño; un solo <code>h1</code> por página.</li>
+    <li>Preferí etiquetas semánticas (<code>strong</code>, <code>em</code>, <code>cite</code>) antes que visuales (<code>b</code>, <code>i</code>).</li>
+    <li>Las listas se usan para contenido enumerado y también para menús de navegación.</li>
+    <li>Los comentarios son públicos: nunca incluyas información sensible.</li>
+    <li>La legibilidad se define con ancho de lectura, altura de línea, contraste y unidades relativas.</li>
+  </ul>
+</div>
+
+<div class="bibliografia">
+  <h2>Bibliografía del tema</h2>
+  <ul>
+    <li>
+      Celaya Luna, A. (2014). <cite>Creación de páginas web: HTML 5</cite>.
+      Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/56045">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Toharia Rabasco, J. P. y Raya González, L. (2015).
+      <cite>Lenguajes de marcas y sistemas de gestión de la información</cite>.
+      RA-MA Editorial.
+      <a href="https://elibro.net/es/ereader/kennedy/62483">Acceso en eLibro</a>.
+    </li>
+    <li>
+      MDN Web Docs.
+      <a href="https://developer.mozilla.org/es/docs/Learn/HTML/Introduction_to_HTML/HTML_text_fundamentals">Fundamentos de texto en HTML</a>.
+    </li>
+  </ul>
+</div>
+
+    <nav class="pager" aria-label="Navegación entre clases">
+      <a class="pager__anterior" rel="prev" href="../../clases/03-etiquetas/index.html">
+        <span class="pager__direccion">← Anterior</span>
+        <span class="pager__titulo">Clase 03 · Etiquetas principales y secundarias</span>
+      </a>
+      <a class="pager__siguiente" rel="next" href="../../clases/05-enlaces/index.html">
+        <span class="pager__direccion">Siguiente →</span>
+        <span class="pager__titulo">Clase 05 · Enlaces e hipervínculos</span>
+      </a>
+    </nav>
+    </main>
+  </div>
+
+  <footer class="sitio-footer">
+    <div class="contenedor sitio-footer__contenido">
+      <p><strong>Desarrollo de Software III</strong> · Licenciatura en Sistemas ·
+        Universidad John F. Kennedy</p>
+      <p><a href="../../index.html">Índice del curso</a> ·
+        <a href="../../index.html#bibliografia">Bibliografía</a></p>
+    </div>
+  </footer>
+</body>
+</html>

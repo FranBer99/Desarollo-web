@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Del texto plano a la web — Clase 4</title>
+  <meta name="description" content="Artículo de ejemplo sobre la jerarquía y los estilos del texto.">
+  <style>
+    :root {
+      color-scheme: light;
+      --texto: #292524;
+      --tenue: #78716c;
+      --borde: #e7e5e4;
+      --indigo: #4f46e5;
+      --indigo-oscuro: #3730a3;
+      --indigo-suave: #eef2ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #fafaf9;
+      color: var(--texto);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .articulo {
+      max-width: 65ch;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 2.5rem;
+    }
+
+    .volanta {
+      color: var(--indigo);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0.35rem 0 0;
+      font-size: clamp(1.8rem, 1.2rem + 2.5vw, 2.4rem);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+
+    .bajada {
+      margin-top: 0.75rem;
+      color: var(--tenue);
+      font-size: 1.125rem;
+      line-height: 1.55;
+    }
+
+    .meta {
+      margin-top: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--borde);
+      color: var(--tenue);
+      font-size: 0.85rem;
+    }
+
+    h2 {
+      margin-top: 2.25rem;
+      font-size: 1.35rem;
+      line-height: 1.3;
+    }
+
+    h3 {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    p {
+      margin: 0.85rem 0 0;
+    }
+
+    a {
+      color: var(--indigo);
+      text-underline-offset: 0.18em;
+    }
+
+    strong {
+      font-weight: 700;
+    }
+
+    mark {
+      padding: 0 0.15em;
+      border-radius: 0.2rem;
+      background-color: #fef08a;
+      color: #422006;
+    }
+
+    abbr[title] {
+      text-decoration: underline dotted;
+      cursor: help;
+    }
+
+    code {
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+      background-color: #e0e7ff;
+      color: #312e81;
+      font-family: ui-monospace, monospace;
+      font-size: 0.85em;
+    }
+
+    pre {
+      margin: 1rem 0 0;
+      padding: 0.9rem 1rem;
+      overflow-x: auto;
+      border-radius: 0.5rem;
+      background-color: #1c1917;
+      color: #e7e5e4;
+      font-family: ui-monospace, monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    pre code {
+      padding: 0;
+      background: none;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    blockquote {
+      margin: 1.25rem 0 0;
+      padding: 0.75rem 1rem;
+      border-left: 4px solid #c7d2fe;
+      border-radius: 0 0.4rem 0.4rem 0;
+      background-color: var(--indigo-suave);
+      color: var(--indigo-oscuro);
+    }
+
+    blockquote p {
+      margin: 0;
+    }
+
+    blockquote footer {
+      margin-top: 0.35rem;
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    ul,
+    ol {
+      margin: 0.75rem 0 0;
+      padding-left: 1.4rem;
+    }
+
+    li + li {
+      margin-top: 0.3rem;
+    }
+
+    li::marker {
+      color: var(--indigo);
+    }
+
+    hr {
+      margin: 2rem 0 0;
+      border: 0;
+      border-top: 1px solid var(--borde);
+    }
+
+    .cierre {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--borde);
+      color: var(--tenue);
+      font-size: 0.85rem;
+    }
+
+    address {
+      font-style: normal;
+    }
+
+    ::selection {
+      background-color: #c7d2fe;
+      color: #1e1b4b;
+    }
+  </style>
+</head>
+<body>
+  <article class="articulo">
+    <header>
+      <p class="volanta">Historia de la web</p>
+      <h1>Del texto plano a la web</h1>
+      <p class="bajada">
+        Cómo el hipertexto convirtió documentos aislados en una red de
+        conocimiento y por qué la tipografía sigue siendo una decisión de
+        diseño, no un accidente.
+      </p>
+      <p class="meta">
+        Publicado el <time datetime="2026-10-28">28 de octubre de 2026</time> ·
+        Lectura de 4 minutos
+      </p>
+    </header>
+
+    <h2>Un documento, muchos destinos</h2>
+    <p>
+      En 1991, el primer sitio web del mundo era apenas una página de texto con
+      enlaces. No tenía tipografías personalizadas ni animaciones: tenía
+      <strong>información conectada</strong>. Esa idea —el hipertexto— sigue
+      siendo el corazón de la web.
+    </p>
+    <p>
+      El navegador se encarga de interpretar el marcado y aplicar sus estilos
+      por defecto. Nosotros podemos cambiarlos con CSS, pero el significado
+      del contenido no depende de la apariencia.
+    </p>
+
+    <blockquote cite="https://www.w3.org/People/Berners-Lee/">
+      <p>La web es más grande que cualquier empresa.</p>
+      <footer>— Tim Berners-Lee</footer>
+    </blockquote>
+
+    <h2>Tres decisiones que mejoran la lectura</h2>
+    <p>
+      La legibilidad no es cuestión de gustos: hay medidas que se pueden
+      comprobar.
+    </p>
+    <ol>
+      <li>
+        <strong>Ancho de línea.</strong> Entre <mark>45 y 75 caracteres</mark>
+        por línea; se logra con <code>max-width: 65ch</code>.
+      </li>
+      <li>
+        <strong>Altura de línea.</strong> Un valor entre 1.5 y 1.8 para texto
+        corrido.
+      </li>
+      <li>
+        <strong>Contraste.</strong> Al menos 4.5:1 para texto normal, según
+        <abbr title="Web Content Accessibility Guidelines">WCAG</abbr>.
+      </li>
+    </ol>
+
+    <h3>Un ejemplo mínimo</h3>
+    <p>Estas reglas alcanzan para que un artículo se lea bien:</p>
+    <pre><code>body {
+  max-width: 65ch;
+  margin-inline: auto;
+  font-family: system-ui, sans-serif;
+  line-height: 1.7;
+}</code></pre>
+
+    <h2>Lo que no cambia</h2>
+    <p>
+      Las modas tipográficas van y vienen, pero la estructura semántica
+      permanece: un <code>h1</code> sigue siendo el título principal, una
+      lista sigue siendo una lista y una cita sigue siendo una cita. Esa es la
+      parte que conviene cuidar.
+    </p>
+
+    <hr>
+
+    <footer class="cierre">
+      <address>
+        Material de la cátedra de Desarrollo de Software III ·
+        <a href="../../../index.html">Volver al índice del curso</a>
+      </address>
+    </footer>
+  </article>
+</body>
+</html>

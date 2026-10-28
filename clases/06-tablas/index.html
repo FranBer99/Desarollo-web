@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Origen y uso actual de las tablas, estructura básica, tablas complejas, accesibilidad y estilos.">
+  <title>Clase 06 · Tablas — Desarrollo de Software III</title>
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/curso.css">
+</head>
+<body>
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <header class="sitio-header">
+    <div class="contenedor">
+      <div class="sitio-header__barra">
+        <a class="marca" href="../../index.html">desarrollo-de-software-iii{}</a>
+        <p class="sitio-header__contexto">&rsaquo; Clase 06 · Tablas</p>
+      </div>
+      <nav class="rail" aria-label="Clases del curso">
+        <a href="../../index.html" aria-label="Clase 0: Presentación del curso">00</a>
+        <a href="../../clases/01-origenes-y-evolucion-de-html/index.html" aria-label="Clase 1: Orígenes y evolución de HTML">01</a>
+        <a href="../../clases/02-estructura-de-un-documento-html/index.html" aria-label="Clase 2: Estructura de un documento HTML">02</a>
+        <a href="../../clases/03-etiquetas/index.html" aria-label="Clase 3: Etiquetas principales y secundarias">03</a>
+        <a href="../../clases/04-control-de-texto/index.html" aria-label="Clase 4: Control de texto">04</a>
+        <a href="../../clases/05-enlaces/index.html" aria-label="Clase 5: Enlaces e hipervínculos">05</a>
+        <a href="../../clases/06-tablas/index.html" aria-label="Clase 6: Tablas" aria-current="page">06</a>
+        <a href="../../clases/07-formularios/index.html" aria-label="Clase 7: Formularios">07</a>
+        <a href="../../clases/08-marcos/index.html" aria-label="Clase 8: Marcos">08</a>
+        <a href="../../clases/09-css-y-responsive/index.html" aria-label="Clase 9: Hojas de estilo y desarrollo responsivo">09</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="contenedor layout">
+    <nav class="toc" aria-labelledby="toc-titulo">
+      <p class="toc__titulo" id="toc-titulo">En esta clase</p>
+      <ol>
+        <li><a href="#historia">Origen y uso actual</a></li>
+        <li><a href="#estructura">Estructura básica</a></li>
+        <li><a href="#complejas">Tablas complejas</a></li>
+        <li><a href="#accesibilidad">Accesibilidad</a></li>
+        <li><a href="#estilos">Estilos</a></li>
+        <li><a href="#actividad">Actividad práctica</a></li>
+        <li><a href="#resumen">Resumen</a></li>
+      </ol>
+    </nav>
+
+    <main class="contenido" id="contenido" tabindex="-1">
+<header class="encabezado-clase">
+  <p class="etiqueta">Clase 06</p>
+  <h1>Tablas</h1>
+  <p class="lead">
+    Las tablas nacieron para mostrar datos y durante años se usaron para
+    maquetar páginas. Hoy volvieron a su función original: organizar
+    información tabular de forma comprensible para todas las personas.
+  </p>
+</header>
+
+<aside class="aviso aviso--nota" aria-label="Objetivos de la clase">
+  <span class="aviso__titulo">Objetivos</span>
+  <ul>
+    <li>Entender por qué las tablas dejaron de usarse para maquetar.</li>
+    <li>Construir tablas con encabezados, cuerpo y pie.</li>
+    <li>Resolver tablas complejas con celdas combinadas y encabezados asociados.</li>
+    <li>Aplicar estilos responsivos sin romper la semántica.</li>
+  </ul>
+</aside>
+
+<section aria-labelledby="historia">
+  <h2 id="historia">Origen y uso actual</h2>
+  <p>
+    Las tablas se incorporaron a HTML a mediados de los noventa para presentar
+    datos científicos y financieros. Como permitían alinear contenido en
+    filas y columnas, los diseñadores las adoptaron para maquetar páginas
+    completas: el encabezado en una fila, el menú en una celda, el contenido en
+    otra y hasta imágenes transparentes de un píxel (<em>spacer GIF</em>) para
+    forzar espacios.
+  </p>
+  <p>
+    Ese uso produjo páginas difíciles de mantener, lentas y casi imposibles de
+    leer con un lector de pantalla, porque el orden de lectura seguía la
+    estructura de la tabla y no el contenido. Con la llegada de CSS, el
+    maquetado se trasladó a hojas de estilo y las tablas recuperaron su
+    propósito: <strong>datos que se relacionan en filas y columnas</strong>.
+  </p>
+
+  <div class="tabla">
+    <table>
+      <caption>¿Tabla o diseño con CSS?</caption>
+      <thead>
+        <tr>
+          <th scope="col">Situación</th>
+          <th scope="col">Herramienta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Notas por alumno, precios, horarios, comparativas</th>
+          <td>Tabla HTML.</td>
+        </tr>
+        <tr>
+          <th scope="row">Distribuir el encabezado, el menú y el contenido</th>
+          <td>CSS Grid o Flexbox.</td>
+        </tr>
+        <tr>
+          <th scope="row">Alinear un formulario o una tarjeta</th>
+          <td>CSS.</td>
+        </tr>
+        <tr>
+          <th scope="row">Datos que deben leerse en filas y columnas</th>
+          <td>Tabla HTML con encabezados y leyenda.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <aside class="aviso aviso--atencion" aria-label="Atención">
+    <span class="aviso__titulo">No vuelvas al maquetado con tablas</span>
+    <p>
+      Usar tablas para distribuir una página obliga a simular el diseño con
+      celdas, complica el responsive y confunde a las tecnologías de
+      asistencia. Si encontrás una tabla de layout en un sitio antiguo, la
+      alternativa es reescribir la estructura con HTML semántico y CSS.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="estructura">
+  <h2 id="estructura">Estructura básica</h2>
+  <p>
+    Una tabla se construye de afuera hacia adentro: el elemento
+    <code>table</code> contiene una leyenda opcional, grupos de columnas y tres
+    secciones (encabezado, cuerpo y pie). Cada fila es un <code>tr</code> y
+    cada celda un <code>th</code> (encabezado) o un <code>td</code> (dato).
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>tabla-basica.html</figcaption>
+    <pre><code>&lt;table&gt;
+  &lt;caption&gt;Notas del primer parcial&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Alumno&lt;/th&gt;
+      &lt;th scope="col"&gt;Nota&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Ana Pérez&lt;/th&gt;
+      &lt;td&gt;8&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Luis Gómez&lt;/th&gt;
+      &lt;td&gt;7&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Promedio&lt;/th&gt;
+      &lt;td&gt;7,5&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+  </figure>
+
+  <div class="tabla">
+    <table>
+      <caption>Elementos de una tabla</caption>
+      <thead>
+        <tr>
+          <th scope="col">Elemento</th>
+          <th scope="col">Función</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>table</code></th><td>Contenedor de la tabla.</td></tr>
+        <tr><th scope="row"><code>caption</code></th><td>Título o descripción. Debe ser el primer hijo de <code>table</code>.</td></tr>
+        <tr><th scope="row"><code>colgroup</code> y <code>col</code></th><td>Agrupan columnas para aplicarles estilos.</td></tr>
+        <tr><th scope="row"><code>thead</code></th><td>Fila o filas de encabezado.</td></tr>
+        <tr><th scope="row"><code>tbody</code></th><td>Cuerpo con los datos.</td></tr>
+        <tr><th scope="row"><code>tfoot</code></th><td>Pie: totales, promedios, notas.</td></tr>
+        <tr><th scope="row"><code>tr</code></th><td>Fila.</td></tr>
+        <tr><th scope="row"><code>th</code></th><td>Celda de encabezado; lleva <code>scope</code>.</td></tr>
+        <tr><th scope="row"><code>td</code></th><td>Celda de dato.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    El elemento <code>caption</code> no es decorativo: describe la tabla y se
+    anuncia antes de recorrerla. Debe ir inmediatamente después de
+    <code>&lt;table&gt;</code>, antes de <code>thead</code>.
+  </p>
+  <p>
+    <code>scope</code> indica si un <code>th</code> encabeza una columna
+    (<code>col</code>), una fila (<code>row</code>), un grupo de columnas
+    (<code>colgroup</code>) o un grupo de filas (<code>rowgroup</code>). Es la
+    forma más simple y robusta de asociar encabezados con datos.
+  </p>
+</section>
+
+<section aria-labelledby="complejas">
+  <h2 id="complejas">Tablas complejas</h2>
+  <p>
+    Cuando una celda ocupa más de una columna o más de una fila se usan
+    <code>colspan</code> y <code>rowspan</code>. La tabla sigue siendo válida,
+    pero el orden de lectura se vuelve más difícil: conviene reservar las
+    celdas combinadas para casos realmente necesarios.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>combinar-celdas.html</figcaption>
+    <pre><code>&lt;tr&gt;
+  &lt;th scope="row"&gt;20:00–21:00&lt;/th&gt;
+  &lt;td&gt;Base de datos&lt;/td&gt;
+  &lt;td rowspan="2" colspan="2"&gt;Laboratorio&lt;/td&gt;
+  &lt;td&gt;Práctica&lt;/td&gt;
+  &lt;td&gt;Tutoría&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th scope="row"&gt;21:00–22:00&lt;/th&gt;
+  &lt;td&gt;Inglés&lt;/td&gt;
+  &lt;td&gt;Consultas&lt;/td&gt;
+  &lt;td&gt;Libre&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+  </figure>
+
+  <h3>Encabezados asociados con <code>headers</code></h3>
+  <p>
+    En tablas con varios niveles de encabezado, <code>scope</code> puede no
+    alcanzar. En ese caso, cada celda de dato puede indicar los
+    <code>id</code> de sus encabezados en el atributo <code>headers</code>,
+    separados por espacios. Es más verboso, pero permite una lectura exacta.
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>headers.html</figcaption>
+    <pre><code>&lt;th id="sede-centro" scope="colgroup" colspan="2"&gt;Sede Centro&lt;/th&gt;
+...
+&lt;td headers="sede-centro curso-html"&gt;18 inscriptos&lt;/td&gt;</code></pre>
+  </figure>
+
+  <aside class="aviso aviso--dato" aria-label="Dato">
+    <span class="aviso__titulo">Una tabla, un tema</span>
+    <p>
+      No anides tablas para “ordenar” el contenido ni uses una tabla para
+      comparar dos bloques de texto libre. Si la información no se lee
+      naturalmente en filas y columnas, no es una tabla.
+    </p>
+  </aside>
+</section>
+
+<section aria-labelledby="accesibilidad">
+  <h2 id="accesibilidad">Accesibilidad</h2>
+  <ul>
+    <li><strong>Leyenda</strong>: toda tabla de datos debería tener <code>caption</code>.</li>
+    <li><strong>Encabezados</strong>: usá <code>th</code> con <code>scope</code>; no conviertas encabezados en <code>td</code> con negrita.</li>
+    <li><strong>Orden de lectura</strong>: el HTML debe leerse de izquierda a derecha y de arriba abajo; las celdas combinadas no deberían romper esa lógica.</li>
+    <li><strong>Celdas vacías</strong>: evitá dejarlas; si son necesarias, explicá el motivo en la leyenda.</li>
+    <li><strong>Desplazamiento horizontal</strong>: si la tabla no entra en pantallas chicas, envolvela en un contenedor con <code>overflow-x: auto</code>, <code>tabindex="0"</code> y un <code>role="region"</code> con nombre accesible, para que se pueda recorrer con teclado.</li>
+    <li><strong>Sin tablas de layout</strong>: la estructura de la página va con regiones semánticas y CSS.</li>
+  </ul>
+
+  <figure class="bloque-codigo">
+    <figcaption>tabla-responsive.html</figcaption>
+    <pre><code>&lt;div class="tabla-scroll" role="region"
+     aria-label="Horarios del cuatrimestre" tabindex="0"&gt;
+  &lt;table&gt;...&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+  .tabla-scroll { overflow-x: auto; }
+  table { min-width: 40rem; }
+&lt;/style&gt;</code></pre>
+  </figure>
+</section>
+
+<section aria-labelledby="estilos">
+  <h2 id="estilos">Estilos</h2>
+  <p>
+    Los atributos de presentación de las tablas (<code>border</code>,
+    <code>cellpadding</code>, <code>cellspacing</code>, <code>width</code>,
+    <code>align</code>, <code>bgcolor</code>) están obsoletos. Todo se define
+    con CSS:
+  </p>
+
+  <figure class="bloque-codigo">
+    <figcaption>tabla.css</figcaption>
+    <pre><code>table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+th,
+td {
+  padding: 0.55rem 0.9rem;
+  border-bottom: 1px solid #e7e5e4;
+  text-align: left;
+  vertical-align: top;
+}
+
+thead th {
+  background-color: #fafaf9;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fcfcfb;
+}
+
+caption {
+  caption-side: top;
+  text-align: left;
+  color: #78716c;
+}</code></pre>
+  </figure>
+
+  <ul>
+    <li><code>border-collapse: collapse</code> une los bordes de las celdas.</li>
+    <li><code>border-spacing</code> solo tiene efecto con <code>border-collapse: separate</code>.</li>
+    <li>El rayado alternado (<em>zebra</em>) mejora la lectura de filas largas, pero no reemplaza a los encabezados.</li>
+    <li>Evitá <code>table-layout: fixed</code> si el contenido es variable y puede desbordar.</li>
+    <li>En pantallas chicas, priorizá el desplazamiento horizontal antes que reducir la letra.</li>
+  </ul>
+
+  <figure class="demo">
+    <iframe src="ejemplos/tabla-compleja.html"
+            title="Tabla de horarios con celdas combinadas"
+            loading="lazy"></iframe>
+    <figcaption>
+      <span>Tabla con leyenda, encabezados, celdas combinadas y desplazamiento accesible.</span>
+      <a href="ejemplos/tabla-compleja.html">Abrir ejemplo</a>
+    </figcaption>
+  </figure>
+</section>
+
+<div class="ejercicio">
+  <h2 id="actividad">Actividad práctica</h2>
+  <p>
+    Armar la tabla de horarios del cuatrimestre con datos reales o inventados.
+  </p>
+  <ol>
+    <li>Crear una tabla con leyenda y columnas para los cinco días hábiles.</li>
+    <li>Usar <code>thead</code> para los días, <code>tbody</code> para los horarios y <code>tfoot</code> para una nota general.</li>
+    <li>Marcar los horarios como encabezados de fila con <code>scope="row"</code>.</li>
+    <li>Combinar al menos una celda con <code>colspan</code> y otra con <code>rowspan</code>.</li>
+    <li>Aplicar estilos de borde, espaciado y rayado alternado solo con CSS.</li>
+    <li>Envolver la tabla en un contenedor desplazable con nombre accesible y probarla a 320 px de ancho.</li>
+    <li>Validar el HTML y revisar la tabla con el árbol de accesibilidad del navegador.</li>
+  </ol>
+  <p>
+    <strong>Para entregar</strong>: el HTML, el CSS y una captura del árbol de
+    accesibilidad donde se vean la leyenda y los encabezados asociados.
+  </p>
+</div>
+
+<div class="resumen">
+  <h2 id="resumen">Resumen</h2>
+  <ul>
+    <li>Las tablas son para datos tabulares; el layout se hace con CSS.</li>
+    <li>Una tabla completa lleva <code>caption</code>, <code>thead</code>, <code>tbody</code> y, si hace falta, <code>tfoot</code>.</li>
+    <li><code>th</code> con <code>scope</code> asocia encabezados y datos.</li>
+    <li><code>colspan</code> y <code>rowspan</code> combinan celdas; conviene usarlos con moderación.</li>
+    <li>Los atributos de presentación están obsoletos: los estilos van en CSS.</li>
+    <li>En pantallas chicas, la tabla se desplaza horizontalmente dentro de una región accesible.</li>
+  </ul>
+</div>
+
+<div class="bibliografia">
+  <h2>Bibliografía del tema</h2>
+  <ul>
+    <li>
+      Celaya Luna, A. (2014). <cite>Creación de páginas web: HTML 5</cite>.
+      Editorial ICB.
+      <a href="https://elibro.net/es/ereader/kennedy/56045">Acceso en eLibro</a>.
+    </li>
+    <li>
+      Toharia Rabasco, J. P. y Raya González, L. (2015).
+      <cite>Lenguajes de marcas y sistemas de gestión de la información</cite>.
+      RA-MA Editorial.
+      <a href="https://elibro.net/es/ereader/kennedy/62483">Acceso en eLibro</a>.
+    </li>
+    <li>
+      MDN Web Docs.
+      <a href="https://developer.mozilla.org/es/docs/Web/HTML/Element/table">El elemento table</a>.
+    </li>
+    <li>
+      W3C.
+      <a href="https://www.w3.org/WAI/tutorials/tables/">Tutorial de tablas accesibles</a>.
+    </li>
+  </ul>
+</div>
+
+    <nav class="pager" aria-label="Navegación entre clases">
+      <a class="pager__anterior" rel="prev" href="../../clases/05-enlaces/index.html">
+        <span class="pager__direccion">← Anterior</span>
+        <span class="pager__titulo">Clase 05 · Enlaces e hipervínculos</span>
+      </a>
+      <a class="pager__siguiente" rel="next" href="../../clases/07-formularios/index.html">
+        <span class="pager__direccion">Siguiente →</span>
+        <span class="pager__titulo">Clase 07 · Formularios</span>
+      </a>
+    </nav>
+    </main>
+  </div>
+
+  <footer class="sitio-footer">
+    <div class="contenedor sitio-footer__contenido">
+      <p><strong>Desarrollo de Software III</strong> · Licenciatura en Sistemas ·
+        Universidad John F. Kennedy</p>
+      <p><a href="../../index.html">Índice del curso</a> ·
+        <a href="../../index.html#bibliografia">Bibliografía</a></p>
+    </div>
+  </footer>
+</body>
+</html>
